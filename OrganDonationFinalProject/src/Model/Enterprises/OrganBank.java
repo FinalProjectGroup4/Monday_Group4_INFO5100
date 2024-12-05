@@ -10,4 +10,8 @@ package Model.Enterprises;
  */
 public class OrganBank extends Enterprise{
     
+    public OrganBank(String name, EnterpriseType type) {
+        super(name, type);
+    }
+    
 }

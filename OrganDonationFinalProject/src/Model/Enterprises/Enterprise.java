@@ -4,6 +4,8 @@
  */
 package Model.Enterprises;
 
+import Model.Organization.OrganizationDirectory;
+
 /**
  *
  * @author apple
@@ -14,7 +16,7 @@ public abstract class Enterprise extends Model.Organization.Organization{
     private OrganizationDirectory organizationDirectory;
     
     public Enterprise(String name,EnterpriseType type){
-        super(name);
+        super();
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
     }

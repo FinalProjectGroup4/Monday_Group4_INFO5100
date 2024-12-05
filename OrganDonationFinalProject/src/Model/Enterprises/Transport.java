@@ -10,4 +10,8 @@ package Model.Enterprises;
  */
 public class Transport extends Enterprise{
     
+    public Transport(String name, EnterpriseType type) {
+        super(name, type);
+    }
+    
 }

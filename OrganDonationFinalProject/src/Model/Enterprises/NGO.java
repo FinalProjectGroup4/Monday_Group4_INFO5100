@@ -10,4 +10,8 @@ package Model.Enterprises;
  */
 public class NGO extends Enterprise{
     
+    public NGO(String name, EnterpriseType type) {
+        super(name, type);
+    }
+    
 }
