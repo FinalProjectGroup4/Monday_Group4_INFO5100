@@ -8,6 +8,6 @@ package Model.Organization;
  *
  * @author nihardabhi
  */
-public class RequestFullfillment {
+public class RequestFullfillment extends Organization{
     
 }

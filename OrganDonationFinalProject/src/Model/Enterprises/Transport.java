@@ -8,6 +8,6 @@ package Model.Enterprises;
  *
  * @author nihardabhi
  */
-public class Transport {
+public class Transport extends Enterprise{
     
 }

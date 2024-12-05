@@ -6,8 +6,8 @@ package Model.Organization;
 
 /**
  *
- * @author nihardabhi
+ * @author apple
  */
-public class Driver extends Organization{
+public abstract class Organization {
     
 }

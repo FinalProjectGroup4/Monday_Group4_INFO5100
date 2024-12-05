@@ -8,6 +8,6 @@ package Model.Organization;
  *
  * @author nihardabhi
  */
-public class PatientService {
+public class PatientService extends Organization{
     
 }

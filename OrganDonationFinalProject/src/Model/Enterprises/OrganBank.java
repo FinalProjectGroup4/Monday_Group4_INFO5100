@@ -8,6 +8,6 @@ package Model.Enterprises;
  *
  * @author nihardabhi
  */
-public class OrganBank {
+public class OrganBank extends Enterprise{
     
 }

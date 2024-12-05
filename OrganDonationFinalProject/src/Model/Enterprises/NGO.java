@@ -8,6 +8,6 @@ package Model.Enterprises;
  *
  * @author nihardabhi
  */
-public class NGO {
+public class NGO extends Enterprise{
     
 }

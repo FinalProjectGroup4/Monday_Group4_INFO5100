@@ -8,6 +8,6 @@ package Model.Enterprises;
  *
  * @author nihardabhi
  */
-public class Government {
+public class Government extends Enterprise{
     
 }

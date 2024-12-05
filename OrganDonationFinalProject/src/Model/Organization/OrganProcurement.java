@@ -8,6 +8,6 @@ package Model.Organization;
  *
  * @author nihardabhi
  */
-public class OrganProcurement {
+public class OrganProcurement extends Organization{
     
 }

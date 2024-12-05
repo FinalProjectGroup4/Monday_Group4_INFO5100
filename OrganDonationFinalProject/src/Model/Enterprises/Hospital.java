@@ -8,6 +8,6 @@ package Model.Enterprises;
  *
  * @author nihardabhi
  */
-public class Hospital {
+public class Hospital extends Enterprise{
     
 }

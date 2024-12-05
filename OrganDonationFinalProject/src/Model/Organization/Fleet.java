@@ -8,6 +8,6 @@ package Model.Organization;
  *
  * @author nihardabhi
  */
-public class Fleet {
+public class Fleet extends Organization{
     
 }
