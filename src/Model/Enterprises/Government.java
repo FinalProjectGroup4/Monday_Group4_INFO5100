@@ -4,6 +4,9 @@
  */
 package Model.Enterprises;
 
+import Model.Roles.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author nihardabhi
@@ -12,6 +15,11 @@ public class Government extends Enterprise{
     
     public Government(String name, EnterpriseType type) {
         super(name, type);
+    }
+
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        return  null;
     }
     
 }

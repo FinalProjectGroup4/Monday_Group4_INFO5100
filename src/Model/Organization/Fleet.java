@@ -4,10 +4,22 @@
  */
 package Model.Organization;
 
+import Model.Roles.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author nihardabhi
  */
 public class Fleet extends Organization{
+
+    public Fleet(String name) {
+        super(name);
+    }
+
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        return null;
+    }
     
 }

@@ -16,7 +16,7 @@ public abstract class Enterprise extends Model.Organization.Organization{
     private OrganizationDirectory organizationDirectory;
     
     public Enterprise(String name,EnterpriseType type){
-        super();
+        super(name);
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
     }

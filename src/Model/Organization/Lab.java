@@ -4,10 +4,22 @@
  */
 package Model.Organization;
 
+import Model.Roles.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author nihardabhi
  */
 public class Lab extends Organization{
+
+    public Lab(String name) {
+        super(name);
+    }
+
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        return null;
+    }
     
 }
