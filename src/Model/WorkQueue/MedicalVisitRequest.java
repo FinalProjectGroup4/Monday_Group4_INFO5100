@@ -44,6 +44,11 @@ public class MedicalVisitRequest extends WorkRequest{
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+    
     
     
 }

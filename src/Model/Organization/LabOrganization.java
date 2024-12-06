@@ -6,6 +6,7 @@ package Model.Organization;
 
 import Model.Roles.Role;
 import Model.WorkQueue.WorkRequest;
+import Model.storage.Patient;
 import java.util.ArrayList;
 
 /**
@@ -18,8 +19,8 @@ public class LabOrganization extends Organization{
         super(name);
     }
     
-    public ArrayList<WorkRequest> getPathologyTestRequests(){
-        return this.getWorkQueue().getPathologyTestRequests();
+    public ArrayList<WorkRequest> getPathologyTestRequests(Patient patient){
+        return this.getWorkQueue().getPathologyTestRequests(patient.getId(),false);
     }
 
     @Override

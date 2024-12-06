@@ -34,4 +34,10 @@ public class OrganRequest extends WorkRequest{
     public void setOrganName(String testName) {
         this.organName = testName;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+    
+    
 }

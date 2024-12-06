@@ -23,6 +23,7 @@ public class WorkQueue {
     // Our code
     private  ArrayList<WorkRequest> pathologyTestRequests;
     private  ArrayList<WorkRequest> medicalVisitRequests;
+    private  ArrayList<WorkRequest> organRequests;
 
     public WorkQueue() {
         workRequestList = new ArrayList();
@@ -36,6 +37,7 @@ public class WorkQueue {
         // Our code
         pathologyTestRequests = new ArrayList();
         medicalVisitRequests = new ArrayList();
+        organRequests = new ArrayList();
     }
 
     public ArrayList<WorkRequest> getOrganReportHosList() {
@@ -129,9 +131,6 @@ public class WorkQueue {
         workRequestList.remove(r);
     }
 
-    public void removeOrganRequest(WorkRequest workRequest) {
-        organRequestList.remove(workRequest);
-    }
 
     public void removeOrganReport(WorkRequest workRequest) {
         organReportList.remove(workRequest);
@@ -167,12 +166,42 @@ public class WorkQueue {
         pathologyTestRequests.remove(workRequest);
     }
     
-    public ArrayList<WorkRequest> getMedicalVisitRequests() {
-        return medicalVisitRequests;
+    public ArrayList<WorkRequest> getMedicalVisitRequests(int patientId, boolean isPending) {
+        
+        ArrayList<WorkRequest> filterResult = new ArrayList<>();
+        
+        for(WorkRequest w : medicalVisitRequests){
+            MedicalVisitRequest p = (MedicalVisitRequest) w;
+            if(p.getPatient().getId() == patientId){
+                WorkRequest filterPatient = (WorkRequest) p;
+                filterResult.add(filterPatient);
+            }
+            
+        }
+        return filterResult;
     }
     
     public void removeMedicalVisitRequest(WorkRequest workRequest) {
         medicalVisitRequests.remove(workRequest);
+    }
+    
+    public ArrayList<WorkRequest> getOrganRequests(int patientId, boolean isPending) {
+        
+        ArrayList<WorkRequest> filterResult = new ArrayList<>();
+        
+        for(WorkRequest w : organRequests){
+            OrganRequest p = (OrganRequest) w;
+            if(p.getPatient().getId() == patientId){
+                WorkRequest filterPatient = (WorkRequest) p;
+                filterResult.add(filterPatient);
+            }
+            
+        }
+        return filterResult;
+    }
+    
+    public void removeOrganRequest(WorkRequest workRequest) {
+        organRequests.remove(workRequest);
     }
     
     
