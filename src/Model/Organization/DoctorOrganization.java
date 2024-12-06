@@ -5,6 +5,7 @@
 package Model.Organization;
 import Model.Roles.DoctorRole;
 import Model.Roles.Role;
+import Model.WorkQueue.WorkRequest;
 import Model.storage.PatientDirectory;
 import java.util.ArrayList;
 
@@ -21,7 +22,12 @@ public class DoctorOrganization extends Organization{
         super(name);
         patientDirectory = new PatientDirectory();
     }
+    
+    public ArrayList<WorkRequest> getMedicalVisits(){
+        return this.getWorkQueue().getMedicalVisitRequests();
+    }
 
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();

@@ -17,6 +17,8 @@ public class Patient {
     private String address;
     private String sickness;
     private String email;
+    private int id;
+    private static int count = 1;
 
     public String getEmail() {
         return email;
@@ -26,9 +28,6 @@ public class Patient {
         this.email = email;
     }
     
-  
-    private int id;
-    private static int count = 1;
 
     public Patient() {
         id = count;
