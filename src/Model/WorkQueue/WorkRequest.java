@@ -1,5 +1,6 @@
 package Model.WorkQueue;
 
+import Model.UserAccount.UserAccount;
 import java.util.Date;
 
 /*

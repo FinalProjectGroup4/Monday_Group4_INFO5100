@@ -117,7 +117,7 @@ public class WorkQueue {
     }
 
     public void removeLabRequest(WorkRequest workRequest) {
-        LabTestWorkRequest r = (LabTestWorkRequest)workRequest;  
+        PathologyTestRequest r = (PathologyTestRequest)workRequest;  
         workRequestList.remove(r);
     }
 
