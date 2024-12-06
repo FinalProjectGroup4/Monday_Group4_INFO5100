@@ -47,7 +47,7 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
 
         btnAdd.setText("Add");
 
-        hospCmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        hospCmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctors", "Lab Technicians", "Front Desk Assistant" }));
         hospCmbBox.setMaximumSize(new java.awt.Dimension(200, 50));
         hospCmbBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
        userprocesscontainer.add("DoctorDetailsJPanel",ddjp);
        
        CardLayout layout = (CardLayout) userprocesscontainer.getLayout();
-       layout.show(userprocesscontainer, "DoctorDetails");
+       layout.next(userprocesscontainer);
        
     }//GEN-LAST:event_btnViewActionPerformed
 
