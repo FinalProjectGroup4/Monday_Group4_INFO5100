@@ -9,5 +9,9 @@ package Model.Employee;
  * @author nihardabhi
  */
 public class EmployeeDirectory {
+
+    public Employee createEmployee(String rrh) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
