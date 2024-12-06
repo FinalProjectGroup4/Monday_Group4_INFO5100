@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model.Organization;
-
+import Model.Roles.DoctorRole;
 import Model.Roles.Role;
 import java.util.ArrayList;
 
@@ -19,7 +19,9 @@ public class DoctorOrganization extends Organization{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new DoctorRole());
+        return roles;
     }
     
 }
