@@ -34,8 +34,17 @@ public abstract class Enterprise extends Model.Organization.Organization{
             return value;
         }
         @Override
-        public String toString(){
-        return value;
+            public String toString(){
+            return value;
+        }
     }
+    
+    public EnterpriseType getEnterpriseType() {
+        return enterpriseType;
     }
+
+    public void setEnterpriseType(EnterpriseType enterpriseType) {
+        this.enterpriseType = enterpriseType;
+    }
+    
 }
