@@ -12,10 +12,11 @@ public class PathologyTestRequest extends WorkRequest{
     private int patientId;
     private String bloodType;
     private String testName;
+    private Double results;
 
     
     public PathologyTestRequest(){
-        
+        results = 0.0;
     }
     
     public int getPatientId() {
@@ -40,5 +41,13 @@ public class PathologyTestRequest extends WorkRequest{
 
     public void setTestName(String testName) {
         this.testName = testName;
+    }
+    
+    public Double getResults() {
+        return results;
+    }
+
+    public void setResults(Double results) {
+        this.results = results;
     }
 }
