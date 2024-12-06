@@ -4,6 +4,8 @@
  */
 package Model.UserAccount;
 
+import Model.Employee.Employee;
+import Model.Roles.SystemAdminRole;
 import java.util.ArrayList;
 
 /**
@@ -29,5 +31,16 @@ public class UserAccountDirectory {
         return null;
     }
      
+    public boolean checkIfUsernameIsUnique(String username){
+        for (UserAccount ua : userAccountList){
+            if (ua.getUsername().equals(username))
+                return false;
+        }
+        return true;
+    }
+
+    public UserAccount createUserAccount(String string, String string0, Employee employee, SystemAdminRole systemAdminRole) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
