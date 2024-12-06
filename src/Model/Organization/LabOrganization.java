@@ -11,9 +11,9 @@ import java.util.ArrayList;
  *
  * @author nihardabhi
  */
-public class Driver extends Organization{
+public class LabOrganization extends Organization{
 
-    public Driver(String name) {
+    public LabOrganization(String name) {
         super(name);
     }
 

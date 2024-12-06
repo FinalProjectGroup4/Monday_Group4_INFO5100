@@ -11,9 +11,9 @@ import java.util.ArrayList;
  *
  * @author nihardabhi
  */
-public class OrganProcurement extends Organization{
+public class PatientServiceOrganization extends Organization{
 
-    public OrganProcurement(String name) {
+    public PatientServiceOrganization(String name) {
         super(name);
     }
 

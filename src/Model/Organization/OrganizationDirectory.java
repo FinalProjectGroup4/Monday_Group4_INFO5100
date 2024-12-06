@@ -4,6 +4,7 @@
  */
 package Model.Organization;
 
+import Model.Organization.Organization.Type;
 import java.util.ArrayList;
 
 /**
@@ -12,14 +13,30 @@ import java.util.ArrayList;
  */
 public class OrganizationDirectory {
     
-    private ArrayList<Organization> organizationList;
+   private ArrayList<Organization> organizationList;
 
-    public OrganizationDirectory() {
+   public OrganizationDirectory() {
         organizationList = new ArrayList();
     }
 
-    public ArrayList<Organization> getOrganizationList() {
+   public ArrayList<Organization> getOrganizationList() {
         return organizationList;
+    }
+    
+    public Organization createOrganization(String name, Type type){
+        Organization organization = null;
+        if (type.getValue().equals(Type.Doctor.getValue())){
+            organization = new DoctorOrganization(name);
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Type.Lab.getValue())){
+            organization = new LabOrganization(name);
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals((Type.Fleet.getValue()))){
+            organization = new FleetOrganization(name);
+        }
+        return organization;
     }
     
 }
