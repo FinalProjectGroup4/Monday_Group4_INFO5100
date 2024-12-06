@@ -192,6 +192,7 @@ public class MainJFrame extends javax.swing.JFrame {
             container.add("SystemAdminWorkArea", sawa);
 
             layout.next(container);
+
         }else if (userName.equalsIgnoreCase("hospitalAdmin") && password.equalsIgnoreCase("admin123")) {
             HospitalAdminWorkArea hwa = new HospitalAdminWorkArea();
             container.add("HospitalAdminWorkArea", hwa);
