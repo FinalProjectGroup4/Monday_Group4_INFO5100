@@ -190,6 +190,11 @@ public class MainJFrame extends javax.swing.JFrame {
         if (userName.equalsIgnoreCase("admin") && password.equalsIgnoreCase("1234")) {
             SystemAdminWorkArea sawa = new SystemAdminWorkArea(container);
             container.add("SystemAdminWorkArea", sawa);
+            
+            CardLayout layout = (CardLayout) container.getLayout();
+            layout.next(container);
+       
+            
 
             layout.next(container);
 
