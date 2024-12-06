@@ -26,7 +26,6 @@ public class DoctorOrganization extends Organization{
     public ArrayList<WorkRequest> getMedicalVisits(){
         return this.getWorkQueue().getMedicalVisitRequests();
     }
-
     
     @Override
     public ArrayList<Role> getSupportedRole() {

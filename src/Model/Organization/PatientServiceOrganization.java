@@ -5,6 +5,7 @@
 package Model.Organization;
 
 import Model.Roles.Role;
+import Model.storage.PatientDirectory;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +13,9 @@ import java.util.ArrayList;
  * @author nihardabhi
  */
 public class PatientServiceOrganization extends Organization{
+    
+    private PatientDirectory patientDirectory;
+
 
     public PatientServiceOrganization(String name) {
         super(name);

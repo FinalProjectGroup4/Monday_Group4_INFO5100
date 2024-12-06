@@ -174,5 +174,7 @@ public class WorkQueue {
     public void removeMedicalVisitRequest(WorkRequest workRequest) {
         medicalVisitRequests.remove(workRequest);
     }
+    
+    
 
 }
