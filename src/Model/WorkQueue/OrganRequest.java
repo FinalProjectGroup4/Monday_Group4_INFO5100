@@ -4,25 +4,19 @@
  */
 package Model.WorkQueue;
 
+import Model.storage.Patient;
+
 /**
  *
  * @author apple
  */
 public class OrganRequest extends WorkRequest{
-    private int patientId;
+    private Patient patient;
     private String bloodType;
     private String organName;
     
-    public OrganRequest(){
-        
-    }
-    
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+    public OrganRequest(Patient patient){
+        this.patient = patient;
     }
 
     public String getBloodType() {
