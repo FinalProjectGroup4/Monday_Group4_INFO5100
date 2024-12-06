@@ -5,6 +5,7 @@
 package Model.Organization;
 import Model.Roles.DoctorRole;
 import Model.Roles.Role;
+import Model.storage.PatientDirectory;
 import java.util.ArrayList;
 
 /**
@@ -13,8 +14,12 @@ import java.util.ArrayList;
  */
 public class DoctorOrganization extends Organization{
 
+    private PatientDirectory patientDirectory;
+    
+    
     public DoctorOrganization(String name) {
         super(name);
+        patientDirectory = new PatientDirectory();
     }
 
     @Override
@@ -23,5 +28,6 @@ public class DoctorOrganization extends Organization{
         roles.add(new DoctorRole());
         return roles;
     }
+    
     
 }
