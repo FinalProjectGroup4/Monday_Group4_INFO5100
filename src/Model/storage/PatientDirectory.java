@@ -27,11 +27,11 @@ public class PatientDirectory {
         return patient;
     }
 
-    public void removeAirplane(Patient patient) {
+    public void removePatient(Patient patient) {
         PatientDirectory.remove(patient);
     }
 
-    public Patient searchAirplane(String keyWord) {
+    public Patient searchPatient(String keyWord) {
         for (Patient patient : PatientDirectory) {
             if (keyWord.equals(patient.getName())) {
                 return patient;
