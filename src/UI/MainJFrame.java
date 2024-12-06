@@ -195,6 +195,7 @@ public class MainJFrame extends javax.swing.JFrame {
             
             CardLayout layout = (CardLayout) container.getLayout();
             layout.next(container);
+       
             
 
         } else {
