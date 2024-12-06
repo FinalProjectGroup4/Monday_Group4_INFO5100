@@ -6,6 +6,7 @@ package Model.Organization;
 import Model.Roles.DoctorRole;
 import Model.Roles.Role;
 import Model.WorkQueue.WorkRequest;
+import Model.storage.Patient;
 import Model.storage.PatientDirectory;
 import java.util.ArrayList;
 
@@ -23,9 +24,22 @@ public class DoctorOrganization extends Organization{
         patientDirectory = new PatientDirectory();
     }
     
-    public ArrayList<WorkRequest> getMedicalVisits(){
-        return this.getWorkQueue().getMedicalVisitRequests();
+    public ArrayList<WorkRequest> getMedicalVisits(Patient patient){
+        return this.getWorkQueue().getMedicalVisitRequests(patient.getId(),false);
     }
+    
+    public ArrayList<WorkRequest> getOrganRequests(Patient patient){
+        return this.getWorkQueue().getOrganRequests(patient.getId(),false);
+    }
+    
+    public void removeMedicalVisit(WorkRequest workRequest){
+        this.getWorkQueue().removeMedicalVisitRequest(workRequest);
+    }
+    
+    public void removeOrganRequest(WorkRequest workRequest){
+        this.getWorkQueue().removeOrganRequest(workRequest);
+    }
+    
     
     @Override
     public ArrayList<Role> getSupportedRole() {
