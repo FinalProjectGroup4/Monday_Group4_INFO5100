@@ -114,7 +114,9 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
+       
+        DoctorDetailsJPanel ddjp = new DoctorDetailsJPanel();
+        
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
