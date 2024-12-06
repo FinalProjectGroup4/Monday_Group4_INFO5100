@@ -21,14 +21,49 @@ public class EnterpriseDirectory {
     public ArrayList<Enterprise> getEnterpriseList() {
         return enterpriseList;
     }
-
-    public void setEnterpriseList(ArrayList<Enterprise> enterpriseList) {
-        this.enterpriseList = enterpriseList;
-    }
     
     //Create enterprise
     public Enterprise createAndAddEnterprise(String name,Enterprise.EnterpriseType type){
-        Enterprise enterprise=null;
+        Enterprise enterprise = null;
+        
+        if (type.getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            enterprise = new Hospital(name, type);
+            if(checkIfEnterpriseIsUnique(enterprise.getName())) enterpriseList.add(enterprise);
+        }
+        
+        else if (type.getValue().equals(Enterprise.EnterpriseType.Government.getValue())){
+            enterprise = new Government(name, type);
+            if(checkIfEnterpriseIsUnique(enterprise.getName())) enterpriseList.add(enterprise);
+        }
+        
+        else if (type.getValue().equals(Enterprise.EnterpriseType.NGO.getValue())){
+            enterprise = new NGO(name, type);
+            if(checkIfEnterpriseIsUnique(enterprise.getName())) enterpriseList.add(enterprise);
+        }
+        
+        else if (type.getValue().equals(Enterprise.EnterpriseType.OrganBank.getValue())){
+            enterprise = new OrganBank(name, type);
+            if(checkIfEnterpriseIsUnique(enterprise.getName())) enterpriseList.add(enterprise);
+        }  
+        
+        else{
+            enterprise = new Transport(name, type);
+            if(checkIfEnterpriseIsUnique(enterprise.getName())) enterpriseList.add(enterprise);
+        }
+        
         return enterprise;
     }
+    
+    public boolean checkIfEnterpriseIsUnique(String name){
+        for(Enterprise e : enterpriseList){
+            if(e.getName().equals(name)) return false;
+        }
+        
+        return true;
+    }
+    
+    public void removeEnterprise(int index){
+        enterpriseList.remove(index);
+    }
+    
 }
