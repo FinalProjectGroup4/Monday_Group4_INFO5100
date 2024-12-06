@@ -5,23 +5,22 @@
 package Model.WorkQueue;
 
 import Model.storage.Patient;
+import java.util.Date;
 
 /**
  *
  * @author apple
  */
-public class PathologyTestRequest extends WorkRequest{
+public class MedicalVisitRequest extends WorkRequest{
     private Patient patient;
     private String bloodType;
-    private String testName;
-    private Double results;
+    private Date visiDate;
+    private  String remarks;
 
-    
-    public PathologyTestRequest(Patient patient){
+    public MedicalVisitRequest(Patient patient) {
         this.patient = patient;
-        results = null;
     }
-
+    
     public String getBloodType() {
         return bloodType;
     }
@@ -30,19 +29,21 @@ public class PathologyTestRequest extends WorkRequest{
         this.bloodType = bloodType;
     }
 
-    public String getTestName() {
-        return testName;
+    public Date getVisiDate() {
+        return visiDate;
     }
 
-    public void setTestName(String testName) {
-        this.testName = testName;
+    public void setVisiDate(Date visiDate) {
+        this.visiDate = visiDate;
     }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
     
-    public Double getResults() {
-        return results;
-    }
-
-    public void setResults(Double results) {
-        this.results = results;
-    }
 }

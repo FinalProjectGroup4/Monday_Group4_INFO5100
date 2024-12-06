@@ -19,6 +19,10 @@ public class WorkQueue {
     
     private ArrayList<WorkRequest> organReportDocList;
     private ArrayList<WorkRequest> organReportHosList;
+    
+    // Our code
+    private  ArrayList<WorkRequest> pathologyTestRequests;
+    private  ArrayList<WorkRequest> medicalVisitRequests;
 
     public WorkQueue() {
         workRequestList = new ArrayList();
@@ -28,6 +32,10 @@ public class WorkQueue {
         artificialOrganRequestlist = new ArrayList();
         organReportDocList = new ArrayList();
         organReportHosList = new ArrayList();
+        
+        // Our code
+        pathologyTestRequests = new ArrayList();
+        medicalVisitRequests = new ArrayList();
     }
 
     public ArrayList<WorkRequest> getOrganReportHosList() {
@@ -136,4 +144,24 @@ public class WorkQueue {
     public void removeartificialOrganRequest(WorkRequest workRequest) {
         artificialOrganRequestlist.remove(workRequest);
     } 
+    
+    
+    // Our code
+    
+    public ArrayList<WorkRequest> getPathologyTestRequests() {
+        return pathologyTestRequests;
+    }
+    
+    public void removePathologyTestRequest(WorkRequest workRequest) {
+        pathologyTestRequests.remove(workRequest);
+    }
+    
+    public ArrayList<WorkRequest> getMedicalVisitRequests() {
+        return pathologyTestRequests;
+    }
+    
+    public void removeMedicalVisitRequest(WorkRequest workRequest) {
+        medicalVisitRequests.remove(workRequest);
+    }
+
 }
