@@ -4,6 +4,8 @@
  */
 package UI.Hospital;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author viralsuchak
@@ -13,8 +15,10 @@ public class DoctorDetailsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorDetailsJPanel
      */
-    public DoctorDetailsJPanel() {
+    JPanel userprocesscontainer;
+    public DoctorDetailsJPanel(JPanel userprocesscontainer) {
         initComponents();
+        this.userprocesscontainer = userprocesscontainer;
     }
 
     /**

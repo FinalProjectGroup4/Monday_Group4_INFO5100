@@ -16,8 +16,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
      * Creates new form SystemAdminWorkArea
      */
     JPanel userProcessContainer;
-    public SystemAdminWorkArea() {
+    public SystemAdminWorkArea(JPanel container) {
         initComponents();
+        this.userProcessContainer = container;
         
     }
 

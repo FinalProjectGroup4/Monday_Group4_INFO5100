@@ -4,6 +4,8 @@
  */
 package UI.Hospital;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author viralsuchak
@@ -26,19 +28,16 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        hospCmbBox = new javax.swing.JComboBox<>();
+        userprocesscontainer = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHospAdmin = new javax.swing.JTable();
         btnView = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        hospCmbBox = new javax.swing.JComboBox<>();
 
-        hospCmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        hospCmbBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hospCmbBoxActionPerformed(evt);
-            }
-        });
+        userprocesscontainer.setMinimumSize(new java.awt.Dimension(1000, 1000));
+        userprocesscontainer.setLayout(new java.awt.CardLayout());
 
         tblHospAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,73 +60,61 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblHospAdmin);
 
+        userprocesscontainer.add(jScrollPane1, "card3");
+
         btnView.setText("View");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
             }
         });
+        userprocesscontainer.add(btnView, "card4");
 
         btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
+        userprocesscontainer.add(btnAdd, "card5");
 
         btnDelete.setText("Delete");
+        userprocesscontainer.add(btnDelete, "card6");
+
+        hospCmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        hospCmbBox.setMaximumSize(new java.awt.Dimension(200, 50));
+        hospCmbBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hospCmbBoxActionPerformed(evt);
+            }
+        });
+        userprocesscontainer.add(hospCmbBox, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hospCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(userprocesscontainer, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(842, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(hospCmbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnView)
-                    .addComponent(btnAdd)
-                    .addComponent(btnDelete))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addComponent(userprocesscontainer, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-       
-        DoctorDetailsJPanel ddjp = new DoctorDetailsJPanel();
-        
-    }//GEN-LAST:event_btnViewActionPerformed
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void hospCmbBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospCmbBoxActionPerformed
-        hospCmbBox.addItem("Doctor");
-        hospCmbBox.addItem("Lab Technician");
-        hospCmbBox.addItem("Front Desk Assistant");
+        hospCmbBox.addItem("Doctors");
+        hospCmbBox.addItem("Lab Technicians");
+        hospCmbBox.addItem("Front Desk Assistants");
     }//GEN-LAST:event_hospCmbBoxActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+       DoctorDetailsJPanel ddjp = new DoctorDetailsJPanel(userprocesscontainer);
+       userprocesscontainer.add("DoctorDetailsJPanel",ddjp);
+       
+        CardLayout layout = (CardLayout) userprocesscontainer.getLayout();
+        layout.show(userprocesscontainer, "DoctorDetails");
+       
+    }//GEN-LAST:event_btnViewActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,5 +124,6 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> hospCmbBox;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblHospAdmin;
+    private javax.swing.JPanel userprocesscontainer;
     // End of variables declaration//GEN-END:variables
 }
