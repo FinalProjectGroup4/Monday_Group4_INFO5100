@@ -4,7 +4,9 @@
  */
 package UI.Hospital;
 
+import Model.EcoSystem;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -15,8 +17,12 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
     /**
      * Creates new form HospitalAdminWorkArea
      */
-    public HospitalAdminWorkArea() {
+    JPanel userProcessContainer;
+    EcoSystem ecosystem;
+    public HospitalAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
+        this.userProcessContainer=container;
+        this.ecosystem=ecosystem;
     }
 
     /**

@@ -4,6 +4,7 @@
  */
 package UI.OrganBank;
 
+import Model.EcoSystem;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,9 +18,11 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
      * Creates new form OrganBankAdminWorkArea
      */
     JPanel userProcessContainer;
-    public OrganBankAdminWorkArea(JPanel container) {
+    EcoSystem ecosystem;
+    public OrganBankAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
-        this.userProcessContainer = container;
+         this.userProcessContainer=container;
+        this.ecosystem=ecosystem;
     }
 
     /**
@@ -60,6 +63,11 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         });
 
         btnInventoryManager.setText("Inventory Manager");
+        btnInventoryManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventoryManagerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,6 +109,15 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewRequestDetailsActionPerformed
+
+    private void btnInventoryManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryManagerActionPerformed
+        // TODO add your handling code here:
+        InventoryManager im = new InventoryManager(userProcessContainer);
+        userProcessContainer.add("InventoryManager",im);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnInventoryManagerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
