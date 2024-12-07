@@ -196,7 +196,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // Get Password
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray);
-         CardLayout layout = (CardLayout) container.getLayout();
+        CardLayout layout = (CardLayout) container.getLayout();
          
         if (userName.equalsIgnoreCase("admin") && password.equalsIgnoreCase("1234")) {
             SystemAdminWorkArea sawa = new SystemAdminWorkArea(container,system);
