@@ -21,7 +21,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
     EcoSystem ecosystem;
     public OrganBankAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
-         this.userProcessContainer=container;
+        this.userProcessContainer=container;
         this.ecosystem=ecosystem;
     }
 

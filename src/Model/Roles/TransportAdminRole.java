@@ -9,6 +9,7 @@ import Model.Enterprises.Enterprise;
 import Model.Organization.Organization;
 import Model.UserAccount.UserAccount;
 import Model.storage.PatientDirectory;
+import UI.TransportAdmin.TransportAdminWorkArea;
 import javax.swing.JPanel;
 
 /**
@@ -18,8 +19,8 @@ import javax.swing.JPanel;
 public class TransportAdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, PatientDirectory patientDirectory) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, PatientDirectory patientDirectory) {
+        return new TransportAdminWorkArea(userProcessContainer, system);
     }
     
 }
