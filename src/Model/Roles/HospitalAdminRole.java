@@ -9,5 +9,8 @@ package Model.Roles;
  * @author apple
  */
 public class HospitalAdminRole extends Role{
+
+    public HospitalAdminRole() {
+    }
     
 }

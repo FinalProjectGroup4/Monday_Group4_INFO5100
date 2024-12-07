@@ -5,7 +5,7 @@
 package Model.UserAccount;
 
 import Model.Employee.Employee;
-import Model.Roles.SystemAdminRole;
+import Model.Roles.Role;
 import java.util.ArrayList;
 
 /**
@@ -38,9 +38,17 @@ public class UserAccountDirectory {
         }
         return true;
     }
-
-    public UserAccount createUserAccount(String string, String string0, Employee employee, SystemAdminRole systemAdminRole) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public UserAccount createUserAccount(String username, String password, Employee employee, Role role){
+        UserAccount userAccount = new UserAccount();
+        userAccount.setUsername(username);
+        userAccount.setPassword(password);
+        userAccount.setEmployee(employee);
+        userAccount.setRole(role);
+        userAccountList.add(userAccount);
+        return userAccount;
     }
+    
+    
     
 }

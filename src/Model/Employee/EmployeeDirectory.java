@@ -4,14 +4,29 @@
  */
 package Model.Employee;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author nihardabhi
  */
 public class EmployeeDirectory {
 
-    public Employee createEmployee(String rrh) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private ArrayList<Employee> employeeList;
+
+    public EmployeeDirectory() {
+        employeeList = new ArrayList();
+    }
+
+    public ArrayList<Employee> getEmployeeList() {
+        return employeeList;
+    }
+    
+    public Employee createEmployee(String name){
+        Employee employee = new Employee();
+        employee.setName(name);
+        employeeList.add(employee);
+        return employee;
     }
     
 }

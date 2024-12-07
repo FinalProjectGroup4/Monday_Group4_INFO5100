@@ -4,6 +4,7 @@
  */
 package UI.SystemAdmin;
 
+import Model.EcoSystem;
 import javax.swing.JPanel;
 
 /**
@@ -16,11 +17,21 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
      * Creates new form SystemAdminWorkArea
      */
     JPanel userProcessContainer;
-    public SystemAdminWorkArea(JPanel container) {
+    EcoSystem ecosystem;
+    public SystemAdminWorkArea(JPanel container, System system) {
         initComponents();
+<<<<<<< Updated upstream
         this.userProcessContainer = container;
         populateComboBox();
         
+=======
+        this.userProcessContainer=container;
+        this.ecosystem=ecosystem;
+        populateTree();        
+    }
+    
+    public void populateTree(){
+>>>>>>> Stashed changes
     }
 
     /**

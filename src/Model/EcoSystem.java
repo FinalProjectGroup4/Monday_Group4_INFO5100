@@ -22,6 +22,22 @@ public class EcoSystem extends Organization{
     private ArrayList<Network> networkList;
     private PatientDirectory patientDirectory;
     
+    private EcoSystem(){
+        super(null);
+        networkList=new ArrayList<Network>();
+        patientDirectory = new PatientDirectory();
+//        unosManagerDirectory = new UNOSmanagerDirectory();
+//        airEmployeeDirectory = new AirEmployeeDirectory();
+//        organCompanyStaffDirectory = new OrganCompanyStaffDirectory();
+    }
+    
+    public static EcoSystem getInstance(){
+        if(business==null){
+            business=new EcoSystem();
+        }
+        return business;
+    }
+    
 //    private UNOSmanagerDirectory unosManagerDirectory;
 //    private AirEmployeeDirectory airEmployeeDirectory;
 //    private OrganCompanyStaffDirectory organCompanyStaffDirectory;
@@ -63,31 +79,17 @@ public class EcoSystem extends Organization{
         this.patientDirectory = patientDirectory;
     }
     
-    public static EcoSystem getInstance(){
-        if(business==null){
-            business=new EcoSystem();
-        }
-        return business;
-    }
-    
     public Network createAndAddNetwork(){
         Network network=new Network();
         networkList.add(network);
         return network;
     }
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roleList=new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
-    }
-    private EcoSystem(){
-        super(null);
-        networkList=new ArrayList<Network>();
-        patientDirectory = new PatientDirectory();
-//        unosManagerDirectory = new UNOSmanagerDirectory();
-//        airEmployeeDirectory = new AirEmployeeDirectory();
-//        organCompanyStaffDirectory = new OrganCompanyStaffDirectory();
     }
 
     public ArrayList<Network> getNetworkList() {

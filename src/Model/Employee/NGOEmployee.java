@@ -6,8 +6,8 @@ package Model.Employee;
 
 /**
  *
- * @author nihardabhi
+ * @author apple
  */
-public class LabEmployee extends Employee{
+public class NGOEmployee extends Employee{
     
 }

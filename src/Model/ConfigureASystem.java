@@ -5,7 +5,12 @@
 package Model;
 
 import Model.Employee.Employee;
+import Model.Roles.GovernmentOfficialRole;
+import Model.Roles.HospitalAdminRole;
+import Model.Roles.NGOAdminRole;
+import Model.Roles.OrganBankAdminRole;
 import Model.Roles.SystemAdminRole;
+import Model.Roles.TransportAdminRole;
 import Model.UserAccount.UserAccount;
 
 /**
@@ -18,21 +23,26 @@ public class ConfigureASystem {
         EcoSystem system = EcoSystem.getInstance();
         
         //Create a network
-        //create an enterprise
-        //initialize some organizations
-        //have some employees 
-        //create user account
+        //Create an enterprise
+        //Have some employees 
+        //Create user account
         
         
-        Employee employee = system.getEmployeeDirectory().createEmployee("RRH");
-        //log in as system administrator
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("1", "1", employee, new SystemAdminRole());
-        //log in as UNOS administrator
-//        UserAccount uno = system.getUserAccountDirectory().createUserAccount("UNOS", "UNOS", employee, new UNOSRole());
-//        //log in as air ambulence administrator
-//        UserAccount air = system.getUserAccountDirectory().createUserAccount("AIR", "AIR", employee, new AirRole());
-//        //log in as organ company administrator
-//        UserAccount oad = system.getUserAccountDirectory().createUserAccount("COM", "COM", employee, new OrganCompanyAdminRole());
+        Employee employee = system.getEmployeeDirectory().createEmployee("System Admin");
+        
+        //System Admin
+        UserAccount userAccountSys = system.getUserAccountDirectory().createUserAccount("master", "master", employee, new SystemAdminRole());
+        
+        UserAccount userAccountHospitalAdmin = system.getUserAccountDirectory().createUserAccount("hospital", "hospital", employee, new HospitalAdminRole());
+
+        UserAccount userAccountNGOAdmin = system.getUserAccountDirectory().createUserAccount("ngo", "ngo", employee, new NGOAdminRole());
+        
+        UserAccount userAccountOrganBankAdmin = system.getUserAccountDirectory().createUserAccount("organ", "organ", employee, new OrganBankAdminRole());
+        
+        UserAccount userAccountTransportAdmin = system.getUserAccountDirectory().createUserAccount("transport", "transport", employee, new TransportAdminRole());
+        
+        UserAccount userAccountGovernmentAdmin = system.getUserAccountDirectory().createUserAccount("gov", "gov", employee, new GovernmentOfficialRole());
+
         return system;
     }
 }
