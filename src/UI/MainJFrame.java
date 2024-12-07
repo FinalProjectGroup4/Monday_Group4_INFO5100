@@ -247,59 +247,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
         }
         
-//        if (userName.equalsIgnoreCase("admin") && password.equalsIgnoreCase("1234")) {
-//            SystemAdminWorkArea sawa = new SystemAdminWorkArea(container,system);
-//            container.add("SystemAdminWorkArea", sawa);
-//            layout.next(container);
-//        }else if (userName.equalsIgnoreCase("hospitalAdmin") && password.equalsIgnoreCase("admin123")) {
-//            HospitalAdminWorkArea hwa = new HospitalAdminWorkArea();
-//            container.add("HospitalAdminWorkArea", hwa);
-//            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("doctor") && password.equalsIgnoreCase("doctor123")) {
-////            DoctorWorkArea dwa = new DoctorWorkArea(container);
-////            container.add("DoctorWorkArea", dwa);
-////
-////            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("labtech") && password.equalsIgnoreCase("lab123")) {
-////            LabTechWorkArea ltw = new LabTechWorkArea(container);
-////            container.add("LabTechWorkArea", ltw);
-////
-////            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("frontdesk") && password.equalsIgnoreCase("desk123")) {
-////            FrontDeskWorkArea fdwa = new FrontDeskWorkArea(container);
-////            container.add("FrontDeskWorkArea", fdwa);
-////
-////            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("ngo") && password.equalsIgnoreCase("ngo123")) {
-//            NGOAdminWorkArea nwo = new NGOAdminWorkArea(container);
-//            container.add("NGOWorkArea", nwo);
-//
-//            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("organbank") && password.equalsIgnoreCase("organ123")) {
-//            OrganBankAdminWorkArea obwa = new OrganBankAdminWorkArea(container);
-//            container.add("OrganBankWorkArea", obwa);
-//
-//            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("transport") && password.equalsIgnoreCase("transport123")) {
-////            TransportWorkArea twa = new TransportWorkArea(container);
-////            container.add("TransportWorkArea", twa);
-////
-////            layout.next(container);
-//        } else if (userName.equalsIgnoreCase("government") && password.equalsIgnoreCase("govt123")) {
-////            GovernmentWorkArea gwa = new GovernmentWorkArea(container);
-////            container.add("GovernmentWorkArea", gwa);
-////
-////            layout.next(container);
-//        }
-//        else {
-//            //loginPanel.setVisible(false);
-//            JDialog showMessageDialog = new JDialog();
-//            showMessageDialog.setAlwaysOnTop(true);
-//            JOptionPane.showMessageDialog((this), "Invalid credentials");
-//            return;
-//
-//        }
-
         loginJButton.setEnabled(false);
         loginJButton.setVisible(false);
         logoutJButton.setEnabled(true);
