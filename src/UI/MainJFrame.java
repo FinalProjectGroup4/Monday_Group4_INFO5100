@@ -6,6 +6,7 @@ package UI;
 
 import UI.Hospital.HospitalAdminWorkArea;
 import UI.NGO.NGOAdminWorkArea;
+import UI.OrganBank.OrganBankAdminWorkArea;
 import UI.SystemAdmin.SystemAdminWorkArea;
 import java.awt.CardLayout;
 import javax.swing.JDialog;
@@ -217,10 +218,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
             layout.next(container);
         } else if (userName.equalsIgnoreCase("organbank") && password.equalsIgnoreCase("organ123")) {
-//            OrganBankWorkArea obwa = new OrganBankWorkArea(container);
-//            container.add("OrganBankWorkArea", obwa);
-//
-//            layout.next(container);
+            OrganBankAdminWorkArea obwa = new OrganBankAdminWorkArea(container);
+            container.add("OrganBankWorkArea", obwa);
+
+            layout.next(container);
         } else if (userName.equalsIgnoreCase("transport") && password.equalsIgnoreCase("transport123")) {
 //            TransportWorkArea twa = new TransportWorkArea(container);
 //            container.add("TransportWorkArea", twa);
