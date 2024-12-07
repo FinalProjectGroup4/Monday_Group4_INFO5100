@@ -4,6 +4,7 @@
  */
 package UI.NGO;
 
+import Model.EcoSystem;
 import javax.swing.JPanel;
 
 /**
@@ -16,9 +17,11 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
      * Creates new form NGOAdminWorkArea
      */
     JPanel userProcessContainer;
-    public NGOAdminWorkArea(JPanel container) {
+    EcoSystem ecosystem;
+    public NGOAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
-        this.userProcessContainer = container;
+        this.userProcessContainer=container;
+        this.ecosystem=ecosystem;
     }
 
     /**
