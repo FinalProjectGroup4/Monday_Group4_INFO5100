@@ -5,8 +5,11 @@
 package UI.SystemAdmin;
 
 import Model.EcoSystem;
+import Model.Networks.Network;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,11 +21,12 @@ public class ManageNetwork extends javax.swing.JPanel {
      * Creates new form ManageNetowkr
      */
     JPanel userProcessContainer;
-    EcoSystem ecosystem;
+    EcoSystem system;
+    
     public ManageNetwork(JPanel container, EcoSystem system) {
         initComponents();
-        this.userProcessContainer=container;
-        this.ecosystem=ecosystem;
+        this.userProcessContainer = container;
+        this.system = system;
     }
 
     /**
@@ -61,6 +65,11 @@ public class ManageNetwork extends javax.swing.JPanel {
         });
 
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,6 +120,30 @@ public class ManageNetwork extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        if (txtName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog((this), "Please enter all command field");
+            return;
+        }
+        JOptionPane.showMessageDialog((this), "Submitted Successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+
+        String name = txtName.getText();
+
+        Network network = system.createAndAddNetwork();
+        network.setName(name);
+        populateNetworkTable();
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void populateNetworkTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (Network network : system.getNetworkList()) {
+            Object[] row = new Object[0];
+            row[0] = network.getName();
+            model.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
