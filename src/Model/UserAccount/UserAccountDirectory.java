@@ -47,8 +47,5 @@ public class UserAccountDirectory {
         userAccount.setRole(role);
         userAccountList.add(userAccount);
         return userAccount;
-    }
-    
-    
-    
+    } 
 }

@@ -47,4 +47,8 @@ public abstract class Enterprise extends Model.Organization.Organization{
         this.enterpriseType = enterpriseType;
     }
     
+    public OrganizationDirectory getOrganizationDirectory() {
+        return organizationDirectory;
+    }
+    
 }
