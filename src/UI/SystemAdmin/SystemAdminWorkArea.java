@@ -18,20 +18,15 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    public SystemAdminWorkArea(JPanel container, System system) {
+    public SystemAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
-<<<<<<< Updated upstream
-        this.userProcessContainer = container;
         populateComboBox();
-        
-=======
         this.userProcessContainer=container;
         this.ecosystem=ecosystem;
         populateTree();        
     }
     
     public void populateTree(){
->>>>>>> Stashed changes
     }
 
     /**

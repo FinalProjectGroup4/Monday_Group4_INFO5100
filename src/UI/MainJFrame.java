@@ -4,6 +4,9 @@
  */
 package UI;
 
+import Model.DB4OUtil.DB4OUtil;
+import Model.EcoSystem;
+import Model.storage.PatientDirectory;
 import UI.Hospital.HospitalAdminWorkArea;
 import UI.NGO.NGOAdminWorkArea;
 import UI.OrganBank.OrganBankAdminWorkArea;
@@ -19,12 +22,18 @@ import javax.swing.JPanel;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    private EcoSystem system;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private PatientDirectory patientDirectory;
+    
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
         logoutJButton.setVisible(false);
+        system = dB4OUtil.retrieveSystem();
+        this.setSize(1680, 1050);
         
     }
 
@@ -190,7 +199,7 @@ public class MainJFrame extends javax.swing.JFrame {
          CardLayout layout = (CardLayout) container.getLayout();
          
         if (userName.equalsIgnoreCase("admin") && password.equalsIgnoreCase("1234")) {
-            SystemAdminWorkArea sawa = new SystemAdminWorkArea(container);
+            SystemAdminWorkArea sawa = new SystemAdminWorkArea(container,system);
             container.add("SystemAdminWorkArea", sawa);
             layout.next(container);
         }else if (userName.equalsIgnoreCase("hospitalAdmin") && password.equalsIgnoreCase("admin123")) {
