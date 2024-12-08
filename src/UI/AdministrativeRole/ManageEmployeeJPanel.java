@@ -152,7 +152,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
-
+        if (cmbOrganization.getItemCount() > 0) {
+            int selectedIndex = cmbOrganization.getSelectedIndex();
+            Organization firstOrganization = (Organization)cmbOrganization.getItemAt(selectedIndex);
+            populateTable(firstOrganization);
+        }
     }//GEN-LAST:event_cmbOrganizationActionPerformed
 
 
@@ -171,6 +175,13 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         
         for (Organization organization : organizationDir.getOrganizationList()){
             cmbOrganization.addItem(organization);
+            
+        }
+        
+        if (cmbOrganization.getItemCount() > 0) {
+            cmbOrganization.setSelectedIndex(0);
+            Organization firstOrganization = (Organization)cmbOrganization.getItemAt(0);
+            populateTable(firstOrganization);
         }
     }
      private void populateTable(Organization organization){
