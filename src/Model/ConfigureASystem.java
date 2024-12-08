@@ -6,10 +6,10 @@ package Model;
 
 import Model.Employee.Employee;
 import Model.Roles.EnterpriseAdminRole;
-import Model.Roles.GovernmentOfficialRole;
+import Model.Roles.GovernmentStaffRole;
 import Model.Roles.HospitalAdminRole;
-import Model.Roles.NGOAdminRole;
-import Model.Roles.OrganBankAdminRole;
+import Model.Roles.NGOStaffRole;
+import Model.Roles.OrganBankStaffRole;
 import Model.Roles.SystemAdminRole;
 import Model.Roles.TransportAdminRole;
 import Model.UserAccount.UserAccount;
@@ -36,13 +36,13 @@ public class ConfigureASystem {
         
         UserAccount userAccountHospitalAdmin = system.getUserAccountDirectory().createUserAccount("hospital", "hospital", employee, new HospitalAdminRole());
 
-        UserAccount userAccountNGOAdmin = system.getUserAccountDirectory().createUserAccount("ngo", "ngo", employee, new NGOAdminRole());
+        UserAccount userAccountNGOAdmin = system.getUserAccountDirectory().createUserAccount("ngo", "ngo", employee, new NGOStaffRole());
         
-        UserAccount userAccountOrganBankAdmin = system.getUserAccountDirectory().createUserAccount("organ", "organ", employee, new OrganBankAdminRole());
+        UserAccount userAccountOrganBankAdmin = system.getUserAccountDirectory().createUserAccount("organ", "organ", employee, new OrganBankStaffRole());
         
         UserAccount userAccountTransportAdmin = system.getUserAccountDirectory().createUserAccount("transport", "transport", employee, new TransportAdminRole());
         
-        UserAccount userAccountGovernmentAdmin = system.getUserAccountDirectory().createUserAccount("gov", "gov", employee, new GovernmentOfficialRole());
+        UserAccount userAccountGovernmentAdmin = system.getUserAccountDirectory().createUserAccount("gov", "gov", employee, new GovernmentStaffRole());
         
         UserAccount userAccountEnterpriseAdminHos = system.getUserAccountDirectory().createUserAccount("hos", "hos", employee, new EnterpriseAdminRole());
 

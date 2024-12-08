@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author apple
  */
-public class OrganBankAdminRole extends Role {
+public class OrganBankStaffRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, PatientDirectory patientDirectory) {
