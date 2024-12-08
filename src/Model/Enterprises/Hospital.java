@@ -5,6 +5,7 @@
 package Model.Enterprises;
 
 import Model.Roles.Role;
+import Model.storage.PatientDirectory;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +14,21 @@ import java.util.ArrayList;
  */
 public class Hospital extends Enterprise{
     
+    private PatientDirectory patientDirectory;
+    
     public Hospital(String name, EnterpriseType type) {
         super(name, type);
     }
 
+    public PatientDirectory getPatientDirectory() {
+        return patientDirectory;
+    }
+
+    public void setPatientDirectory(PatientDirectory patientDirectory) {
+        this.patientDirectory = patientDirectory;
+    }
+
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         return  null;
