@@ -72,4 +72,9 @@ public abstract class Enterprise extends Model.Organization.Organization{
         return organizationDirectory;
     }
     
+    @Override
+    public String toString(){
+        return enterpriseType.getValue();
+    }
+    
 }

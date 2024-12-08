@@ -27,6 +27,7 @@ public class ManageNetwork extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = container;
         this.system = system;
+        populateNetworkTable();
     }
 
     /**

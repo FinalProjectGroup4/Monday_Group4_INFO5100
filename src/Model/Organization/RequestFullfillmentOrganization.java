@@ -4,6 +4,7 @@
  */
 package Model.Organization;
 
+import Model.Roles.NGOAdminRole;
 import Model.Roles.Role;
 import java.util.ArrayList;
 
@@ -19,7 +20,8 @@ public class RequestFullfillmentOrganization extends Organization{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new NGOAdminRole());
+        return roles;    
     }
-    
 }
