@@ -102,7 +102,7 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
         int selectedrow = tblRequests.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please select valid row");
+            JOptionPane.showMessageDialog((this), "Please select a valid row");
             return;
         }
         
