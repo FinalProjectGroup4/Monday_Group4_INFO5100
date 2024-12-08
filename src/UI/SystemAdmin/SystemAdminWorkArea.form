@@ -21,14 +21,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane1" pref="651" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnViewDetails" min="-2" pref="155" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="btnAddNew" min="-2" pref="148" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="lblEnterprise" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="btnBack" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAddNew" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
@@ -42,10 +38,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="182" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnViewDetails" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAddNew" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnAddNew" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="lblEnterprise" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -65,10 +58,10 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="0">
-                <Column editable="true" title="ID" type="java.lang.Object"/>
-                <Column editable="true" title="Name" type="java.lang.Object"/>
-                <Column editable="true" title="City" type="java.lang.Object"/>
-                <Column editable="true" title="Country" type="java.lang.Object"/>
+                <Column editable="false" title="ID" type="java.lang.Object"/>
+                <Column editable="false" title="Name" type="java.lang.Object"/>
+                <Column editable="false" title="City" type="java.lang.Object"/>
+                <Column editable="false" title="Country" type="java.lang.Object"/>
                 <Column editable="true" title="Network" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -108,17 +101,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnViewDetails">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Details"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewDetailsActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnAddNew">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add New"/>
+        <Property name="text" type="java.lang.String" value="Add New Enterprise"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddNewActionPerformed"/>
@@ -153,20 +138,15 @@
                       <Component id="txtCity" pref="120" max="32767" attributes="0"/>
                       <Component id="cmbEnterprise" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel2" pref="129" max="32767" attributes="0"/>
-                              <Component id="jLabel4" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lblNetwork" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblNetwork" max="32767" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel2" max="32767" attributes="0"/>
+                          <Component id="jLabel4" min="-2" pref="129" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtName" max="32767" attributes="0"/>
                       <Component id="txtCountry" pref="130" max="32767" attributes="0"/>
@@ -215,20 +195,26 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Organization ID :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtId">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Organization Name :"/>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Enterprise Name :"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtName">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="City :"/>
           </Properties>
         </Component>
@@ -236,6 +222,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Country :"/>
           </Properties>
         </Component>
@@ -251,12 +238,14 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblNetwork">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="Networks"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Enterprise"/>
+            <Property name="horizontalAlignment" type="int" value="4"/>
+            <Property name="text" type="java.lang.String" value="Enterprise Type"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbEnterprise">
@@ -299,7 +288,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;&lt;&lt; Back"/>
+        <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
