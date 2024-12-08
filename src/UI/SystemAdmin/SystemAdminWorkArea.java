@@ -53,7 +53,6 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
-        btnViewDetails = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
         lblEnterprise = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -78,17 +77,18 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             new String [] {
                 "ID", "Name", "City", "Country", "Network"
             }
-        ));
-        jScrollPane1.setViewportView(tblDetails);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
 
-        btnViewDetails.setText("View Details");
-        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewDetailsActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(tblDetails);
 
-        btnAddNew.setText("Add New");
+        btnAddNew.setText("Add New Enterprise");
         btnAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddNewActionPerformed(evt);
@@ -97,12 +97,18 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         lblEnterprise.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Details"));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Organization ID :");
 
-        jLabel2.setText("Organization Name :");
+        txtId.setEnabled(false);
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Enterprise Name :");
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("City :");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Country :");
 
         btnSave.setText("Save");
@@ -112,9 +118,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        lblNetwork.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNetwork.setText("Networks");
 
-        jLabel6.setText("Enterprise");
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Enterprise Type");
 
         cmbEnterprise.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cmbEnterprise.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -147,16 +155,13 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                     .addComponent(txtId)
                     .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(cmbEnterprise, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(lblEnterpriseLayout.createSequentialGroup()
-                        .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(51, 51, 51))
-                    .addGroup(lblEnterpriseLayout.createSequentialGroup()
-                        .addComponent(lblNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(62, 62, 62)))
+                .addGap(59, 59, 59)
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtName)
                     .addComponent(txtCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
@@ -193,7 +198,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        btnBack.setText("<<< Back");
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -209,12 +214,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnViewDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
-                            .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnBack))
+                    .addComponent(btnBack)
+                    .addComponent(btnAddNew))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -225,9 +227,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnViewDetails)
-                    .addComponent(btnAddNew))
+                .addComponent(btnAddNew)
                 .addGap(27, 27, 27)
                 .addComponent(lblEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -291,7 +291,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
-txtName.setEditable(false);
+        txtName.setEditable(true);
         txtCity.setEditable(true);
         txtCountry.setEditable(true);
         cmbNetwork.setEditable(true);
@@ -307,16 +307,11 @@ txtName.setEditable(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbNetworkActionPerformed
 
-    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewDetailsActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNew;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnViewDetails;
     private javax.swing.JComboBox cmbEnterprise;
     private javax.swing.JComboBox cmbNetwork;
     private javax.swing.JLabel jLabel1;
