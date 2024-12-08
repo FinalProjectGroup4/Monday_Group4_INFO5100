@@ -56,7 +56,7 @@ public abstract class Enterprise extends Model.Organization.Organization{
     
     public void createDefaultOrganization(){
             for (Organization.Type type : enterpriseOrganizationMap.get(enterpriseType)){
-                organizationDirectory.createOrganization(type.toString(), type);
+                organizationDirectory.createOrganization(type.getValue(), type);
             }
     }
     
