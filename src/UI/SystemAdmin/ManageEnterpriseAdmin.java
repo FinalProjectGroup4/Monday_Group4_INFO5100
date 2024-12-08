@@ -97,6 +97,11 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         });
 
         passwordJPasswordField.setText("jPasswordField1");
+        passwordJPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordJPasswordFieldActionPerformed(evt);
+            }
+        });
 
         networkJComboBox.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -201,10 +206,10 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
 
     private void enterpriseJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterpriseJComboBoxActionPerformed
 
-        Network network = (Network) networkJComboBox.getSelectedItem();
-        if (network != null) {
-            populateEnterpriseComboBox(network);
-        }
+//        Network network = (Network) networkJComboBox.getSelectedItem();
+//        if (network != null) {
+//            populateEnterpriseComboBox(network);
+//        }
     }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -214,11 +219,15 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void passwordJPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordJPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordJPasswordFieldActionPerformed
+
     private void populateEnterpriseComboBox(Network network){
         enterpriseJComboBox.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            enterpriseJComboBox.addItem(enterprise);
+            enterpriseJComboBox.addItem(enterprise.getEnterpriseType());
         }
         
     }
