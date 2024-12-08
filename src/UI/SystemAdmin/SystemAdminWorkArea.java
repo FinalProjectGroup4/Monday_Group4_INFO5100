@@ -254,7 +254,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         Enterprise.EnterpriseType enterpriseType = null;
         
-        if(selectedEnterprise.equals("Hospitals")){
+        if(selectedEnterprise.equals("Hospital")){
             enterpriseType = Enterprise.EnterpriseType.Hospital;
         } else if(selectedEnterprise.equals("NGO")){
             enterpriseType = Enterprise.EnterpriseType.NGO;
@@ -293,7 +293,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             return;
         }
         
-        Enterprise enterprise = (Enterprise) tblDetails.getValueAt(selectedrow, 0);
+        Enterprise enterprise = (Enterprise) tblDetails.getValueAt(selectedrow, 1);
         
         if (txtName.getText().isEmpty() || txtCity.getText().isEmpty() || txtCountry.getText().isEmpty()) {
             JOptionPane.showMessageDialog((this), "Please enter all command field");
@@ -352,7 +352,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
                 Object[] row = new Object[5];
                 row[0] = e.getOrganizationID();
-                row[1] = e.getName();
+                row[1] = e;
                 row[2] = e.getCity();
                 row[3] = e.getCountry();
                 row[4] = network.getName();
