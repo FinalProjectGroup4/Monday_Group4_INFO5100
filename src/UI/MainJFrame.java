@@ -33,7 +33,7 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         logoutJButton.setVisible(false);
         system = dB4OUtil.retrieveSystem();
-        this.setSize(950, 700);
+        this.setSize(1680, 1050);
         
     }
 

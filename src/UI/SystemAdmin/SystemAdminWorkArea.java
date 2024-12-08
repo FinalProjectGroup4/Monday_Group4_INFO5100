@@ -40,9 +40,6 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         cmbNetwork.setEditable(false);
         cmbEnterprise.setEditable(false);
         btnSave.setEnabled(false);
-        txtCity.setEditable(false);
-        txtCountry.setEditable(false);
-        txtName.setEditable(false);
     }
 
     /**
@@ -56,6 +53,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
+        btnViewDetails = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
         lblEnterprise = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -78,25 +76,19 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "City", "Country", "Network", "Enterprise"
+                "ID", "Name", "City", "Country", "Network"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDetailsMouseClicked(evt);
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblDetails);
 
-        btnAddNew.setText("Add New Organization");
+        btnViewDetails.setText("View Details");
+        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDetailsActionPerformed(evt);
+            }
+        });
+
+        btnAddNew.setText("Add New");
         btnAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddNewActionPerformed(evt);
@@ -107,17 +99,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         jLabel1.setText("Organization ID :");
 
-        txtId.setEnabled(false);
-
         jLabel2.setText("Organization Name :");
 
         jLabel3.setText("City :");
-
-        txtCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCityActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Country :");
 
@@ -225,9 +209,12 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnViewDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(29, 29, 29)
+                            .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(lblEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnBack)
-                    .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBack))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -237,9 +224,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addComponent(btnBack)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnAddNew)
-                .addGap(32, 32, 32)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnViewDetails)
+                    .addComponent(btnAddNew))
+                .addGap(27, 27, 27)
                 .addComponent(lblEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -287,12 +276,6 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         newEnterprise.setCountry(txtCountry.getText());
         newEnterprise.setName(txtName.getText());
         
-
-        
-        populateTable();
-        
-        btnUpdate.setEnabled(true);
-
         txtName.setText("");
         txtId.setText("");
         txtCity.setText("");
@@ -303,68 +286,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         cmbNetwork.setEditable(false);
         cmbEnterprise.setEditable(false);
         populateTable();
-
         btnSave.setEnabled(false);
-        txtCity.setEditable(false);
-        txtCountry.setEditable(false);
-        txtName.setEditable(false);
-        txtId.setText("");
-        txtCity.setText("");
-        txtCountry.setText("");
-        txtName.setText("");
         
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
-
-
-        txtCity.setEditable(true);
-        txtCountry.setEditable(true);
-        txtName.setEditable(true);
-        btnUpdate.setEnabled(true);
-        btnSave.setEnabled(true);
-    }//GEN-LAST:event_btnAddNewActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        
-        cmbEnterprise.setEnabled(false);
-        cmbNetwork.setEnabled(false);
-        
-        int selectedrow = tblDetails.getSelectedRow();
-        
-        if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please enter valid");
-            return;
-        }
-        
-        Enterprise enterprise = (Enterprise) tblDetails.getValueAt(selectedrow, 5);
-        
-        if (txtName.getText().isEmpty() || txtCity.getText().isEmpty() || txtCountry.getText().isEmpty()) {
-            JOptionPane.showMessageDialog((this), "Please enter all command field");
-            return;
-        }
-        
-        
-        enterprise.setCity(txtCity.getText());
-        enterprise.setCountry(txtCountry.getText());
-        enterprise.setName(txtName.getText());
-
-        populateTable();
-        
-        btnUpdate.setEnabled(true);
-        btnSave.setEnabled(false);
-        txtCity.setEditable(false);
-        txtCountry.setEditable(false);
-        txtName.setEditable(false);
-        txtId.setText("");
-        txtCity.setText("");
-        txtCountry.setText("");
-        txtName.setText("");
-        
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-
 txtName.setEditable(false);
         txtCity.setEditable(true);
         txtCountry.setEditable(true);
@@ -372,7 +298,6 @@ txtName.setEditable(false);
         cmbEnterprise.setEditable(true);
         btnSave.setEnabled(true);
     }//GEN-LAST:event_btnAddNewActionPerformed
-
 
     private void cmbEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEnterpriseActionPerformed
 
@@ -382,39 +307,16 @@ txtName.setEditable(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbNetworkActionPerformed
 
-    private void txtCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCityActionPerformed
+    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCityActionPerformed
-
-    private void tblDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailsMouseClicked
-        txtCity.setEditable(true);
-        txtCountry.setEditable(true);
-        txtName.setEditable(true);
-        
-        int selectedRow = tblDetails.getSelectedRow();
-        
-        String id = tblDetails.getValueAt(selectedRow, 0).toString();
-        String name = tblDetails.getValueAt(selectedRow, 1).toString();
-        String city = tblDetails.getValueAt(selectedRow, 2).toString();
-        String country = tblDetails.getValueAt(selectedRow, 3).toString();
-        
-        txtId.setText(id);
-        txtName.setText(name);
-        txtCity.setText(city);
-        txtCountry.setText(country);
-        //System.out.println("Table row"+selectedRow+" selected");
-    }//GEN-LAST:event_tblDetailsMouseClicked
+    }//GEN-LAST:event_btnViewDetailsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNew;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
-
-    private javax.swing.JButton btnUpdate;
-
     private javax.swing.JButton btnViewDetails;
-
     private javax.swing.JComboBox cmbEnterprise;
     private javax.swing.JComboBox cmbNetwork;
     private javax.swing.JLabel jLabel1;
@@ -446,13 +348,12 @@ txtName.setEditable(false);
         model.setRowCount(0);
         for (Network network : ecosystem.getNetworkList()) {
             for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
-                Object[] row = new Object[6];
+                Object[] row = new Object[5];
                 row[0] = e.getOrganizationID();
-                row[1] = e.getName();
+                row[1] = e;
                 row[2] = e.getCity();
                 row[3] = e.getCountry();
                 row[4] = network.getName();
-                row[5] = e; // Store the Enterprise object
                 model.addRow(row);
             }
         }

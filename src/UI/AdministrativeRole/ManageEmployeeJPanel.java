@@ -30,8 +30,6 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
      
        this.organizationDir = organizationDir;
        populateOrganizationComboBox();
-       
-       //populateTable(organization);
     }
 
     /**
