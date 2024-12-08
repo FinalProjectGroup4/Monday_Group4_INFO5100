@@ -6,7 +6,12 @@ package UI.Hospital;
 
 import Model.EcoSystem;
 import Model.Enterprises.Hospital;
+import Model.UserAccount.UserAccount;
+import Model.WorkQueue.PathologyTestRequest;
+import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
+import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -18,14 +23,16 @@ public class RequestReportJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     Patient patient;
     Hospital enterpriseHospital;
+    UserAccount doctorAccount;
     /**
      * Creates new form RequestReportJPanel
      */
-    public RequestReportJPanel(JPanel userProcessContainer, EcoSystem system ,Patient patient, Hospital enterprise) {
+    public RequestReportJPanel(JPanel userProcessContainer, EcoSystem system ,Patient patient, Hospital enterprise, UserAccount doctorAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterpriseHospital = enterprise;
         this.patient = patient;
+        this.doctorAccount = doctorAccount;
         fillPatientData();
     }
 
@@ -48,6 +55,7 @@ public class RequestReportJPanel extends javax.swing.JPanel {
         txtPatientSickness = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtReportDetails = new javax.swing.JTextArea();
+        btnBack3 = new javax.swing.JButton();
 
         jLabel1.setText("Name");
 
@@ -68,30 +76,38 @@ public class RequestReportJPanel extends javax.swing.JPanel {
         txtReportDetails.setRows(5);
         jScrollPane1.setViewportView(txtReportDetails);
 
+        btnBack3.setText("Back");
+        btnBack3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(165, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(btnRaiseRequest)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(btnBack3))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPatientSickness, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPatientGender, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPatientName, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -104,23 +120,39 @@ public class RequestReportJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(txtPatientSickness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRaiseRequest))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRaiseRequest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBack3))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRaiseRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseRequestActionPerformed
         // TODO add your handling code here:
-        enterpriseHospital.getWorkQueue().getPathologyTestRequests(patient.getId(), true);
+        PathologyTestRequest pathologyTestRequest = new PathologyTestRequest(patient);
+        pathologyTestRequest.setSender(doctorAccount);
+        pathologyTestRequest.setStatus("Pending");
+        pathologyTestRequest.setMessage(txtReportDetails.getText());
+        ArrayList<WorkRequest> existingRequests = enterpriseHospital.getWorkQueue().getPathologyTestRequests(patient.getId(), true);
+        existingRequests.add(pathologyTestRequest);
+        enterpriseHospital.getWorkQueue().setPathologyTestRequests(existingRequests);
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
+
+    private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBack3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack3;
     private javax.swing.JButton btnRaiseRequest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

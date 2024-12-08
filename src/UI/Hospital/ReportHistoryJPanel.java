@@ -9,6 +9,7 @@ import Model.Enterprises.Hospital;
 import Model.UserAccount.UserAccount;
 import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +27,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ReportHistoryJPanel
      */
-    public ReportHistoryJPanel(JPanel userProcessContainer, Hospital enterprise, UserAccount userAccount,EcoSystem system) {
+    public ReportHistoryJPanel(JPanel userProcessContainer, EcoSystem system ,Patient patient, Hospital enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.hospitalEnterprise = enterprise;
@@ -41,7 +42,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests(patient.getId(), true)) {
                     Object[] row = new Object[4];
-                    row[0] = workRequest.getSender();
+                    row[0] = workRequest;
                     row[1] = workRequest.getStatus();
                     row[2] = workRequest.getMessage();
                     row[3] = workRequest.getRequestDate();
@@ -62,6 +63,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnBack3 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +82,13 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
         jButton1.setText("Request Organ");
 
+        btnBack3.setText("Back");
+        btnBack3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +101,8 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(btnBack3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,12 +115,22 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(0, 154, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBack3)
+                .addGap(0, 125, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBack3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

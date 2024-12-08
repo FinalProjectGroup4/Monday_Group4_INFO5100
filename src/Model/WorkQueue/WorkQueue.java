@@ -149,18 +149,13 @@ public class WorkQueue {
     
     public ArrayList<WorkRequest> getPathologyTestRequests(int patientId, boolean isPending) {
         
-        ArrayList<WorkRequest> filterResult = new ArrayList<>();
-        
-        for(WorkRequest w : pathologyTestRequests){
-            PathologyTestRequest p = (PathologyTestRequest) w;
-            if(p.getPatient().getId() == patientId){
-                WorkRequest filterPatient = (WorkRequest) p;
-                filterResult.add(filterPatient);
-            }
-            
-        }
-        return filterResult;
+        return pathologyTestRequests;
     }
+
+    public void setPathologyTestRequests(ArrayList<WorkRequest> pathologyTestRequests) {
+        this.pathologyTestRequests = pathologyTestRequests;
+    }
+    
     
     public void removePathologyTestRequest(WorkRequest workRequest) {
         pathologyTestRequests.remove(workRequest);
@@ -203,7 +198,4 @@ public class WorkQueue {
     public void removeOrganRequest(WorkRequest workRequest) {
         organRequests.remove(workRequest);
     }
-    
-    
-
 }
