@@ -108,7 +108,7 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
         
         ConsignmentRequest cr = (ConsignmentRequest)tblRequests.getValueAt(selectedrow, 0);
         cr.setStatus("SHIPPED");
-        cr.getGovernmentOrganApproveRequest().setStatus("SHIPPED");
+        cr.getGovernmentOrganApproveRequest().setStatus("Shipped");
         cr.getGovernmentOrganApproveRequest().getOrganProcurement().setStatus("SHIPPED");
         cr.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().setStatus("SHIPPED");
         populateTable();
