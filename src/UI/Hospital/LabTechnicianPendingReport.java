@@ -5,10 +5,14 @@
 package UI.Hospital;
 
 import Model.EcoSystem;
-import Model.Enterprises.Enterprise;
 import Model.Enterprises.Hospital;
 import Model.UserAccount.UserAccount;
+import Model.WorkQueue.WorkRequest;
+import Model.storage.Patient;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,18 +21,20 @@ import javax.swing.JPanel;
 public class LabTechnicianPendingReport extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
-    Enterprise enterprise;
+    Hospital hospitalEnterprise;
     UserAccount userAccount;
     EcoSystem system;
+    Patient patient;
     /**
      * Creates new form LabTechnicianPendingReport
      */
-    public LabTechnicianPendingReport(JPanel userProcessContainer, Hospital enterprise, UserAccount userAccount,EcoSystem system) {
+    public LabTechnicianPendingReport(JPanel userProcessContainer, EcoSystem system ,Patient patient, Hospital enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;
+        this.hospitalEnterprise = enterprise;
         this.userAccount = userAccount;
         this.system = system;
+        populateTable();
     }
 
     /**
@@ -57,36 +63,66 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableReport);
 
-<<<<<<< Updated upstream
-        btnProcess.setText("Process Report");
-=======
         btnProcess.setText("Process report");
->>>>>>> Stashed changes
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnProcess)
-                .addGap(222, 222, 222))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(btnProcess)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = tableReport.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please enter valid");
+            return;
+        }
+        
+        WorkRequest workRequest = (WorkRequest) tableReport.getValueAt(selectedrow, 1);
+        LabTechnicianReportProcess labTechnicianReportProcess = new LabTechnicianReportProcess(userProcessContainer,system,patient,hospitalEnterprise);
+        userProcessContainer.add("Request Report",viewHistoryJPanel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tableReport.getModel();
+        model.setRowCount(0);
+        for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests(patient.getId(), true)) {
+                    Object[] row = new Object[4];
+                    row[0] = workRequest;
+                    row[1] = workRequest.getStatus();
+                    row[2] = workRequest.getMessage();
+                    row[3] = workRequest.getRequestDate();
+                    model.addRow(row);   
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProcess;
