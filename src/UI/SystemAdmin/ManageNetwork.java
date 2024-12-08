@@ -141,6 +141,7 @@ public class ManageNetwork extends javax.swing.JPanel {
         for (Network network : system.getNetworkList()) {
             Object[] row = new Object[1];
             row[0] = network.toString();
+            row[0] = network.getName();
             model.addRow(row);
         }
     }
