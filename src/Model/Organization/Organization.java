@@ -25,7 +25,7 @@ public abstract class Organization {
     private String city;
     private String country;
     
-    public enum Type{
+    public static enum Type{
         Doctor("Doctor Organization"), Lab("Lab Organization"),Government("Government Organization"), 
         Fleet("Fleet Organization"), PatientService("Patient Service Organization"),
         OrganProcurement("Organ Procurement Organization"), RequestFullfillment("Request Fullfillment Organization"),

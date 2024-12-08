@@ -10,6 +10,7 @@ import Model.Enterprises.Enterprise;
 import Model.Networks.Network;
 import Model.Roles.EnterpriseAdminRole;
 import Model.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -89,6 +90,11 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         });
 
         backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
 
         passwordJPasswordField.setText("jPasswordField1");
 
@@ -200,6 +206,13 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
             populateEnterpriseComboBox(network);
         }
     }//GEN-LAST:event_enterpriseJComboBoxActionPerformed
+
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
 
     private void populateEnterpriseComboBox(Network network){
         enterpriseJComboBox.removeAllItems();

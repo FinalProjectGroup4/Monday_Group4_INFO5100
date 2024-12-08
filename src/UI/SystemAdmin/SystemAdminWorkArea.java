@@ -7,6 +7,7 @@ package UI.SystemAdmin;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.Networks.Network;
+import Model.Organization.Organization;
 import java.awt.CardLayout;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -274,7 +275,8 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             enterpriseType = Enterprise.EnterpriseType.Government;
         }
 
-        selectedNetwork.getEnterpriseDirectory().createAndAddEnterprise(txtName.getText(),enterpriseType);
+        Enterprise newEnterprise = selectedNetwork.getEnterpriseDirectory().createAndAddEnterprise(txtName.getText(),enterpriseType);
+        newEnterprise.getOrganizationDirectory().createOrganization(selectedNetworks, Organization.Type.Lab);
         populateTable();
         
         btnUpdate.setEnabled(false);
