@@ -19,7 +19,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminWorkAreaJPanel
      */
-   JPanel userProcessContainer;
+    JPanel userProcessContainer;
     Enterprise enterprise;
     UserAccount userAccount;
     EcoSystem system;
@@ -29,7 +29,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = userAccount;
         this.system = system;
-//        valuelabel.setText(enterprise.getName());
+        valuelabel.setText(enterprise.getName());
     }
 
     /**
@@ -88,7 +88,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeeActionPerformed
         // TODO add your handling code here:
-        ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer);
+        ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer,enterprise.getOrganizationDirectory());
         userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -97,7 +97,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageUsersActionPerformed
         // TODO add your handling code here:
-        ManageUserJPanel manageUserJPanel = new ManageUserJPanel(userProcessContainer);
+        ManageUserJPanel manageUserJPanel = new ManageUserJPanel(userProcessContainer,enterprise);
         userProcessContainer.add("ManageUserJPanel", manageUserJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
