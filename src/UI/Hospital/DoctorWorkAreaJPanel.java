@@ -10,6 +10,7 @@ import Model.UserAccount.UserAccount;
 import Model.storage.Patient;
 import Model.storage.PatientDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -121,8 +122,17 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnRequestReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestReportActionPerformed
         // TODO add your handling code here:
-        RequestReportJPanel addPatientJPanel = new RequestReportJPanel(userProcessContainer,system,patient,hospitalEnterprise);
-        userProcessContainer.add("Add PAtient",addPatientJPanel);
+        int selectedrow = tblPatientList.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please enter valid");
+            return;
+        }
+        
+        Patient patient = (Patient) tblPatientList.getValueAt(selectedrow, 1);
+
+        RequestReportJPanel addPatientJPanel = new RequestReportJPanel(userProcessContainer,system,patient,hospitalEnterprise,userAccount);
+        userProcessContainer.add("Request Report",addPatientJPanel);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -130,6 +140,20 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnReportHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportHistoryActionPerformed
         // TODO add your handling code here:
+        int selectedrow = tblPatientList.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please enter valid");
+            return;
+        }
+        
+        Patient patient = (Patient) tblPatientList.getValueAt(selectedrow, 1);
+        ReportHistoryJPanel viewHistoryJPanel = new ReportHistoryJPanel(userProcessContainer,system,patient,hospitalEnterprise);
+        userProcessContainer.add("Request Report",viewHistoryJPanel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnReportHistoryActionPerformed
 
 
