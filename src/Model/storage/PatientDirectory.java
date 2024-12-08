@@ -17,7 +17,7 @@ public class PatientDirectory {
         PatientDirectory = new ArrayList();
     }
     
-       public ArrayList<Patient> getPatientDirectory() {
+       public ArrayList<Patient> getPatientList() {
         return PatientDirectory;
     }
 

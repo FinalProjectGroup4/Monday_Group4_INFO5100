@@ -4,17 +4,31 @@
  */
 package UI.Hospital;
 
+import Model.EcoSystem;
+import Model.Enterprises.Enterprise;
+import Model.Enterprises.Hospital;
+import Model.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author nihardabhi
  */
 public class LabTechnicianPendingReport extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    Enterprise enterprise;
+    UserAccount userAccount;
+    EcoSystem system;
     /**
      * Creates new form LabTechnicianPendingReport
      */
-    public LabTechnicianPendingReport() {
+    public LabTechnicianPendingReport(JPanel userProcessContainer, Hospital enterprise, UserAccount userAccount,EcoSystem system) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        this.system = system;
     }
 
     /**
