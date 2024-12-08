@@ -85,7 +85,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnProcess">
       <Properties>
-        <Property name="text" type="java.lang.String" value="process report"/>
+        <Property name="text" type="java.lang.String" value="Process Report"/>
       </Properties>
     </Component>
   </SubComponents>
