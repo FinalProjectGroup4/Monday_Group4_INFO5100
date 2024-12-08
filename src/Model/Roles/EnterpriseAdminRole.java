@@ -9,7 +9,7 @@ import Model.Enterprises.Enterprise;
 import Model.Organization.Organization;
 import Model.UserAccount.UserAccount;
 import Model.storage.PatientDirectory;
-import UI.SystemAdmin.SystemAdminMainWorkArea;
+import UI.AdministrativeRole.AdminWorkAreaJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +20,7 @@ public class EnterpriseAdminRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,PatientDirectory patientDirectory) {
-        return new SystemAdminMainWorkArea(userProcessContainer, system);
+        return new AdminWorkAreaJPanel(userProcessContainer,enterprise,account, system);
     }
     
 }

@@ -5,6 +5,7 @@
 package Model;
 
 import Model.Employee.Employee;
+import Model.Roles.EnterpriseAdminRole;
 import Model.Roles.GovernmentOfficialRole;
 import Model.Roles.HospitalAdminRole;
 import Model.Roles.NGOAdminRole;
@@ -42,6 +43,8 @@ public class ConfigureASystem {
         UserAccount userAccountTransportAdmin = system.getUserAccountDirectory().createUserAccount("transport", "transport", employee, new TransportAdminRole());
         
         UserAccount userAccountGovernmentAdmin = system.getUserAccountDirectory().createUserAccount("gov", "gov", employee, new GovernmentOfficialRole());
+        
+        UserAccount userAccountEnterpriseAdminHos = system.getUserAccountDirectory().createUserAccount("hos", "hos", employee, new EnterpriseAdminRole());
 
         return system;
     }
