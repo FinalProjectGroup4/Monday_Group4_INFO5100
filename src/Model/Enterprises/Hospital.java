@@ -18,6 +18,7 @@ public class Hospital extends Enterprise{
     
     public Hospital(String name, EnterpriseType type) {
         super(name, type);
+        patientDirectory = new PatientDirectory();
     }
 
     public PatientDirectory getPatientDirectory() {

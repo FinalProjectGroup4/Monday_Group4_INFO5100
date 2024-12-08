@@ -8,6 +8,7 @@ import Model.EcoSystem;
 import Model.storage.Patient;
 import Model.storage.PatientDirectory;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -307,6 +308,7 @@ public class AddPatientJPanel extends javax.swing.JPanel {
             patient.setAddress(addressText.getText());
             patient.setSickness(sicknessText.getText());
             patient.setEmail(emailjTextField.getText());
+            patient.setAcceptedDate(mm+"/"+dd+"/"+yyyy);
 
 //            try {
 //                String host = "smtp.gmail.com";
@@ -356,6 +358,10 @@ public class AddPatientJPanel extends javax.swing.JPanel {
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
 
         userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        PatientServiceWorkAreaJPanel pswajp = (PatientServiceWorkAreaJPanel) component;
+        pswajp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed

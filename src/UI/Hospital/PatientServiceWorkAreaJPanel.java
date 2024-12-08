@@ -5,7 +5,6 @@
 package UI.Hospital;
 
 import Model.EcoSystem;
-import Model.Enterprises.Enterprise;
 import Model.Enterprises.Hospital;
 import Model.UserAccount.UserAccount;
 import Model.storage.Patient;
@@ -21,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
-    Enterprise enterprise;
+    Hospital hospitalEnterprise;
     UserAccount userAccount;
     EcoSystem system;
     PatientDirectory patientDirectory;
@@ -32,20 +31,24 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
     public PatientServiceWorkAreaJPanel(JPanel userProcessContainer, Hospital enterprise, UserAccount userAccount,EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;
+        this.hospitalEnterprise = enterprise;
         this.userAccount = userAccount;
         this.system = system;
         this.patientDirectory = enterprise.getPatientDirectory();
         populateTable();
     }
 
-    private void populateTable() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblPatientList.getModel();
 
         model.setRowCount(0);
         for (Patient patient : patientDirectory.getPatientList()) {
-                    Object[] row = new Object[1];
-                    row[0] = patient;
+                    Object[] row = new Object[5];
+                    row[0] = patient.getId();
+                    row[1] = patient;
+                    row[2] = patient.getGender();
+                    row[3] = patient.getAcceptedDate();
+                    row[4] = patient.getEmail();
                     model.addRow(row);   
         }
     }
@@ -64,13 +67,13 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
 
         tblPatientList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Patient"
+                "ID", "Name", "Gender", "Date of Visit", "Email"
             }
         ));
         jScrollPane1.setViewportView(tblPatientList);
