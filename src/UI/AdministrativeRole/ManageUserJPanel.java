@@ -4,8 +4,15 @@
  */
 package UI.AdministrativeRole;
 
+import Model.Employee.Employee;
+import Model.Enterprises.Enterprise;
+import Model.Organization.Organization;
+import Model.Roles.Role;
+import Model.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +25,12 @@ public class ManageUserJPanel extends javax.swing.JPanel {
      */
    
     private JPanel userProcessContainer;
-    public ManageUserJPanel(JPanel userProcessContainer) {
+    private Enterprise enterprise;
+    public ManageUserJPanel(JPanel userProcessContainer,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.enterprise = enterprise;
+        populateOrganizationComboBox();
     }
 
     /**
@@ -34,7 +44,7 @@ public class ManageUserJPanel extends javax.swing.JPanel {
 
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblData = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         cmbOrganization = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -54,7 +64,7 @@ public class ManageUserJPanel extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -62,17 +72,22 @@ public class ManageUserJPanel extends javax.swing.JPanel {
                 "Username", "Role"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblData);
 
         jLabel1.setText("Organization :");
 
         cmbOrganization.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbOrganizationActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Employee :");
 
         cmbEmployee.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("Role :");
 
         cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -81,6 +96,11 @@ public class ManageUserJPanel extends javax.swing.JPanel {
         jLabel5.setText("Password :");
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -161,6 +181,34 @@ public class ManageUserJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) cmbOrganization.getSelectedItem();
+        if (organization != null) {
+            populateEmployeeComboBox(organization);
+            populateRoleComboBox(organization);
+        }
+    }//GEN-LAST:event_cmbOrganizationActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog((this), "Please enter all command field");
+            return;
+        }
+        JOptionPane.showMessageDialog((this), "Created Successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+        Organization organization = (Organization) cmbOrganization.getSelectedItem();
+        Employee employee = (Employee) cmbEmployee.getSelectedItem();
+        Role role = (Role) cmbRole.getSelectedItem();
+
+        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+
+        populateData();
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -174,8 +222,46 @@ public class ManageUserJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblData;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void populateOrganizationComboBox() {
+         cmbOrganization.removeAllItems();
+
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            cmbOrganization.addItem(organization.getName());
+        }
+    }
+
+    private void populateEmployeeComboBox(Organization organization) {
+        cmbEmployee.removeAllItems();
+        
+        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
+            cmbEmployee.addItem(employee.getName());
+        }
+    }
+
+    private void populateRoleComboBox(Organization organization) {
+        cmbRole.removeAllItems();
+        for (Role role : organization.getSupportedRole()){
+            cmbRole.addItem(role.toString());
+        }
+    }
+
+    private void populateData() {
+        DefaultTableModel model = (DefaultTableModel) tblData.getModel();
+
+        model.setRowCount(0);
+
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
+                Object row[] = new Object[2];
+                row[0] = ua;
+                row[1] = ua.getRole();
+                ((DefaultTableModel) tblData.getModel()).addRow(row);
+            }
+        }
+    }
 }
