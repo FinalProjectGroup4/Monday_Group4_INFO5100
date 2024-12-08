@@ -262,7 +262,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         Enterprise.EnterpriseType enterpriseType = null;
         
-        if(selectedEnterprise.equals("Hospital")){
+        if(selectedEnterprise.equals("Hospitals")){
             enterpriseType = Enterprise.EnterpriseType.Hospital;
         } else if(selectedEnterprise.equals("NGO")){
             enterpriseType = Enterprise.EnterpriseType.NGO;
