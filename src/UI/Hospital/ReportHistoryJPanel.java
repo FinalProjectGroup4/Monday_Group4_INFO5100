@@ -40,7 +40,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
      private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests(patient.getId(), true)) {
+        for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequestsForAPatient(patient.getId())) {
                     Object[] row = new Object[4];
                     row[0] = workRequest;
                     row[1] = workRequest.getStatus();
@@ -81,6 +81,11 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         jLabel1.setText("Organ Name");
 
         jButton1.setText("Request Organ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnBack3.setText("<<< Back");
         btnBack3.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +135,10 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBack3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
