@@ -61,7 +61,6 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPatientList = new javax.swing.JTable();
         btnAddNewPatient = new javax.swing.JButton();
-        btnUpdatePatient = new javax.swing.JButton();
 
         tblPatientList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,8 +82,6 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnUpdatePatient.setText("Update");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,8 +90,6 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAddNewPatient)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdatePatient)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,9 +98,7 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddNewPatient)
-                    .addComponent(btnUpdatePatient))
+                .addComponent(btnAddNewPatient)
                 .addContainerGap(218, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -122,7 +115,6 @@ public class PatientServiceWorkAreaJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewPatient;
-    private javax.swing.JButton btnUpdatePatient;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPatientList;
     // End of variables declaration//GEN-END:variables
