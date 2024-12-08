@@ -20,9 +20,6 @@ public class LabOrganization extends Organization{
         super(name);
     }
     
-    public ArrayList<WorkRequest> getPathologyTestRequests(Patient patient){
-        return this.getWorkQueue().getPathologyTestRequests(patient.getId(),false);
-    }
 
     @Override
     public ArrayList<Role> getSupportedRole() {

@@ -147,10 +147,23 @@ public class WorkQueue {
     
     // Our code
     
-    public ArrayList<WorkRequest> getPathologyTestRequests(int patientId, boolean isPending) {
-        
+    public ArrayList<WorkRequest> getPathologyTestRequests() {
         return pathologyTestRequests;
     }
+    
+    public ArrayList<WorkRequest> getPathologyTestRequestsForAPatient(int patientId){
+        ArrayList<WorkRequest> filterResult = new ArrayList<>();
+        
+        for(WorkRequest w : pathologyTestRequests){
+            PathologyTestRequest p = (PathologyTestRequest) w;
+            if(p.getPatient().getId() == patientId){
+                WorkRequest filterPatient = (WorkRequest) p;
+                filterResult.add(filterPatient);
+            }
+            
+        }
+        return filterResult;
+    } 
 
     public void setPathologyTestRequests(ArrayList<WorkRequest> pathologyTestRequests) {
         this.pathologyTestRequests = pathologyTestRequests;
