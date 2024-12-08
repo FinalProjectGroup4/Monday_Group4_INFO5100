@@ -151,6 +151,10 @@ public class WorkQueue {
         return pathologyTestRequests;
     }
     
+     public ArrayList<WorkRequest> getOrganRequests() {
+        return organRequestList;
+    }
+    
     public ArrayList<WorkRequest> getPathologyTestRequestsForAPatient(int patientId){
         ArrayList<WorkRequest> filterResult = new ArrayList<>();
         

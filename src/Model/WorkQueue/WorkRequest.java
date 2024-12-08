@@ -21,6 +21,15 @@ public abstract class WorkRequest {
     private Date resolveDate;
     private String organ;
     private String completedDate;
+    private String bloodGroup;
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
 
     public String getCompletedDate() {
         return completedDate;
