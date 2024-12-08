@@ -12,7 +12,6 @@ import Model.storage.Patient;
  */
 public class PathologyTestRequest extends WorkRequest{
     private Patient patient;
-
     private String bloodType;
     private String testName;
     private Double results;
@@ -20,12 +19,7 @@ public class PathologyTestRequest extends WorkRequest{
     public Patient getPatient() {
         return patient;
     }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
     
-
     public PathologyTestRequest(Patient patient){
         this.patient = patient;
         results = null;

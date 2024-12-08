@@ -85,7 +85,11 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnProcess">
       <Properties>
+<<<<<<< Updated upstream
         <Property name="text" type="java.lang.String" value="Process Report"/>
+=======
+        <Property name="text" type="java.lang.String" value="Process report"/>
+>>>>>>> Stashed changes
       </Properties>
     </Component>
   </SubComponents>
