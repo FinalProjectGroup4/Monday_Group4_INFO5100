@@ -96,7 +96,6 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
             }
         });
 
-        passwordJPasswordField.setText("jPasswordField1");
         passwordJPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordJPasswordFieldActionPerformed(evt);

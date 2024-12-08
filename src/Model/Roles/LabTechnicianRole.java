@@ -24,6 +24,7 @@ public class LabTechnicianRole extends Role{
         this.testRequst = testRequst;
     }
     
+    public LabTechnicianRole(){}
     // to show all related test pending for specific lab technicians.
     public ArrayList<PathologyTestRequest> getTestRequst() {
         return testRequst;

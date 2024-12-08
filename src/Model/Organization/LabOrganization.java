@@ -4,6 +4,7 @@
  */
 package Model.Organization;
 
+import Model.Roles.LabTechnicianRole;
 import Model.Roles.Role;
 import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
@@ -25,7 +26,9 @@ public class LabOrganization extends Organization{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new LabTechnicianRole());
+        return roles;
     }
     
 }
