@@ -4,19 +4,50 @@
  */
 package UI.Hospital;
 
+import Model.EcoSystem;
+import Model.Enterprises.Hospital;
+import Model.UserAccount.UserAccount;
+import Model.WorkQueue.WorkRequest;
+import Model.storage.Patient;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author apple
  */
 public class ReportHistoryJPanel extends javax.swing.JPanel {
 
+    JPanel userProcessContainer;
+    Hospital hospitalEnterprise;
+    UserAccount userAccount;
+    EcoSystem system;
+    Patient patient;
     /**
      * Creates new form ReportHistoryJPanel
      */
-    public ReportHistoryJPanel() {
+    public ReportHistoryJPanel(JPanel userProcessContainer, Hospital enterprise, UserAccount userAccount,EcoSystem system) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.hospitalEnterprise = enterprise;
+        this.userAccount = userAccount;
+        this.system = system;
+        this.patient = patient;
+        populateTable();
     }
 
+     private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests(patient.getId(), true)) {
+                    Object[] row = new Object[4];
+                    row[0] = workRequest.getSender();
+                    row[1] = workRequest.getStatus();
+                    row[2] = workRequest.getMessage();
+                    row[3] = workRequest.getRequestDate();
+                    model.addRow(row);   
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,13 +65,13 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Report"
+                "Sender", "Status", "Message", "Request Data"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
