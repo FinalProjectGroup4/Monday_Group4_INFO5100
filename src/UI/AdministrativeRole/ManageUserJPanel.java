@@ -259,7 +259,7 @@ public class ManageUserJPanel extends javax.swing.JPanel {
     private void populateRoleComboBox(Organization organization) {
         cmbRole.removeAllItems();
         for (Role role : organization.getSupportedRole()){
-            cmbRole.addItem(role.toString());
+            cmbRole.addItem(role);
         }
     }
 
