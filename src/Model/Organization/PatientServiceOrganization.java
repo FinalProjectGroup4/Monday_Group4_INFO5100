@@ -4,6 +4,7 @@
  */
 package Model.Organization;
 
+import Model.Roles.FrontDeskAssistantRole;
 import Model.Roles.Role;
 import Model.storage.PatientDirectory;
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public class PatientServiceOrganization extends Organization{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new FrontDeskAssistantRole());
+        return roles;
     }
     
 }
