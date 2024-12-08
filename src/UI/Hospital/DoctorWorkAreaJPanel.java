@@ -5,11 +5,11 @@
 package UI.Hospital;
 
 import Model.EcoSystem;
-import Model.Enterprises.Enterprise;
 import Model.Enterprises.Hospital;
 import Model.UserAccount.UserAccount;
 import Model.storage.Patient;
 import Model.storage.PatientDirectory;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +23,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form DoctorWorkAreaJPanel
      */
     JPanel userProcessContainer;
-    Enterprise enterprise;
+    Hospital hospitalEnterprise;
     UserAccount userAccount;
     EcoSystem system;
     PatientDirectory patientDirectory;
@@ -31,7 +31,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     public DoctorWorkAreaJPanel(JPanel userProcessContainer, Hospital enterprise, UserAccount userAccount,EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;
+        this.hospitalEnterprise = enterprise;
         this.userAccount = userAccount;
         this.system = system;
         this.patientDirectory = enterprise.getPatientDirectory();
@@ -121,6 +121,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnRequestReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestReportActionPerformed
         // TODO add your handling code here:
+        RequestReportJPanel addPatientJPanel = new RequestReportJPanel(userProcessContainer,system,patient,hospitalEnterprise);
+        userProcessContainer.add("Add PAtient",addPatientJPanel);
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestReportActionPerformed
 
     private void btnReportHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportHistoryActionPerformed
