@@ -79,6 +79,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblDetails);
 
         btnViewDetails.setText("View Details");
+        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDetailsActionPerformed(evt);
+            }
+        });
 
         btnAddNew.setText("Add New");
         btnAddNew.addActionListener(new java.awt.event.ActionListener() {
@@ -276,6 +281,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         Enterprise newEnterprise = selectedNetwork.getEnterpriseDirectory().createAndAddEnterprise(txtName.getText(),enterpriseType);
         newEnterprise.createDefaultOrganization();
+        
+        newEnterprise.setCity(txtCity.getText());
+        newEnterprise.setCountry(txtCountry.getText());
+        newEnterprise.setName(txtName.getText());
+        
         populateTable();
         
         btnUpdate.setEnabled(false);
@@ -328,6 +338,10 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
     private void cmbNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNetworkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbNetworkActionPerformed
+
+    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewDetailsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

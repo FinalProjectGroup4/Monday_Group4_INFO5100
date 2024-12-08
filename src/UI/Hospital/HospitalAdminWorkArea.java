@@ -139,11 +139,14 @@ public class HospitalAdminWorkArea extends javax.swing.JPanel {
     }//GEN-LAST:event_hospCmbBoxActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-       DoctorDetailsJPanel ddjp = new DoctorDetailsJPanel(userprocesscontainer);
-       userprocesscontainer.add("DoctorDetailsJPanel",ddjp);
-       
-       CardLayout layout = (CardLayout) userprocesscontainer.getLayout();
-       layout.next(userprocesscontainer);
+        if (hospCmbBox.getSelectedItem().equals("Doctors")) {
+            
+           DoctorDetailsJPanel ddjp = new DoctorDetailsJPanel(userprocesscontainer);
+           userprocesscontainer.add("DoctorDetailsJPanel",ddjp);
+
+           CardLayout layout = (CardLayout) userprocesscontainer.getLayout();
+           layout.next(userprocesscontainer);
+        }
        
     }//GEN-LAST:event_btnViewActionPerformed
 

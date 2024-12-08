@@ -43,7 +43,7 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableReport);
 
-        btnProcess.setText("process report");
+        btnProcess.setText("Process Report");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
