@@ -43,8 +43,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (Patient patient : patientDirectory.getPatientList()) {
-                    Object[] row = new Object[1];
-                    row[0] = patient;
+                    Object[] row = new Object[5];
+                    row[0] = patient.getId();
+                    row[1] = patient;
+                    row[2] = patient.getGender();
+                    row[3] = patient.getAcceptedDate();
+                    row[4] = patient.getEmail();
                     model.addRow(row);   
         }
     }
@@ -60,28 +64,33 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPatientList = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnReportHistory = new javax.swing.JButton();
+        btnRequestReport = new javax.swing.JButton();
 
         tblPatientList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Patient"
+                "ID", "Name", "Gender", "Date of Admit", "Email"
             }
         ));
         jScrollPane1.setViewportView(tblPatientList);
 
-        jButton1.setText("View Report History");
-
-        jButton2.setText("Request Report");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnReportHistory.setText("View Report History");
+        btnReportHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnReportHistoryActionPerformed(evt);
+            }
+        });
+
+        btnRequestReport.setText("Request Report");
+        btnRequestReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestReportActionPerformed(evt);
             }
         });
 
@@ -91,9 +100,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnReportHistory)
                 .addGap(67, 67, 67)
-                .addComponent(jButton2)
+                .addComponent(btnRequestReport)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
@@ -104,20 +113,24 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnReportHistory)
+                    .addComponent(btnRequestReport))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRequestReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestReportActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRequestReportActionPerformed
+
+    private void btnReportHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportHistoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportHistoryActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnReportHistory;
+    private javax.swing.JButton btnRequestReport;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPatientList;
     // End of variables declaration//GEN-END:variables
