@@ -7,6 +7,7 @@ package UI.Hospital;
 import Model.EcoSystem;
 import Model.Enterprises.Hospital;
 import Model.UserAccount.UserAccount;
+import Model.WorkQueue.PathologyTestRequest;
 import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
 import java.awt.CardLayout;
@@ -28,7 +29,7 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
     /**
      * Creates new form LabTechnicianPendingReport
      */
-    public LabTechnicianPendingReport(JPanel userProcessContainer, EcoSystem system ,Patient patient, Hospital enterprise) {
+    public LabTechnicianPendingReport(JPanel userProcessContainer, EcoSystem system , Hospital enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.hospitalEnterprise = enterprise;
@@ -103,9 +104,9 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
             return;
         }
         
-        WorkRequest workRequest = (WorkRequest) tableReport.getValueAt(selectedrow, 1);
-        LabTechnicianReportProcess labTechnicianReportProcess = new LabTechnicianReportProcess(userProcessContainer,system,patient,hospitalEnterprise);
-        userProcessContainer.add("Request Report",viewHistoryJPanel);
+        PathologyTestRequest ptr = (PathologyTestRequest) tableReport.getValueAt(selectedrow, 0);
+        LabTechnicianReportProcess labTechnicianReportProcess = new LabTechnicianReportProcess(userProcessContainer,system,patient,hospitalEnterprise,userAccount,ptr);
+        userProcessContainer.add("Request Report",labTechnicianReportProcess);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -114,7 +115,7 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tableReport.getModel();
         model.setRowCount(0);
-        for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests(patient.getId(), true)) {
+        for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests()) {
                     Object[] row = new Object[4];
                     row[0] = workRequest;
                     row[1] = workRequest.getStatus();

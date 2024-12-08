@@ -5,7 +5,11 @@
 package UI.Hospital;
 
 
-import Model.Enterprises.Enterprise;
+import Model.EcoSystem;
+import Model.Enterprises.Hospital;
+import Model.UserAccount.UserAccount;
+import Model.WorkQueue.PathologyTestRequest;
+import Model.storage.Patient;
 import javax.swing.JPanel;
 
 /**
@@ -14,16 +18,23 @@ import javax.swing.JPanel;
  */
 public class LabTechnicianReportProcess extends javax.swing.JPanel {
     
-    JPanel panel;
-    Enterprise enterprise;
-
+    JPanel userProcessContainer;
+    Hospital hospitalEnterprise;
+    UserAccount userAccount;
+    EcoSystem system;
+    Patient patient;
+    PathologyTestRequest pathologyTestRequest;
     /**
      * Creates new form LabTechnicianReportProcess
      */
-    public LabTechnicianReportProcess(JPanel panel, Enterprise enterprise) {
+    public LabTechnicianReportProcess(JPanel panel, EcoSystem system ,Patient patient, Hospital enterprise,UserAccount details,PathologyTestRequest ptr) {
         initComponents();
-        this.panel = panel;
-        this.enterprise = enterprise;
+        this.userProcessContainer = panel;
+        this.hospitalEnterprise = enterprise;
+        this.system =system;
+        this.patient = patient;
+        this.userAccount = details;
+        this.pathologyTestRequest = ptr;
         populateField();
     }
 
@@ -47,6 +58,8 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
         lblResult = new javax.swing.JLabel();
         txtResult = new javax.swing.JTextField();
         btnProcess = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtDoctor = new javax.swing.JTextField();
 
         lblID.setText("PatientID");
 
@@ -65,41 +78,51 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
         lblResult.setText("Result");
 
         btnProcess.setText("Process");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Doctor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblBG))
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtBG)
+                            .addComponent(txtName)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblResult)
-                                .addGap(128, 128, 128)
-                                .addComponent(txtResult))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(lblBG))
-                                .addGap(91, 91, 91)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBG)
-                                    .addComponent(txtName)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 3, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTT)
-                                .addGap(111, 111, 111)
-                                .addComponent(txtTT))))
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 3, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(btnProcess)))
+                        .addComponent(lblTT)
+                        .addGap(111, 111, 111)
+                        .addComponent(txtTT))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblResult)
+                            .addComponent(jLabel1))
+                        .addGap(127, 127, 127)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtResult)
+                            .addComponent(txtDoctor))))
                 .addGap(146, 146, 146))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(182, 182, 182)
+                .addComponent(btnProcess)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +147,13 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblResult)
                     .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(btnProcess)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,15 +161,24 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        // TODO add your handling code here:
+       String result = txtResult.getText();
+       pathologyTestRequest.setResults(Double.parseDouble(result));
+       pathologyTestRequest.setStatus("Complete");
+    }//GEN-LAST:event_btnProcessActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProcess;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblBG;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblResult;
     private javax.swing.JLabel lblTT;
     private javax.swing.JTextField txtBG;
+    private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtResult;
@@ -150,6 +186,16 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateField() {
+        txtID.setText(String.valueOf(pathologyTestRequest.getPatient().getId()));
+        txtName.setText(String.valueOf(pathologyTestRequest.getPatient().getName()));
+        txtBG.setText(String.valueOf(pathologyTestRequest.getBloodType()));
+        txtTT.setText(String.valueOf(pathologyTestRequest.getTestName()));
+        txtDoctor.setText(String.valueOf(pathologyTestRequest.getSender()));
         
+        txtID.setEnabled(false);
+        txtName.setEnabled(false);
+        txtBG.setEnabled(false);
+        txtTT.setEnabled(false);
+        txtDoctor.setEnabled(false);
     }
 }

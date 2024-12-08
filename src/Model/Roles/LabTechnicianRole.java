@@ -10,6 +10,7 @@ import Model.Enterprises.Hospital;
 import Model.Organization.Organization;
 import Model.UserAccount.UserAccount;
 import Model.WorkQueue.PathologyTestRequest;
+import Model.storage.Patient;
 import Model.storage.PatientDirectory;
 import UI.Hospital.LabTechnicianPendingReport;
 import java.util.ArrayList;
@@ -21,6 +22,15 @@ import javax.swing.JPanel;
  */
 public class LabTechnicianRole extends Role{
     private ArrayList<PathologyTestRequest> testRequst;
+    private Patient patient;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
     
     public LabTechnicianRole(ArrayList<PathologyTestRequest> testRequst){
         this.testRequst = testRequst;
@@ -43,7 +53,7 @@ public class LabTechnicianRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, PatientDirectory patientDirectory) {
-        return new LabTechnicianPendingReport(userProcessContainer, (Hospital) enterprise,account, system);
+        return new LabTechnicianPendingReport(userProcessContainer,  system ,(Hospital)enterprise);
 
     }
 }

@@ -56,6 +56,8 @@ public class RequestReportJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtReportDetails = new javax.swing.JTextArea();
         btnBack3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtBloodGroup = new javax.swing.JTextField();
 
         jLabel1.setText("Name");
 
@@ -83,11 +85,13 @@ public class RequestReportJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Blood Group");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(165, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -95,21 +99,27 @@ public class RequestReportJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(btnRaiseRequest)
                     .addComponent(jLabel4)
-                    .addComponent(btnBack3))
+                    .addComponent(btnBack3)
+                    .addComponent(jLabel5))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtPatientSickness, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPatientGender, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPatientName, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(txtBloodGroup))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(btnBack3)
                 .addGap(18, 18, 18)
+=======
+                .addContainerGap(82, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,14 +131,28 @@ public class RequestReportJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPatientSickness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< Updated upstream
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(btnRaiseRequest))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(156, Short.MAX_VALUE))
+=======
+                    .addComponent(jLabel5)
+                    .addComponent(txtBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(10, 10, 10)
+                .addComponent(btnRaiseRequest)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBack3)
+                .addGap(50, 50, 50))
+>>>>>>> Stashed changes
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,7 +162,8 @@ public class RequestReportJPanel extends javax.swing.JPanel {
         pathologyTestRequest.setSender(doctorAccount);
         pathologyTestRequest.setStatus("Pending");
         pathologyTestRequest.setMessage(txtReportDetails.getText());
-        ArrayList<WorkRequest> existingRequests = enterpriseHospital.getWorkQueue().getPathologyTestRequests(patient.getId(), true);
+        pathologyTestRequest.setBloodType(txtBloodGroup.getText());
+        ArrayList<WorkRequest> existingRequests = enterpriseHospital.getWorkQueue().getPathologyTestRequestsForAPatient(patient.getId());
         existingRequests.add(pathologyTestRequest);
         enterpriseHospital.getWorkQueue().setPathologyTestRequests(existingRequests);
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
@@ -158,7 +183,9 @@ public class RequestReportJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtBloodGroup;
     private javax.swing.JTextField txtPatientGender;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTextField txtPatientSickness;
