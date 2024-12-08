@@ -50,6 +50,7 @@ public class Network {
 //    public UNOS getUnos() {
 //        return unos;
 //    }
+    
     public String getName() {
         return name;
     }

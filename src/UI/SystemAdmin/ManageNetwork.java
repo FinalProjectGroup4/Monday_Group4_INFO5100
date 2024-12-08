@@ -47,7 +47,7 @@ public class ManageNetwork extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null}
             },
             new String [] {
                 "Name"
@@ -139,8 +139,8 @@ public class ManageNetwork extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (Network network : system.getNetworkList()) {
-            Object[] row = new Object[0];
-            row[0] = network.getName();
+            Object[] row = new Object[1];
+            row[0] = network.toString();
             model.addRow(row);
         }
     }

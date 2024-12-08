@@ -5,7 +5,6 @@
 package UI.SystemAdmin;
 
 import Model.EcoSystem;
-import UI.OrganBank.ViewRequestDetails;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -19,11 +18,11 @@ public class SystemAdminMainWorkArea extends javax.swing.JPanel {
      * Creates new form SystemAdminMainWorkArea
      */
     JPanel userProcessContainer;
-    EcoSystem ecosystem;
+    EcoSystem system;
     public SystemAdminMainWorkArea(JPanel container, EcoSystem system) {
         initComponents();
         this.userProcessContainer=container;
-        this.ecosystem=ecosystem;
+        this.system=system;
     }
 
     /**
@@ -82,7 +81,7 @@ public class SystemAdminMainWorkArea extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        SystemAdminWorkArea sawa = new SystemAdminWorkArea(userProcessContainer,ecosystem);
+        SystemAdminWorkArea sawa = new SystemAdminWorkArea(userProcessContainer,system);
         userProcessContainer.add("SystemAdminWorkArea",sawa);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -91,7 +90,7 @@ public class SystemAdminMainWorkArea extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ManageNetwork mn = new ManageNetwork(userProcessContainer,ecosystem);
+        ManageNetwork mn = new ManageNetwork(userProcessContainer,system);
         userProcessContainer.add("ManageNetwork",mn);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
