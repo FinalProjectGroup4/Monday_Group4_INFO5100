@@ -14,6 +14,12 @@ public class OrganRequest extends WorkRequest{
     private Patient patient;
     private String bloodType;
     private String organName;
+
+    public OrganRequest(Patient patient, String bloodType, String organName) {
+        this.patient = patient;
+        this.bloodType = bloodType;
+        this.organName = organName;
+    }
     
     public OrganRequest(Patient patient){
         this.patient = patient;
