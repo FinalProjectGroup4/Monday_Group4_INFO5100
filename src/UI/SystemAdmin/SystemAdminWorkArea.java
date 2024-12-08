@@ -6,9 +6,12 @@ package UI.SystemAdmin;
 
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
+import Model.Networks.Network;
 import java.awt.CardLayout;
+import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,15 +24,18 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    HashMap<String, Network> networkMap = new HashMap<>();
+    
     public SystemAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
         populateComboBox();
         this.userProcessContainer=container;
-        this.ecosystem=ecosystem;
-        populateTree();        
-    }
-    
-    public void populateTree(){
+        this.ecosystem=system; 
+        populateNetworkCmb();
+        populateTable();
+        txtId.setEditable(false);
+        btnUpdate.setEnabled(false);
+        btnSave.setEnabled(false);
     }
 
     /**
@@ -41,12 +47,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmbOrganizations = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
         btnViewDetails = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        lblEnterprise = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -57,18 +62,18 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         txtCountry = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
-        cmbType = new javax.swing.JComboBox<>();
-        lblType = new javax.swing.JLabel();
+        cmbNetwork = new javax.swing.JComboBox<>();
+        lblNetwork = new javax.swing.JLabel();
+        cmbEnterprise = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-
-        cmbOrganizations.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tblDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Name", "City", "Country"
+                "ID", "Name", "City", "Country", "Network"
             }
         ));
         jScrollPane1.setViewportView(tblDetails);
@@ -76,8 +81,13 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         btnViewDetails.setText("View Details");
 
         btnAddNew.setText("Add New");
+        btnAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewActionPerformed(evt);
+            }
+        });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Details"));
+        lblEnterprise.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Details"));
 
         jLabel1.setText("Organization ID :");
 
@@ -88,6 +98,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         jLabel4.setText("Country :");
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -96,68 +111,76 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbNetwork.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        lblType.setText("Enterprise Type");
+        lblNetwork.setText("Networks");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtId)
-                            .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        cmbEnterprise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel6.setText("Enterprise");
+
+        javax.swing.GroupLayout lblEnterpriseLayout = new javax.swing.GroupLayout(lblEnterprise);
+        lblEnterprise.setLayout(lblEnterpriseLayout);
+        lblEnterpriseLayout.setHorizontalGroup(
+            lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEnterpriseLayout.createSequentialGroup()
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblEnterpriseLayout.createSequentialGroup()
                         .addGap(149, 149, 149)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblEnterpriseLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbEnterprise, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtId)
+                            .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(lblEnterpriseLayout.createSequentialGroup()
+                        .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(lblEnterpriseLayout.createSequentialGroup()
+                                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(51, 51, 51))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(lblEnterpriseLayout.createSequentialGroup()
+                                .addComponent(lblNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(62, 62, 62)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName)
-                            .addComponent(txtCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(cmbNetwork, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(35, 35, 35))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        lblEnterpriseLayout.setVerticalGroup(
+            lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEnterpriseLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblType))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNetwork)
+                    .addComponent(cmbNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(25, 25, 25)
+                .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnSave))
                 .addContainerGap())
@@ -184,10 +207,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                                 .addComponent(btnViewDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addComponent(btnAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 14, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbOrganizations, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBack)))
                 .addContainerGap())
@@ -196,9 +218,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbOrganizations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack))
+                .addComponent(btnBack)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
@@ -206,8 +226,8 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                     .addComponent(btnViewDetails)
                     .addComponent(btnAddNew))
                 .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(lblEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,14 +240,77 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        if (txtId.getText().isEmpty() || txtName.getText().isEmpty() || txtCity.getText().isEmpty() || txtCountry.getText().isEmpty()) {
+        if (txtName.getText().isEmpty() || txtCity.getText().isEmpty() || txtCountry.getText().isEmpty() || cmbEnterprise.getSelectedItem() == null || cmbNetwork.getSelectedItem() == null) {
             JOptionPane.showMessageDialog((this), "Please enter all command field");
             return;
         }
         
-        Enterprise selectedEnterprise = (Enterprise) cmbOrganizations.getSelectedItem();
-         
+        String selectedEnterprise = (String) cmbEnterprise.getSelectedItem();
+                
+      
+        String selectedNetworks = (String) cmbNetwork.getSelectedItem();
+        
+        Network selectedNetwork = networkMap.get(selectedNetworks);
+
+        Enterprise.EnterpriseType enterpriseType = null;
+        
+        if(selectedEnterprise.equals("Hospitals")){
+            enterpriseType = Enterprise.EnterpriseType.Hospital;
+        } else if(selectedEnterprise.equals("NGO")){
+            enterpriseType = Enterprise.EnterpriseType.NGO;
+        } else if(selectedEnterprise.equals("Organ Banks")){
+            enterpriseType = Enterprise.EnterpriseType.OrganBank;
+        } else if(selectedEnterprise.equals("Transport Agencies")){
+            enterpriseType = Enterprise.EnterpriseType.Transport;
+        } else{
+            enterpriseType = Enterprise.EnterpriseType.Government;
+        }
+
+        selectedNetwork.getEnterpriseDirectory().createAndAddEnterprise(txtName.getText(),enterpriseType);
+        populateTable();
+        
+        btnUpdate.setEnabled(false);
+        btnSave.setEnabled(false);
+        
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
+        // TODO add your handling code here:
+        btnUpdate.setEnabled(true);
+        btnSave.setEnabled(true);
+    }//GEN-LAST:event_btnAddNewActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        cmbEnterprise.setEnabled(false);
+        cmbNetwork.setEnabled(false);
+        
+        int selectedrow = tblDetails.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please enter valid");
+            return;
+        }
+        
+        Enterprise enterprise = (Enterprise) tblDetails.getValueAt(selectedrow, 0);
+        
+        if (txtName.getText().isEmpty() || txtCity.getText().isEmpty() || txtCountry.getText().isEmpty()) {
+            JOptionPane.showMessageDialog((this), "Please enter all command field");
+            return;
+        }
+        
+        
+        enterprise.setCity(txtCity.getText());
+        enterprise.setCountry(txtCountry.getText());
+        enterprise.setName(txtName.getText());
+
+        populateTable();
+        
+        btnUpdate.setEnabled(false);
+        btnSave.setEnabled(false);
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -236,15 +319,16 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnViewDetails;
-    private javax.swing.JComboBox<String> cmbOrganizations;
-    private javax.swing.JComboBox<String> cmbType;
+    private javax.swing.JComboBox<String> cmbEnterprise;
+    private javax.swing.JComboBox<String> cmbNetwork;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblType;
+    private javax.swing.JPanel lblEnterprise;
+    private javax.swing.JLabel lblNetwork;
     private javax.swing.JTable tblDetails;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCountry;
@@ -253,11 +337,37 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateComboBox() {
-        cmbOrganizations.removeAllItems();
-        cmbOrganizations.addItem("Hospitals");
-        cmbOrganizations.addItem("NGOs");
-        cmbOrganizations.addItem("Organ Banks");
-        cmbOrganizations.addItem("Transport Agencies");
-        cmbOrganizations.addItem("Government Bodies");
+        cmbEnterprise.removeAllItems();
+        cmbEnterprise.addItem("Hospitals");
+        cmbEnterprise.addItem("NGOs");
+        cmbEnterprise.addItem("Organ Banks");
+        cmbEnterprise.addItem("Transport Agencies");
+        cmbEnterprise.addItem("Government Bodies");
     }
+    
+    private void populateTable(){
+        DefaultTableModel model = (DefaultTableModel) tblDetails.getModel();
+        model.setRowCount(0);
+        for (Network network : ecosystem.getNetworkList()) {
+            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+                Object[] row = new Object[5];
+                row[0] = e.getOrganizationID();
+                row[1] = e.getName();
+                row[2] = e.getCity();
+                row[3] = e.getCountry();
+                row[4] = network.getName();
+                model.addRow(row);
+            }
+        }
+    }
+    
+    private void populateNetworkCmb(){
+        cmbNetwork.removeAllItems();
+        
+        for(Network network : ecosystem.getNetworkList()){
+            cmbNetwork.addItem(network.toString());
+            networkMap.put(network.toString(), network);
+        }
+    }
+    
 }
