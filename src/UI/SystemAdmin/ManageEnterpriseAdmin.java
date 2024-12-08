@@ -205,7 +205,7 @@ public class ManageEnterpriseAdmin extends javax.swing.JPanel {
         enterpriseJComboBox.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            enterpriseJComboBox.addItem(enterprise.toString());
+            enterpriseJComboBox.addItem(enterprise);
         }
         
     }
