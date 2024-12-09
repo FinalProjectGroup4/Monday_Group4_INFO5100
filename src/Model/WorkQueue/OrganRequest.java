@@ -45,5 +45,8 @@ public class OrganRequest extends WorkRequest{
         return patient;
     }
     
-    
+    @Override()
+    public String toString(){
+       return this.getPatient().getName();
+    }
 }

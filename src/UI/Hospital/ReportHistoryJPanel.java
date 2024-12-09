@@ -6,9 +6,9 @@ package UI.Hospital;
 
 import Model.EcoSystem;
 import Model.Enterprises.Hospital;
-import Model.UserAccount.UserAccount;
 import Model.WorkQueue.OrganRequest;
 import Model.WorkQueue.PathologyTestRequest;
+import Model.WorkQueue.WorkQueue;
 import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
 import java.awt.CardLayout;
@@ -24,7 +24,6 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     Hospital hospitalEnterprise;
-    UserAccount userAccount;
     EcoSystem system;
     Patient patient;
     /**
@@ -34,7 +33,6 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.hospitalEnterprise = enterprise;
-        this.userAccount = userAccount;
         this.system = system;
         this.patient = patient;
         populateTable();
@@ -170,6 +168,8 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         String bloodType = ptr.getBloodType();
         
         OrganRequest or = new OrganRequest(patient,bloodType,organ);
+        WorkQueue networkWorkQueue = hospitalEnterprise.getNetwork().getWorkqueue();
+        networkWorkQueue.getOrganRequests().add(or);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtOrganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrganActionPerformed

@@ -270,6 +270,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         }
 
         Enterprise newEnterprise = selectedNetwork.getEnterpriseDirectory().createAndAddEnterprise(txtName.getText(),enterpriseType);
+        newEnterprise.setNetwork(selectedNetwork);
         newEnterprise.createDefaultOrganization();
         
         newEnterprise.setCity(txtCity.getText());

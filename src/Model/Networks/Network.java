@@ -5,6 +5,7 @@
 package Model.Networks;
 
 import Model.Enterprises.EnterpriseDirectory;
+import Model.WorkQueue.WorkQueue;
 
 /**
  *
@@ -14,6 +15,7 @@ public class Network {
  
     private String name;
     private EnterpriseDirectory enterpriseDirectory;
+    private WorkQueue workqueue;
 //    private UNOS unos;
 //    private OrganCompany organcompany;
 //    private AirAmbulenceDistribution ad;
@@ -42,6 +44,7 @@ public class Network {
     
     public Network(){
         enterpriseDirectory=new EnterpriseDirectory();
+        workqueue = new WorkQueue();
 //        unos = UNOS.getInstance();
 //        organcompany = OrganCompany.getInstance();
 //        ad = AirAmbulenceDistribution.getInstance();
@@ -62,6 +65,15 @@ public class Network {
     public EnterpriseDirectory getEnterpriseDirectory() {
         return enterpriseDirectory;
     }
+
+    public WorkQueue getWorkqueue() {
+        return workqueue;
+    }
+
+    public void setWorkqueue(WorkQueue workqueue) {
+        this.workqueue = workqueue;
+    }
+    
     
     @Override
     public String toString(){

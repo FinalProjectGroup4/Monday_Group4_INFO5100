@@ -5,6 +5,7 @@
 package Model.Organization;
 import Model.Roles.DoctorRole;
 import Model.Roles.Role;
+import Model.WorkQueue.OrganRequest;
 import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
 import Model.storage.PatientDirectory;
@@ -28,12 +29,8 @@ public class DoctorOrganization extends Organization{
         return this.getWorkQueue().getMedicalVisitRequests(patient.getId(),false);
     }
     
-    public ArrayList<WorkRequest> getOrganRequests(Patient patient){
+    public ArrayList<OrganRequest> getOrganRequests(Patient patient){
         return this.getWorkQueue().getOrganRequests(patient.getId(),false);
-    }
-    
-    public void removeMedicalVisit(WorkRequest workRequest){
-        this.getWorkQueue().removeMedicalVisitRequest(workRequest);
     }
     
     public void removeOrganRequest(WorkRequest workRequest){

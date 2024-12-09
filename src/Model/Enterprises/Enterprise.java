@@ -4,6 +4,7 @@
  */
 package Model.Enterprises;
 
+import Model.Networks.Network;
 import Model.Organization.Organization;
 import Model.Organization.OrganizationDirectory;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public abstract class Enterprise extends Model.Organization.Organization{
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
     private HashMap<EnterpriseType,Organization.Type[]> enterpriseOrganizationMap = new HashMap<>();
+    private Network network;
     
     public Enterprise(String name,EnterpriseType type){
         super(name);
@@ -71,6 +73,15 @@ public abstract class Enterprise extends Model.Organization.Organization{
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
+
+    public Network getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
+    
     
     @Override
     public String toString(){

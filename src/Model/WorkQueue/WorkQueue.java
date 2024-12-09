@@ -11,148 +11,33 @@ import java.util.ArrayList;
  * @author apple
  */
 public class WorkQueue {
-   private ArrayList<WorkRequest> workRequestList;
-    private ArrayList<WorkRequest> organRequestList;
-    private ArrayList<WorkRequest> organReportList;
-    private ArrayList<WorkRequest> distributionList;
-    private ArrayList<WorkRequest> artificialOrganRequestlist;
-    
-    private ArrayList<WorkRequest> organReportDocList;
-    private ArrayList<WorkRequest> organReportHosList;
-    
-    // Our code
+    private ArrayList<WorkRequest> workRequestList;
     private  ArrayList<WorkRequest> pathologyTestRequests;
     private  ArrayList<WorkRequest> medicalVisitRequests;
-    private  ArrayList<WorkRequest> organRequests;
+    private  ArrayList<OrganRequest> organRequests;
 
     public WorkQueue() {
         workRequestList = new ArrayList();
-        organRequestList = new ArrayList();
-        organReportList = new ArrayList();
-        distributionList = new ArrayList();
-        artificialOrganRequestlist = new ArrayList();
-        organReportDocList = new ArrayList();
-        organReportHosList = new ArrayList();
-        
-        // Our code
         pathologyTestRequests = new ArrayList();
         medicalVisitRequests = new ArrayList();
         organRequests = new ArrayList();
-    }
-
-    public ArrayList<WorkRequest> getOrganReportHosList() {
-        return organReportHosList;
-    }
-    
-    
-
-    public ArrayList<WorkRequest> getOrganReportDocList() {
-        return organReportDocList;
-    }
-    
-    public ArrayList<WorkRequest> getArtificialOrganRequestlist() {
-        return artificialOrganRequestlist;
-    }
-
-    public ArrayList<WorkRequest> getDistributionList() {
-        return distributionList;
-    }
-
-    public ArrayList<WorkRequest> getOrganReportList() {
-        return organReportList;
     }
 
     public ArrayList<WorkRequest> getWorkRequestList() {
         return workRequestList;
     }
 
-    public ArrayList<WorkRequest> getOrganRequestList() {
-        return organRequestList;
-    }
-
-    @Override
-    public String toString() {
-        return "WorkQueue{" + "workRequestList=" + workRequestList + ", organRequestList=" + organRequestList + ", organReportList=" + organReportList + ", distributionList=" + distributionList + ", artificialOrganRequestlist=" + artificialOrganRequestlist + ", organReportDocList=" + organReportDocList + ", organReportHosList=" + organReportHosList + '}';
-    }
-
-
-    
-    
-    public WorkRequest searchDocReport(String keyword,String keyword2){
-        for(WorkRequest request: organReportDocList){
-            if(keyword.equals(request.getOrgan()) && keyword2.equals(request.getMessage())){
-                return request;
-            }
-        }
-        return null;
-    }
-
-
-    public WorkRequest search(String keyword, String keyword2) {
-        for (WorkRequest request : organRequestList) {
-            if (keyword.equals(request.getMessage()) && keyword2.equals(request.getOrgan())) {
-                return request;
-            }
-        }
-        return null;
-    }
-    
-
-
-    public WorkRequest searchReport(String keyword) {
-        for (WorkRequest request : organReportList) {
-            if (keyword.equals(request.getMessage())) {
-                return request;
-            }
-        }
-        return null;
-    }
-
-    public WorkRequest searchDistribution(String keyword, String keyword2) {
-        for (WorkRequest request : distributionList) {
-            if (keyword.equals(request.getMessage()) && keyword2.equals(request.getOrgan())) {
-                return request;
-            }
-        }
-        return null;
-    }
-
-    public WorkRequest searchArtificial(String keyword, String keyword2) {
-        for (WorkRequest request : artificialOrganRequestlist) {
-            if (keyword.equals(request.getMessage()) && keyword2.equals(request.getOrgan())) {
-                return request;
-            }
-        }
-        return null;
-    }
-
-    public void removeLabRequest(WorkRequest workRequest) {
-        PathologyTestRequest r = (PathologyTestRequest)workRequest;  
-        workRequestList.remove(r);
-    }
-
-
-    public void removeOrganReport(WorkRequest workRequest) {
-        organReportList.remove(workRequest);
-    }
-    
-    public void removeDistributionList(WorkRequest workRequest) {
-        distributionList.remove(workRequest);
-    }
-    
-    public void removeartificialOrganRequest(WorkRequest workRequest) {
-        artificialOrganRequestlist.remove(workRequest);
-    } 
-    
-    
-    // Our code
+//    @Override
+//    public String toString() {
+//        return "WorkQueue{" + "workRequestList=" + workRequestList + ", organRequestList=" + organRequestList + ", organReportList=" + organReportList + ", distributionList=" + distributionList + ", artificialOrganRequestlist=" + artificialOrganRequestlist + ", organReportDocList=" + organReportDocList + ", organReportHosList=" + organReportHosList + '}';
+//    }
     
     public ArrayList<WorkRequest> getPathologyTestRequests() {
         return pathologyTestRequests;
     }
     
-     public ArrayList<WorkRequest> getOrganRequests() {
-        return organRequestList;
+     public ArrayList<OrganRequest> getOrganRequests() {
+        return organRequests;
     }
     
     public ArrayList<WorkRequest> getPathologyTestRequestsForAPatient(int patientId){
@@ -193,18 +78,14 @@ public class WorkQueue {
         return filterResult;
     }
     
-    public void removeMedicalVisitRequest(WorkRequest workRequest) {
-        medicalVisitRequests.remove(workRequest);
-    }
-    
-    public ArrayList<WorkRequest> getOrganRequests(int patientId, boolean isPending) {
+    public ArrayList<OrganRequest> getOrganRequests(int patientId, boolean isPending) {
         
-        ArrayList<WorkRequest> filterResult = new ArrayList<>();
+        ArrayList<OrganRequest> filterResult = new ArrayList<>();
         
         for(WorkRequest w : organRequests){
             OrganRequest p = (OrganRequest) w;
             if(p.getPatient().getId() == patientId){
-                WorkRequest filterPatient = (WorkRequest) p;
+                OrganRequest filterPatient = (OrganRequest) p;
                 filterResult.add(filterPatient);
             }
             
