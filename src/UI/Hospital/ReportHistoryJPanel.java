@@ -81,6 +81,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Organ Name");
 
         jButton1.setText("Request Organ");
@@ -90,7 +91,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack3.setText("<<< Back");
+        btnBack3.setText("Back");
         btnBack3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBack3ActionPerformed(evt);
@@ -103,17 +104,17 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(btnBack3)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtOrgan, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack3)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(265, 265, 265))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +146,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         int selectedrow = jTable1.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please enter valid");
+            JOptionPane.showMessageDialog((this), "Please select a row");
             return;
         }
         

@@ -143,7 +143,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         int selectedrow = tblPatientList.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please enter valid");
+            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
             return;
         }
         

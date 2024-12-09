@@ -59,6 +59,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblList);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name :");
 
         btnAdd.setText("Add");
@@ -68,7 +69,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack3.setText("<<< Back");
+        btnBack3.setText("Back");
         btnBack3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBack3ActionPerformed(evt);
@@ -139,7 +140,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         if (txtName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog((this), "Please enter all command field");
+            JOptionPane.showMessageDialog((this), "Please enter all fields");
             return;
         }
 
@@ -148,7 +149,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
         organization.getEmployeeDirectory().createEmployee(name);
         populateTable(organization);
-        JOptionPane.showMessageDialog((this), "Submitted Successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog((this), "Submitted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
