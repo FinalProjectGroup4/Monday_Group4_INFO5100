@@ -100,7 +100,7 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
         int selectedrow = tableReport.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please enter valid");
+            JOptionPane.showMessageDialog((this), "Please select a report to view");
             return;
         }
         

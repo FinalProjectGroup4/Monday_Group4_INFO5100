@@ -58,7 +58,7 @@ public class ManageUserJPanel extends javax.swing.JPanel {
         cmbEmployee = new javax.swing.JComboBox();
         cmbRole = new javax.swing.JComboBox();
 
-        btnBack.setText(" <<< Back");
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -75,14 +75,19 @@ public class ManageUserJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblData);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Organization :");
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Employee :");
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Role :");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Username :");
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Password :");
 
         btnAdd.setText("Add");
@@ -139,20 +144,24 @@ public class ManageUserJPanel extends javax.swing.JPanel {
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBack)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(178, 178, 178)
-                        .addComponent(btnAdd)))
+                        .addComponent(btnAdd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBack)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4, jLabel5});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(btnBack)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -190,10 +199,10 @@ public class ManageUserJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
-            JOptionPane.showMessageDialog((this), "Please enter all command field");
+            JOptionPane.showMessageDialog((this), "Please enter all fields");
             return;
         }
-        JOptionPane.showMessageDialog((this), "Created Successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog((this), "Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         String userName = txtUsername.getText();
         String password = txtPassword.getText();

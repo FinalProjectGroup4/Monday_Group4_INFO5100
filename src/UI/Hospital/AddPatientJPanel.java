@@ -91,24 +91,31 @@ public class AddPatientJPanel extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name* :");
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Gender* :");
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Birthdate* :");
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("AcceptedDate* :");
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("PhoneNumber* :");
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Address* :");
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Sickness* :");
 
         nameText.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -125,7 +132,7 @@ public class AddPatientJPanel extends javax.swing.JPanel {
         sicknessText.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         backJButton.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        backJButton.setText("<<< Back");
+        backJButton.setText("Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
@@ -146,6 +153,7 @@ public class AddPatientJPanel extends javax.swing.JPanel {
         jMonthTextField.setText("MM");
 
         jLabel28.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel28.setText("Email* :");
 
         emailjTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -158,124 +166,110 @@ public class AddPatientJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 150, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sicknessText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jMonthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(birthdateText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genderText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(186, 186, 186))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(backJButton))
+                        .addGap(222, 222, 222)
+                        .addComponent(submit))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(submit)))
-                .addContainerGap(392, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(backJButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 171, Short.MAX_VALUE)
+                    .addGap(0, 146, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(82, 82, 82)
-                            .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(73, 73, 73)
-                            .addComponent(genderText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(64, 64, 64)
-                            .addComponent(birthdateText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(35, 35, 35)
-                            .addComponent(jMonthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(34, 34, 34)
-                            .addComponent(phoneNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(68, 68, 68)
-                            .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(68, 68, 68)
-                            .addComponent(sicknessText, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel28)
-                            .addGap(85, 85, 85)
-                            .addComponent(emailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 174, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7))
+                    .addGap(0, 443, Short.MAX_VALUE)))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel28, jLabel3, jLabel4, jLabel5, jLabel6, jLabel7});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backJButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 376, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(genderText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(birthdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jMonthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(phoneNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sicknessText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28))
+                .addGap(18, 18, 18)
                 .addComponent(submit)
-                .addGap(54, 54, 54))
+                .addContainerGap(68, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 58, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(19, 19, 19)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(genderText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(19, 19, 19)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel3))
-                        .addComponent(birthdateText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(5, 5, 5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jLabel4))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jMonthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jYearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(10, 10, 10)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel5))
-                        .addComponent(phoneNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(15, 15, 15)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel6))
-                        .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 56, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
                     .addGap(25, 25, 25)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7)
-                        .addComponent(sicknessText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(29, 29, 29)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel28)
-                        .addComponent(emailjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 97, Short.MAX_VALUE)))
+                    .addComponent(jLabel2)
+                    .addGap(35, 35, 35)
+                    .addComponent(jLabel3)
+                    .addGap(25, 25, 25)
+                    .addComponent(jLabel4)
+                    .addGap(30, 30, 30)
+                    .addComponent(jLabel5)
+                    .addGap(25, 25, 25)
+                    .addComponent(jLabel6)
+                    .addGap(25, 25, 25)
+                    .addComponent(jLabel7)
+                    .addGap(0, 152, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -283,7 +277,7 @@ public class AddPatientJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         if (nameText.getText().isEmpty() || genderText.getText().isEmpty() || birthdateText.getText().isEmpty() || jYearTextField.getText().isEmpty() || jMonthTextField.getText().isEmpty() || jDateTextField.getText().isEmpty() || phoneNumberText.getText().isEmpty() || addressText.getText().isEmpty() || sicknessText.getText().isEmpty() || emailjTextField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog((this), "Please enter all command field");
+            JOptionPane.showMessageDialog((this), "Please enter all fields");
             return;
         }
 
@@ -315,48 +309,7 @@ public class AddPatientJPanel extends javax.swing.JPanel {
             patient.setEmail(emailjTextField.getText());
             patient.setAcceptedDate(mm+"/"+dd+"/"+yyyy);
 
-//            try {
-//                String host = "smtp.gmail.com";
-//                String user = "rohansportstar25@gmail.com";
-//                String pass = "ankuavi_12345";
-//                String to = emailjTextField.getText();
-//                String from = "rohansportstar25@gmail.com";
-//                String subject = "Patient Confidential details : Thank you for becoming a priveleged donor";
-//                String messageText = "Important mail :" + "\n" + " Name:" + nameText.getText() + "\n"
-//                + "Donor/Receiver Id: " + patient.getId() + "\n" + "Sickness History: " + sicknessText.getText();
-//                boolean sessionDebug = false;
-//
-//                Properties props = System.getProperties();
-//
-//                props.put("mail.smtp.starttls.enable", "true");
-//                props.put("mail.smtp.host", host);
-//                props.put("mail.smtp.port", "587");
-//                props.put("mail.smtp.auth", "true");
-//                props.put("mail.smtp.starttls.required", "true");
-//
-//                //            java.security.Security.addProvider(new BouncyCastleProvider());
-//                Session mailSession = Session.getDefaultInstance(props, null);
-//
-//                mailSession.setDebug(sessionDebug);
-//                Message msg = new MimeMessage(mailSession);
-//                msg.setFrom(new InternetAddress(from));
-//                InternetAddress[] address = {new InternetAddress(to)};
-//                msg.setRecipients(Message.RecipientType.TO, address);
-//                msg.setSubject(subject);
-//                msg.setSentDate(new Date());
-//                msg.setText(messageText);
-//
-//                Transport transport = mailSession.getTransport("smtp");
-//                transport.connect(host, user, pass);
-//                transport.sendMessage(msg, msg.getAllRecipients());
-//
-//                transport.close();
-//                System.out.println("message send successfully");
-//            } catch (Exception ex) {
-//                System.out.println(ex);
-//            }
-
-            JOptionPane.showMessageDialog((this), "Submitted Successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog((this), "New Patient Added!", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_submitActionPerformed
 
