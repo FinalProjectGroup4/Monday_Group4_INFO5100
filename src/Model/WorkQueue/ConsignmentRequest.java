@@ -72,6 +72,6 @@ public class ConsignmentRequest extends WorkRequest {
 
 @Override()
     public String toString(){
-       return this.governmentOrganApproveRequest.getOrganBank().getName();
+       return this.governmentOrganApproveRequest.getOrganProcurement().getOrganRequest().getPatient().getName();
     }
 }
