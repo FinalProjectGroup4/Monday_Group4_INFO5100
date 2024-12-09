@@ -29,8 +29,9 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
     public GovernmentAdminWorkArea(JPanel container, EcoSystem system, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer=container;
-        this.ecosystem=ecosystem;
+        this.ecosystem=system;
         this.enterprise = enterprise;
+        populateTable();
     }
     
     private void populateTable() {
