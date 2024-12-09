@@ -8,6 +8,7 @@ import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.OrganRequest;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -109,6 +110,7 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
 
     private void btnRaiseRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseRequestActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Request raised successfully");
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
 
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
