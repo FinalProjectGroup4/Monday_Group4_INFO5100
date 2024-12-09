@@ -84,6 +84,12 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Organ Name");
 
+        txtOrgan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrganActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Request Organ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,13 +156,25 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
             return;
         }
         
+        
+        
         PathologyTestRequest ptr = (PathologyTestRequest)jTable1.getValueAt(selectedrow, 0);
+        
+        
+        if(ptr.getStatus().toLowerCase().equals("pending")){
+            JOptionPane.showMessageDialog((this), "Can't request right now !!! status not approved");
+            return;
+        }
         Patient patient = ptr.getPatient();
         
         String bloodType = ptr.getBloodType();
         
         OrganRequest or = new OrganRequest(patient,bloodType,organ);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtOrganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrganActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
