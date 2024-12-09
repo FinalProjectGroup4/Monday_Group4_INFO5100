@@ -6,10 +6,8 @@ package UI.GovernmentBody;
 
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
-import Model.Networks.Network;
 import Model.WorkQueue.ConsignmentRequest;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -40,12 +38,12 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
     model.setRowCount(0);
 
     // Iterate through the list and add each request to the table
-    for (GovernmentOrganApproveRequest or : enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests()) {
-        if (or != null) {
+    for (GovernmentOrganApproveRequest gov : enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests()) {
+        if (gov != null) {
             Object[] row = new Object[3];
-            row[0] = or;
-            row[1] = or.getOrganProcurement().getOrganRequest().getOrganName();
-            row[2] = or.getStatus();
+            row[0] = gov;
+            row[1] = gov.getOrganProcurement().getOrganRequest().getOrganName();
+            row[2] = gov.getStatus();
             model.addRow(row);
         } else {
             System.err.println("Null OrganRequest encountered.");

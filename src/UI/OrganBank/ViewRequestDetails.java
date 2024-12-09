@@ -5,7 +5,6 @@
 package UI.OrganBank;
 
 import Model.Enterprises.Enterprise;
-import Model.Networks.Network;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
 import Model.WorkQueue.OrganProcurement;
 import java.awt.CardLayout;
@@ -169,9 +168,8 @@ public class ViewRequestDetails extends javax.swing.JPanel {
         GovernmentOrganApproveRequest governmentOrganApproveRequest = new GovernmentOrganApproveRequest(organProcurement);
         organProcurement.setStatus("Sent for government approval");
         organProcurement.getOrganRequest().setStatus("Gov approval pending");
-        Network network = enterprise.getNetwork();
-        network.getWorkqueue().getGovernmentOrganApproveRequests().add(governmentOrganApproveRequest);
-        JOptionPane.showMessageDialog(this, "approval send successfully");
+        enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests().add(governmentOrganApproveRequest);
+        JOptionPane.showMessageDialog(this, "Approval send successfully");
 
     }//GEN-LAST:event_btnApprovalActionPerformed
 
