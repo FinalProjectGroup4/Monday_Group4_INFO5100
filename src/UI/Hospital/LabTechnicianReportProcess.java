@@ -11,6 +11,7 @@ import Model.UserAccount.UserAccount;
 import Model.WorkQueue.PathologyTestRequest;
 import Model.storage.Patient;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -191,6 +192,10 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
     private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        PatientServiceWorkAreaJPanel pswajp = (PatientServiceWorkAreaJPanel) component;
+        pswajp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBack3ActionPerformed
