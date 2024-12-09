@@ -4,7 +4,10 @@
  */
 package UI.TransportAdmin;
 
+import Model.Enterprises.Enterprise;
+import Model.WorkQueue.ConsignmentRequest;
 import java.awt.CardLayout;
+import java.sql.Driver;
 import javax.swing.JPanel;
 
 /**
@@ -17,9 +20,15 @@ public class CreateConsignment extends javax.swing.JPanel {
      * Creates new form CreateConsignment
      */
     JPanel userProcessContainer;
-    public CreateConsignment(JPanel container) {
+    ConsignmentRequest consignmentRequest;
+    Enterprise enterprise;
+    public CreateConsignment(JPanel container,Enterprise enterprise ,ConsignmentRequest cr) {
         initComponents();
         this.userProcessContainer=container;
+        this.consignmentRequest = cr;
+        this.enterprise = enterprise;
+        populateComboBox();
+        populateFields(cr);
     }
 
     /**
@@ -168,7 +177,7 @@ public class CreateConsignment extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-         userProcessContainer.remove(this);
+        userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -191,4 +200,18 @@ public class CreateConsignment extends javax.swing.JPanel {
     private javax.swing.JTextField txtOrganBank;
     private javax.swing.JTextField txtOrganBankLocation;
     // End of variables declaration//GEN-END:variables
+
+    private void populateComboBox() {
+        cmbDriver.removeAllItems();
+        
+       cmbDriver.addItem("Driver1");
+       cmbDriver.addItem("Driver2");
+    }
+
+    private void populateFields(ConsignmentRequest cr) {
+        txtOrganBank.setText(String.valueOf(cr.getOrganBank()));
+        txtOrganBankLocation.setText(String.valueOf(cr.getOgLocation()));
+        txtHospital.setText(String.valueOf(cr.getHospital()));
+        txtHospitalLocation.setText(String.valueOf(cr.getHosLocation()));
+    }
 }

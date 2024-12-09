@@ -17,6 +17,15 @@ public class WorkQueue {
     private  ArrayList<OrganRequest> organRequests;
     private ArrayList<GovernmentOrganApproveRequest> governmentOrganApproveRequests;
     private ArrayList<OrganProcurement> organProcurementRequest;
+    private ArrayList<ConsignmentRequest> consignmentRequests;
+
+    public ArrayList<ConsignmentRequest> getConsignmentRequests() {
+        return consignmentRequests;
+    }
+
+    public void setConsignmentRequests(ArrayList<ConsignmentRequest> consignmentRequests) {
+        this.consignmentRequests = consignmentRequests;
+    }
 
     public ArrayList<OrganProcurement> getOrganProcurementRequest() {
         return organProcurementRequest;
@@ -33,6 +42,7 @@ public class WorkQueue {
         organRequests = new ArrayList();
         governmentOrganApproveRequests = new ArrayList();
         organProcurementRequest = new ArrayList();
+        consignmentRequests = new ArrayList();
     }
 
     public ArrayList<WorkRequest> getWorkRequestList() {

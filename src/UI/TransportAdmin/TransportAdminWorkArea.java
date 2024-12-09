@@ -5,9 +5,15 @@
 package UI.TransportAdmin;
 
 import Model.EcoSystem;
-import UI.OrganBank.ViewRequestDetails;
+import Model.Enterprises.Enterprise;
+import Model.WorkQueue.ConsignmentRequest;
+import Model.WorkQueue.OrganProcurement;
+import Model.storage.Patient;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +26,13 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    public TransportAdminWorkArea(JPanel container, EcoSystem system) {
+    Enterprise enterprise;
+    public TransportAdminWorkArea(JPanel container, EcoSystem system,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer=container;
         this.ecosystem=ecosystem;
+        this.enterprise = enterprise;
+        populateTable();
     }
 
     /**
@@ -47,7 +56,7 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Request ID", "Organ Bank", "Hospital", "Organ Bank Location", "Hospital Location"
+                "Request ID", "Organ Bank", "Hospital", "Organ Bank Location", "Hospital Location", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblRequests);
@@ -90,7 +99,16 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        CreateConsignment vrd = new CreateConsignment(userProcessContainer);
+        int selectedrow = tblRequests.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select valid row");
+            return;
+        }
+        
+        ConsignmentRequest cr = (ConsignmentRequest)tblRequests.getValueAt(selectedrow, 0);
+
+        CreateConsignment vrd = new CreateConsignment(userProcessContainer,enterprise,cr);
         userProcessContainer.add("CreateConsignment",vrd);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -104,4 +122,34 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRequests;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblRequests.getModel();
+        model.setRowCount(0);
+
+        // Get the list of OrganRequests
+        ArrayList<ConsignmentRequest> wrq = enterprise.getNetwork().getWorkqueue().getConsignmentRequests();
+
+        // Check if the list is null or empty
+        if (wrq == null || wrq.isEmpty()) {
+            System.err.println("No Pending Requests found.");
+            return;
+        }
+
+        // Iterate through the list and add each request to the table
+        for (ConsignmentRequest or : wrq) {
+            if (or != null) {
+                Object[] row = new Object[6];
+                row[0] = or;
+                row[1] = or.getOrganBank();
+                row[2] = or.getHospital();
+                row[3] = or.getOgLocation();
+                row[4] = or.getHosLocation();
+                row[5] = or.getStatus();
+                model.addRow(row);
+            } else {
+                System.err.println("Null Consignments encountered.");
+            }
+        }
+    }
 }
