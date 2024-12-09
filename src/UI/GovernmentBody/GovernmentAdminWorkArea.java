@@ -7,6 +7,7 @@ package UI.GovernmentBody;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.Networks.Network;
+import Model.WorkQueue.ConsignmentRequest;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -38,20 +39,8 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
     DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
     model.setRowCount(0);
 
-    // Get the list of OrganRequests
-    ArrayList<Network> networkList = ecosystem.getNetworkList();
-    
-    ArrayList<GovernmentOrganApproveRequest> allNetworkRequests = new ArrayList();
-
-    for(Network network : networkList){
-        ArrayList<GovernmentOrganApproveRequest> networkRequestList = network.getWorkqueue().getGovernmentOrganApproveRequests();
-        if (networkRequestList != null && !networkRequestList.isEmpty()) {
-        allNetworkRequests.addAll(networkRequestList);
-        }    
-    }
-
     // Iterate through the list and add each request to the table
-    for (GovernmentOrganApproveRequest or : allNetworkRequests) {
+    for (GovernmentOrganApproveRequest or : enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests()) {
         if (or != null) {
             Object[] row = new Object[3];
             row[0] = or;
@@ -148,8 +137,10 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         
         GovernmentOrganApproveRequest gov = (GovernmentOrganApproveRequest) tblPendingRequests.getValueAt(selectedrow, 0);
         gov.getOrganProcurement().setStatus("APPROVED!");
-        gov.getOrganProcurement().getOrganRequest().setStatus("Approved!");
-        
+        gov.getOrganProcurement().getOrganRequest().setStatus("APPROVED!");
+        ConsignmentRequest congiRequest = new ConsignmentRequest(gov);
+        enterprise.getNetwork().getWorkqueue().getConsignmentRequests().add(congiRequest);
+        populateTable();
     }//GEN-LAST:event_btnApporveActionPerformed
 
 
