@@ -168,8 +168,13 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         String bloodType = ptr.getBloodType();
         
         OrganRequest or = new OrganRequest(patient,bloodType,organ);
+
         WorkQueue networkWorkQueue = hospitalEnterprise.getNetwork().getWorkqueue();
         networkWorkQueue.getOrganRequests().add(or);
+
+        
+         JOptionPane.showMessageDialog((this), "Organ request has been placed successfully");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtOrganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrganActionPerformed

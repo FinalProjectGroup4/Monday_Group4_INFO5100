@@ -52,6 +52,11 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblPendingRequests);
 
         btnApporve.setText("Approve");
+        btnApporve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApporveActionPerformed(evt);
+            }
+        });
 
         btnReject.setText("Reject");
 
@@ -91,6 +96,10 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnApporveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApporveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnApporveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

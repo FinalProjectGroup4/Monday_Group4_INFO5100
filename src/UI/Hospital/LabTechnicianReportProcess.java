@@ -11,6 +11,7 @@ import Model.UserAccount.UserAccount;
 import Model.WorkQueue.PathologyTestRequest;
 import Model.storage.Patient;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -184,6 +185,7 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
        String result = txtResult.getText();
        pathologyTestRequest.setResults(Double.parseDouble(result));
        pathologyTestRequest.setStatus("Complete");
+       JOptionPane.showMessageDialog((this), "Report Submitted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed

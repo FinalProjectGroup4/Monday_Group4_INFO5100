@@ -69,6 +69,11 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         });
 
         btnComplete.setText("Complete");
+        btnComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompleteActionPerformed(evt);
+            }
+        });
 
         tblOrganBanks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,6 +135,10 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
     private void btnRaiseRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseRequestActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
+
+    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCompleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

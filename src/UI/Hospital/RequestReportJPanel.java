@@ -12,6 +12,7 @@ import Model.WorkQueue.WorkRequest;
 import Model.storage.Patient;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -168,6 +169,7 @@ public class RequestReportJPanel extends javax.swing.JPanel {
         ArrayList<WorkRequest> existingRequests = enterpriseHospital.getWorkQueue().getPathologyTestRequestsForAPatient(patient.getId());
         existingRequests.add(pathologyTestRequest);
         enterpriseHospital.getWorkQueue().setPathologyTestRequests(existingRequests);
+        JOptionPane.showMessageDialog((this), "Request raised Submitted Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
 
     private void btnBack3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack3ActionPerformed
