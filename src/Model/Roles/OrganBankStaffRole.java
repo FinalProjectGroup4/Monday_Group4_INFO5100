@@ -20,7 +20,7 @@ public class OrganBankStaffRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, PatientDirectory patientDirectory) {
-        return new OrganBankAdminWorkArea(userProcessContainer, system);
+        return new OrganBankAdminWorkArea(userProcessContainer, system,enterprise);
     }
     
 }
