@@ -173,7 +173,6 @@ public class ViewRequestDetails extends javax.swing.JPanel {
 
     private void btnApprovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalActionPerformed
         // TODO add your handling code here:
-<<<<<<< Updated upstream
         GovernmentOrganApproveRequest governmentOrganApproveRequest = new GovernmentOrganApproveRequest(organProcurement);
         organProcurement.setStatus("Gov approval pending");
         organProcurement.getOrganRequest().setStatus("Gov approval pending");
