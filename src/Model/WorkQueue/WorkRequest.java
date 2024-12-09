@@ -16,24 +16,12 @@ public abstract class WorkRequest {
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
-    private String status;
+    String status;
     private Date requestDate;
     private Date resolveDate;
     private String organ;
     private String completedDate;
-    private String bloodGroup;
-    private static int counter=0;
-    private String city;
-    private String country;
-    private int ID;
-    
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }
+    private boolean isRejected;
 
     public String getCompletedDate() {
         return completedDate;
@@ -104,6 +92,14 @@ public abstract class WorkRequest {
         this.resolveDate = resolveDate;
     }
 
+    public boolean isIsRejected() {
+        return isRejected;
+    }
+
+    public void setIsRejected(boolean isRejected) {
+        this.isRejected = isRejected;
+    }
+    
     @Override
     public String toString() {
         return message;

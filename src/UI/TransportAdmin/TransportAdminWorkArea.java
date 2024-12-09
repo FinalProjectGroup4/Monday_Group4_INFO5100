@@ -5,6 +5,7 @@
 package UI.TransportAdmin;
 
 import Model.EcoSystem;
+import Model.EmailUtil.EmailUtil;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.ConsignmentRequest;
 import java.util.ArrayList;
@@ -46,19 +47,23 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
         tblRequests = new javax.swing.JTable();
         btnCreate = new javax.swing.JButton();
 
-        jLabel1.setText("Upcoming Requests :");
+        setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-airplane_mode_on.png"))); // NOI18N
+        jLabel1.setText("Shipment Requests");
 
         tblRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Patient Name", "Organ Name", "Status"
+                "Patient Name", "Organ Name", "Status", "Origin", "Destination"
             }
         ));
         jScrollPane1.setViewportView(tblRequests);
 
-        btnCreate.setText("Create Consignment");
+        btnCreate.setText("Mark Shipment");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
@@ -69,28 +74,25 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCreate)))
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCreate)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCreate)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(btnCreate))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -105,15 +107,17 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
         String txt = (String) tblRequests.getValueAt(selectedrow, 2);
         if(txt.equals("SHIPPED")){
             btnCreate.setEnabled(false);
-            JOptionPane.showMessageDialog((this), "Request is already accepted");
+            JOptionPane.showMessageDialog((this), "Request is already fullfilled");
             return;
         }
         
         ConsignmentRequest cr = (ConsignmentRequest)tblRequests.getValueAt(selectedrow, 0);
         cr.setStatus("SHIPPED");
-        cr.getGovernmentOrganApproveRequest().setStatus("SHIPPED");
-        cr.getGovernmentOrganApproveRequest().getOrganProcurement().setStatus("SHIPPED");
-        cr.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().setStatus("SHIPPED");
+        EmailUtil.sendEmail(cr.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().getPatient().getEmail(), 
+            "Delivery Confirmation – Organ Transport Completed", 
+            "Dear User,\n\nWe are pleased to inform you that the delivery has been successfully completed. The organ has been transported to the designated location as requested.\n\nThank you for choosing our services. Please do not hesitate to reach out if you need any further assistance.\n\nBest regards,\nThe Transport Company Team"
+        );
+        JOptionPane.showMessageDialog((this), "Shipment Marked Complete.");
         populateTable();
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -145,6 +149,8 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
                 row[0] = cng;
                 row[1] = cng.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().getOrganName();
                 row[2] = cng.getStatus();
+                row[4] = cng.getHospital().getCity() +"-"+cng.getHospital().getCountry();
+                row[3] = cng.organBank().getCity() + "-" + cng.organBank().getCountry();
                 model.addRow(row);
             } else {
                 System.err.println("Null Consignments encountered.");

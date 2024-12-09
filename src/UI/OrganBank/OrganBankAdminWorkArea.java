@@ -7,6 +7,7 @@ package UI.OrganBank;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.OrganProcurement;
+import Model.WorkQueue.OrganRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -47,22 +48,27 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         tblPendingRequests = new javax.swing.JTable();
         btnViewRequestDetails = new javax.swing.JButton();
 
-        jLabel1.setText("Pending Requests :");
+        setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-medical_heart.png"))); // NOI18N
+        jLabel1.setText("Organ Procurement Requests");
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Patient Name", "Organ Name", "Blood Group", "Status"
+                "Patient Name", "Organ Name", "Status", "NGO", "NGO Country", "Date of Request"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
 
-        btnViewRequestDetails.setText("View Request Details");
+        btnViewRequestDetails.setText("View Details");
         btnViewRequestDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewRequestDetailsActionPerformed(evt);
@@ -78,22 +84,24 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnViewRequestDetails))
+                        .addComponent(btnViewRequestDetails)
+                        .addGap(0, 391, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnViewRequestDetails)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -102,7 +110,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         int selectedrow = tblPendingRequests.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            JOptionPane.showMessageDialog((this), "Please select a request to view details.");
             return;
         }
         
@@ -138,11 +146,14 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         // Iterate through the list and add each request to the table
         for (OrganProcurement op : wrq) {
             if (op != null) {
-                Object[] row = new Object[5];
+                Object[] row = new Object[6];
+                OrganRequest organRequest = op.getOrganRequest();
                 row[0] = op;
                 row[1] = op.getOrganRequest().getOrganName();
-                row[2] = op.getOrganRequest().getBloodGroup();
-                row[3] = op.getStatus();
+                row[2] = op.getStatus();
+                row[3] = organRequest.getNGOEnterprise();
+                row[4] = organRequest.getNGOEnterprise().getCountry();
+                row[5] = op.getRequestDate();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");

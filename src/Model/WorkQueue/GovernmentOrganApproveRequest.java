@@ -4,28 +4,45 @@
  */
 package Model.WorkQueue;
 
+import Model.Enterprises.Enterprise;
+import java.util.Date;
+
 /**
  *
  * @author nihardabhi
  */
-public class GovernmentOrganApproveRequest {
+public class GovernmentOrganApproveRequest extends WorkRequest{
     OrganProcurement organProcurement;
-    String status;
+    private boolean processed;
+    private Date requestDate;
+
 
     public GovernmentOrganApproveRequest(OrganProcurement organProcurement) {
-        this.organProcurement = organProcurement;
-        status = "Gov request pending";
-        
+        this.organProcurement = organProcurement; 
+        Date currentDate = new Date();
+        requestDate = currentDate;
     }
 
+    @Override
     public String getStatus() {
-        return status;
+        return organProcurement.getStatus();
     }
 
+    @Override
     public void setStatus(String status) {
-        this.status = status;
+        organProcurement.setStatus(status);
     }
 
+    @Override
+    public boolean isIsRejected() {
+        return organProcurement.isIsRejected();
+    }
+
+    @Override
+    public void setIsRejected(boolean isRejected) {
+        this.organProcurement.setIsRejected(isRejected);
+    }
+    
     public OrganProcurement getOrganProcurement() {
         return this.organProcurement;
     }
@@ -34,8 +51,30 @@ public class GovernmentOrganApproveRequest {
         this.organProcurement = organProcurement;
     }
     
-    
-    
+    public Enterprise getHospital() {
+        return organProcurement.getHospital();
+    }
+    public Enterprise getOrganBank() {
+        return organProcurement.getOrganBank();
+    }
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+
+    @Override
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    @Override
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
     
     
     @Override()

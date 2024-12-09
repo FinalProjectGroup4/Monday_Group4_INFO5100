@@ -42,14 +42,6 @@ public class LabTechnicianRole extends Role{
         return testRequst;
     }
     
-    // lab technician will assign test results
-    public void setTestReport(PathologyTestRequest test, double value){
-        try{
-            test.setResults(value);
-        } catch (Exception e){
-            System.out.println(e);
-        }
-    }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, PatientDirectory patientDirectory) {

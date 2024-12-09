@@ -85,7 +85,7 @@ public abstract class Enterprise extends Model.Organization.Organization{
     
     @Override
     public String toString(){
-        return enterpriseType.getValue();
+        return getName();
     }
     
 }

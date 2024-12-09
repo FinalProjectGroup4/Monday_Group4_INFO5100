@@ -5,6 +5,7 @@
 package UI.GovernmentBody;
 
 import Model.EcoSystem;
+import Model.EmailUtil.EmailUtil;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.ConsignmentRequest;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
@@ -40,10 +41,13 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
     // Iterate through the list and add each request to the table
     for (GovernmentOrganApproveRequest gov : enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests()) {
         if (gov != null && gov.getOrganProcurement()!=null) {
-            Object[] row = new Object[3];
+            Object[] row = new Object[6];
             row[0] = gov;
             row[1] = gov.getOrganProcurement().getOrganRequest().getOrganName();
             row[2] = gov.getStatus();
+            row[3] = gov.getRequestDate();
+            row[4] = gov.getOrganProcurement().getOrganBank().getCountry();
+            row[5] = gov.getOrganProcurement().getOrganRequest().getHospital().getCountry();
             model.addRow(row);
         } else {
             System.err.println("Null OrganRequest encountered.");
@@ -66,14 +70,18 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         btnApporve = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
 
-        jLabel1.setText("Pending Requests :");
+        setBackground(new java.awt.Color(0, 204, 204));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-businessman.png"))); // NOI18N
+        jLabel1.setText("Customs Request from Organ Banks");
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Patient Name", "Organ Name", "Status"
+                "Hospital", "Organ Bank", "Status", "Date", "Origin Country", "Provider Country"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -86,41 +94,40 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         });
 
         btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(btnApporve, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(btnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 132, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnApporve, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(btnReject, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnApporve)
                     .addComponent(btnReject))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,15 +141,54 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         }
         
         GovernmentOrganApproveRequest gov = (GovernmentOrganApproveRequest) tblPendingRequests.getValueAt(selectedrow, 0);
-        gov.getOrganProcurement().getOrganRequest().setStatus("Approved!");
-        gov.setStatus("Consignment created");
-        gov.getOrganProcurement().setStatus("Consignment created");
-        gov.getOrganProcurement().getOrganRequest().setStatus("Consignment created");
+        if(gov.isIsRejected()){
+            JOptionPane.showMessageDialog((this), "Request has been rejected earlier.");
+            return;
+        }
+        if(gov.isProcessed()){
+            JOptionPane.showMessageDialog((this), "Request has been already processed.");
+            return;
+        }
+        gov.setStatus("GOV - Approved");
+        gov.setProcessed(true);
         ConsignmentRequest congiRequest = new ConsignmentRequest(gov);
         JOptionPane.showMessageDialog((this), "Request Approved.");
         enterprise.getNetwork().getWorkqueue().getConsignmentRequests().add(congiRequest);
+        EmailUtil.sendEmail(gov.getOrganProcurement().getOrganRequest().getPatient().getEmail(), 
+            "Organ Transplant Request Approved", 
+            "Dear User,\n\nWe are pleased to inform you that your organ transplant request has been approved by the relevant government authorities. The process will now proceed, and the concerned organizations have been notified to take the next steps.\n\nWe wish you the best of health and will keep you updated on any further developments.\n\nBest regards,\nThe Government Health Department"
+        );
+
         populateTable();
     }//GEN-LAST:event_btnApporveActionPerformed
+
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = tblPendingRequests.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select a request to process.");
+            return;
+        }
+        
+        GovernmentOrganApproveRequest or = (GovernmentOrganApproveRequest) tblPendingRequests.getValueAt(selectedrow, 0);
+        if(or.isProcessed()){
+            JOptionPane.showMessageDialog((this), "Request has been already processed.");
+            return;
+        }
+        if(or.isIsRejected()){
+            JOptionPane.showMessageDialog((this), "Request has been rejected earlier.");
+            return;
+        }
+        or.setStatus("Rejected by GOV" + "-" + enterprise.getName());
+        or.setIsRejected(true);
+        EmailUtil.sendEmail(or.getOrganProcurement().getOrganRequest().getPatient().getEmail(), 
+            "Organ Transplant Request Rejected", 
+            "Dear User,\n\nWe regret to inform you that your organ transplant request has been rejected by the relevant government authorities. Unfortunately, we are unable to proceed with the request due to current regulations and eligibility criteria.\n\nIf you have any questions or need further clarification, please do not hesitate to contact us.\n\nBest regards,\nThe Government Health Department"
+        );
+
+        populateTable();
+    }//GEN-LAST:event_btnRejectActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

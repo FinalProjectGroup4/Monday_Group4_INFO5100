@@ -4,8 +4,8 @@
  */
 package Model.WorkQueue;
 
-import Model.Enterprises.Hospital;
-import Model.Enterprises.OrganBank;
+import Model.Enterprises.Enterprise;
+import java.util.Date;
 
 /**
  *
@@ -13,20 +13,23 @@ import Model.Enterprises.OrganBank;
  */
 public class ConsignmentRequest extends WorkRequest {
     private GovernmentOrganApproveRequest governmentOrganApproveRequest;
-    private String status;
+    boolean processed;
+    private Date requestDate;
 
     public ConsignmentRequest( GovernmentOrganApproveRequest governmentOrganApproveRequest) {
         this.governmentOrganApproveRequest = governmentOrganApproveRequest;
-        status = "Consignment created";
+        Date currentDate = new Date();
+        requestDate = currentDate;
     }
 
-   
+    @Override
     public String getStatus() {
-        return status;
+        return governmentOrganApproveRequest.getStatus();
     }
 
+    @Override
     public void setStatus(String status) {
-        this.status = status;
+        governmentOrganApproveRequest.setStatus(status);
     }
 
     public GovernmentOrganApproveRequest getGovernmentOrganApproveRequest() {
@@ -36,10 +39,46 @@ public class ConsignmentRequest extends WorkRequest {
     public void setGovernmentOrganApproveRequest(GovernmentOrganApproveRequest governmentOrganApproveRequest) {
         this.governmentOrganApproveRequest = governmentOrganApproveRequest;
     }
-    
-    
 
-@Override()
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+    
+    public Enterprise getHospital() {
+        return governmentOrganApproveRequest.getHospital();
+    }
+    
+    public Enterprise organBank() {
+        return governmentOrganApproveRequest.getOrganBank();
+    }
+
+    @Override
+    public Date getRequestDate() {
+        return requestDate;
+    }
+
+    @Override
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
+    }
+    
+    
+    
+    @Override
+    public boolean isIsRejected() {
+        return governmentOrganApproveRequest.isIsRejected();
+    }
+
+    @Override
+    public void setIsRejected(boolean isRejected) {
+        this.governmentOrganApproveRequest.setIsRejected(isRejected);
+    }
+    
+    @Override()
     public String toString(){
        return this.governmentOrganApproveRequest.getOrganProcurement().getOrganRequest().getPatient().getName();
     }

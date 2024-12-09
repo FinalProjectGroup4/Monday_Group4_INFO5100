@@ -5,12 +5,7 @@
 package Model;
 
 import Model.Employee.Employee;
-import Model.Roles.EnterpriseAdminRole;
-import Model.Roles.GovernmentStaffRole;
-import Model.Roles.NGOStaffRole;
-import Model.Roles.OrganBankStaffRole;
 import Model.Roles.SystemAdminRole;
-import Model.Roles.TransportAdminRole;
 import Model.UserAccount.UserAccount;
 
 /**
@@ -21,12 +16,6 @@ public class ConfigureASystem {
     public static EcoSystem configure(){
         
         EcoSystem system = EcoSystem.getInstance();
-        
-        //Create a network
-        //Create an enterprise
-        //Have some employees 
-        //Create user account
-        
         
         Employee employee = system.getEmployeeDirectory().createEmployee("System Admin");
         

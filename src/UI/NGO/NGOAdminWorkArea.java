@@ -5,6 +5,7 @@
 package UI.NGO;
 
 import Model.EcoSystem;
+import Model.EmailUtil.EmailUtil;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.OrganProcurement;
 import Model.WorkQueue.OrganRequest;
@@ -23,12 +24,11 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
      * Creates new form NGOAdminWorkArea
      */
     JPanel userProcessContainer;
-    EcoSystem ecosystem;
     Enterprise enterprise;
+    
     public NGOAdminWorkArea(JPanel container, EcoSystem system,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer=container;
-        this.ecosystem=ecosystem;
         this.enterprise = enterprise;
         populateTable();
     }
@@ -46,23 +46,36 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         tblPendingRequests = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnRaiseRequest = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(0, 204, 204));
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Patient", "Organ", "Blood Group", "Status"
+                "Patient", "Organ", "Status", "Hospital", "Country of Request", "Date of Request"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
 
-        jLabel1.setText("Pending Requests :");
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-charity.png"))); // NOI18N
+        jLabel1.setText("Organ Requests");
 
-        btnRaiseRequest.setText("Raise Request");
+        btnRaiseRequest.setText("Forward to Organ Banks");
         btnRaiseRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRaiseRequestActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Reject Request");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -71,31 +84,63 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(482, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRaiseRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnRaiseRequest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRaiseRequest)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(141, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRaiseRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseRequestActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = tblPendingRequests.getSelectedRow();
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select a request to process.");
+            return;
+        }
+        OrganRequest or = (OrganRequest) tblPendingRequests.getValueAt(selectedrow, 0);
+        if(or.isIsRejected()){
+            JOptionPane.showMessageDialog((this), "Request has been rejected earlier.");
+            return;
+        }
+        if(or.isProcessed()){
+            JOptionPane.showMessageDialog((this), "Request has been already processed.");
+            return;
+        }
+        OrganProcurement organProcurement = new OrganProcurement(or);
+        or.setStatus("ORGAN BANK - Pending");
+        or.setNGOEnterprise(enterprise);
+        or.setProcessed(true);
+        enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest().add(organProcurement);
+        EmailUtil.sendEmail(or.getPatient().getEmail(), 
+            "Organ Bank Referral for Your Request", 
+            "Dear User,\n\nWe are pleased to inform you that we have identified organ banks that can fulfill your request. Your request has been forwarded to them for further processing.\n\nYou will be notified as soon as we receive updates.\n\nBest regards,\nThe NGO Team"
+        );
+
+        JOptionPane.showMessageDialog(this, "Request forwarded to organ banks.");
+        populateTable();
+    }//GEN-LAST:event_btnRaiseRequestActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int selectedrow = tblPendingRequests.getSelectedRow();
         
@@ -103,18 +148,31 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
             JOptionPane.showMessageDialog((this), "Please select a request to process.");
             return;
         }
-        String txt = (String) tblPendingRequests.getValueAt(selectedrow, 3);
+        
         OrganRequest or = (OrganRequest) tblPendingRequests.getValueAt(selectedrow, 0);
-        OrganProcurement organProcurement = new OrganProcurement(or);
-        or.setStatus("Sent to Organ Bank");
-        enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest().add(organProcurement);
-        JOptionPane.showMessageDialog(this, "Request raised successfully");
+        if(or.isProcessed()){
+            JOptionPane.showMessageDialog((this), "Request has been already processed.");
+            return;
+        }
+        if(or.isIsRejected()){
+            JOptionPane.showMessageDialog((this), "Request has been rejected earlier.");
+            return;
+        }
+        or.setStatus("Rejected by NGO" + "-" + enterprise.getName());
+        or.setIsRejected(true);
+        
+        EmailUtil.sendEmail(or.getPatient().getEmail(), 
+            "Organ Request Update", 
+            "Dear User,\n\nWe regret to inform you that, at this time, we have been unable to find suitable organ banks to fulfill your request. As a result, your request has been rejected for now.\n\nPlease feel free to reach out to us if you have any questions or need further assistance.\n\nBest regards,\nThe NGO Team"
+        );
+
         populateTable();
-    }//GEN-LAST:event_btnRaiseRequestActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRaiseRequest;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPendingRequests;
@@ -136,11 +194,13 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         // Iterate through the list and add each request to the table
         for (OrganRequest or : wrq) {
             if (or != null) {
-                Object[] row = new Object[4];
+                Object[] row = new Object[6];
                 row[0] = or;
                 row[1] = or.getOrganName();
-                row[2] = or.getBloodType();
-                row[3] = or.getStatus();
+                row[2] = or.getStatus();
+                row[3] = or.getHospital().getName();
+                row[4] = or.getHospital().getCountry();
+                row[5] = or.getRequestDate();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");

@@ -5,6 +5,8 @@
 package UI.Hospital;
 
 import Model.EcoSystem;
+import Model.EmailUtil.EmailUtil;
+import Model.Enterprises.Enterprise;
 import Model.Enterprises.Hospital;
 import Model.WorkQueue.OrganRequest;
 import Model.WorkQueue.PathologyTestRequest;
@@ -26,6 +28,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
     Hospital hospitalEnterprise;
     EcoSystem system;
     Patient patient;
+    Enterprise enterprise;
     /**
      * Creates new form ReportHistoryJPanel
      */
@@ -35,6 +38,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         this.hospitalEnterprise = enterprise;
         this.system = system;
         this.patient = patient;
+        this.enterprise = enterprise;
         populateTable();
     }
 
@@ -42,11 +46,13 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequestsForAPatient(patient.getId())) {
-                    Object[] row = new Object[4];
+                    PathologyTestRequest ptr = (PathologyTestRequest) workRequest;
+                    Object[] row = new Object[5];
                     row[0] = workRequest;
                     row[1] = workRequest.getStatus();
                     row[2] = workRequest.getMessage();
                     row[3] = workRequest.getRequestDate();
+                    row[4] = ptr.getResults();
                     model.addRow(row);   
         }
     }
@@ -65,22 +71,26 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
         txtOrgan = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnBack3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(0, 204, 204));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Sender", "Status", "Message", "Request Data"
+                "Sender", "Status", "Message", "Request Date", "Results"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Organ Name");
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("Request Organ:");
 
         txtOrgan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,38 +112,45 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-triangular_bandage.png"))); // NOI18N
+        jLabel2.setText("Pathology Test Reports");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnBack3)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtOrgan, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
-                .addGap(265, 265, 265))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jButton1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBack3))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtOrgan, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack3)
-                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtOrgan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtOrgan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(0, 108, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(btnBack3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,17 +180,22 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog((this), "Can't request right now !!! status not approved");
             return;
         }
+        
         Patient patient = ptr.getPatient();
         
         String bloodType = ptr.getBloodType();
         
-        OrganRequest or = new OrganRequest(patient,bloodType,organ);
+        OrganRequest or = new OrganRequest(patient,bloodType,organ,hospitalEnterprise);
 
         WorkQueue networkWorkQueue = hospitalEnterprise.getNetwork().getWorkqueue();
         networkWorkQueue.getOrganRequests().add(or);
 
-        
-         JOptionPane.showMessageDialog((this), "Organ request has been placed successfully");
+        EmailUtil.sendEmail(patient.getEmail(),
+     "Organ Transplant Recommendation", 
+        "Dear User,\n\nBased on your report history, the doctor has decided to proceed with an organ transplant. Your request has been passed on to multiple NGOs for further processing.\n\nBest regards,\nThe Medical Team"
+            );
+
+        JOptionPane.showMessageDialog((this), "Organ request has been placed successfully");
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -186,6 +208,7 @@ public class ReportHistoryJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtOrgan;

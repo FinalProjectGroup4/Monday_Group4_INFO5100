@@ -6,6 +6,7 @@ package UI.SystemAdmin;
 
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
+import Model.Enterprises.Enterprise.EnterpriseType;
 import Model.Networks.Network;
 import java.awt.CardLayout;
 import java.util.*;
@@ -69,6 +70,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         cmbEnterprise = new javax.swing.JComboBox();
         cmbNetwork = new javax.swing.JComboBox();
         btnBack = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(0, 204, 204));
 
         tblDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,18 +101,22 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
         lblEnterprise.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Details"));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("Organization ID :");
 
         txtId.setEnabled(false);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Enterprise Name :");
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("City :");
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("Country :");
 
         btnSave.setText("Save");
@@ -118,10 +126,12 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        lblNetwork.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNetwork.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblNetwork.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNetwork.setText("Networks");
 
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Enterprise Type");
 
         cmbEnterprise.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -148,13 +158,13 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtId)
-                    .addComponent(txtCity, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(cmbEnterprise, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCity)
+                    .addComponent(cmbEnterprise, 0, 120, Short.MAX_VALUE))
                 .addGap(59, 59, 59)
                 .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -164,11 +174,11 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(lblEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtName)
-                    .addComponent(txtCountry, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(cmbNetwork, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCountry)
+                    .addComponent(cmbNetwork, 0, 130, Short.MAX_VALUE))
                 .addGap(35, 35, 35))
             .addGroup(lblEnterpriseLayout.createSequentialGroup()
-                .addGap(237, 237, 237)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -193,9 +203,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(cmbEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(btnSave)
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
 
         btnBack.setText("Back");
@@ -205,32 +215,44 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-building.png"))); // NOI18N
+        jLabel5.setText("Manage Enterprises");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
-                        .addComponent(lblEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnBack)
-                    .addComponent(btnAddNew))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddNew)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBack)
+                        .addGap(0, 480, Short.MAX_VALUE))
+                    .addComponent(lblEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(79, 79, 79)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnAddNew)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddNew)
+                    .addComponent(btnBack))
+                .addGap(18, 18, 18)
                 .addComponent(lblEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -248,26 +270,14 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
             return;
         }
         
-        String selectedEnterprise = (String) cmbEnterprise.getSelectedItem();
+        EnterpriseType selectedEnterprise = (EnterpriseType) cmbEnterprise.getSelectedItem();
                 
       
         String selectedNetworks = (String) cmbNetwork.getSelectedItem();
         
         Network selectedNetwork = networkMap.get(selectedNetworks);
 
-        Enterprise.EnterpriseType enterpriseType = null;
-        
-        if(selectedEnterprise.equals("Hospitals")){
-            enterpriseType = Enterprise.EnterpriseType.Hospital;
-        } else if(selectedEnterprise.equals("NGOs")){
-            enterpriseType = Enterprise.EnterpriseType.NGO;
-        } else if(selectedEnterprise.equals("Organ Banks")){
-            enterpriseType = Enterprise.EnterpriseType.OrganBank;
-        } else if(selectedEnterprise.equals("Transport Agencies")){
-            enterpriseType = Enterprise.EnterpriseType.Transport;
-        } else{
-            enterpriseType = Enterprise.EnterpriseType.Government;
-        }
+        Enterprise.EnterpriseType enterpriseType = selectedEnterprise;
 
         Enterprise newEnterprise = selectedNetwork.getEnterpriseDirectory().createAndAddEnterprise(txtName.getText(),enterpriseType);
         newEnterprise.setNetwork(selectedNetwork);
@@ -321,6 +331,7 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lblEnterprise;
@@ -334,11 +345,9 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
 
     private void populateComboBox() {
         cmbEnterprise.removeAllItems();
-        cmbEnterprise.addItem("Hospitals");
-        cmbEnterprise.addItem("NGOs");
-        cmbEnterprise.addItem("Organ Banks");
-        cmbEnterprise.addItem("Transport Agencies");
-        cmbEnterprise.addItem("Government Bodies");
+        for(EnterpriseType type : Enterprise.EnterpriseType.values()){
+            cmbEnterprise.addItem(type);
+        }
     }
     
     private void populateTable(){

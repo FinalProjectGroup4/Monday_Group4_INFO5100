@@ -14,7 +14,8 @@ public class PathologyTestRequest extends WorkRequest{
     private Patient patient;
     private String bloodType;
     private String testName;
-    private Double results;
+    private String results;
+    private boolean isProcessed;
     
     public Patient getPatient() {
         return patient;
@@ -41,13 +42,22 @@ public class PathologyTestRequest extends WorkRequest{
         this.testName = testName;
     }
     
-    public Double getResults() {
+    public String getResults() {
         return results;
     }
 
-    public void setResults(Double results) {
+    public void setResults(String results) {
         this.results = results;
     }
+
+    public boolean isIsProcessed() {
+        return isProcessed;
+    }
+
+    public void setIsProcessed(boolean isProcessed) {
+        this.isProcessed = isProcessed;
+    }
+    
     
     @Override
     public String toString(){
