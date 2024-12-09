@@ -4,6 +4,8 @@
  */
 package Model.Organization;
 
+import Model.Roles.DoctorRole;
+import Model.Roles.DriverRole;
 import Model.Roles.Role;
 import java.util.ArrayList;
 
@@ -19,7 +21,9 @@ public class DriverOrganization extends Organization{
 
     @Override
     public ArrayList<Role> getSupportedRole() {
-        return null;
+         ArrayList<Role> roles = new ArrayList();
+        roles.add(new DriverRole());
+        return roles;
     }
     
 }
