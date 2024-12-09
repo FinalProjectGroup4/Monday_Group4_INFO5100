@@ -5,9 +5,11 @@
 package UI.GovernmentBody;
 
 import Model.EcoSystem;
+import Model.Enterprises.Enterprise;
 import Model.Networks.Network;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,11 +24,13 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    Enterprise enterprise;
     
-    public GovernmentAdminWorkArea(JPanel container, EcoSystem system) {
+    public GovernmentAdminWorkArea(JPanel container, EcoSystem system, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer=container;
         this.ecosystem=ecosystem;
+        this.enterprise = enterprise;
     }
     
     private void populateTable() {
@@ -50,8 +54,8 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         if (or != null) {
             Object[] row = new Object[3];
             row[0] = or;
-            row[1] = or.getOrganBank();
-            row[2] = or.getHospital();
+            row[1] = or.getOrganProcurement().getOrganRequest().getOrganName();
+            row[2] = or.getStatus();
             model.addRow(row);
         } else {
             System.err.println("Null OrganRequest encountered.");
@@ -81,7 +85,7 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Organ Bank", "Hospital", "Country"
+                "Patient Name", "Organ Name", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -134,6 +138,17 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
 
     private void btnApporveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApporveActionPerformed
         // TODO add your handling code here:
+        int selectedrow = tblPendingRequests.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            return;
+        }
+        
+        GovernmentOrganApproveRequest gov = (GovernmentOrganApproveRequest) tblPendingRequests.getValueAt(selectedrow, 0);
+        gov.getOrganProcurement().setStatus("APPROVED!");
+        gov.getOrganProcurement().getOrganRequest().setStatus("Approved!");
+        
     }//GEN-LAST:event_btnApporveActionPerformed
 
 

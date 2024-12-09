@@ -4,16 +4,13 @@
  */
 package Model.WorkQueue;
 
-import Model.Enterprises.Hospital;
-import Model.Enterprises.OrganBank;
-import Model.storage.Patient;
-
 /**
  *
  * @author nihardabhi
  */
 public class OrganProcurement extends WorkRequest{
     private OrganRequest organRequest;
+    private String status;
 
     public OrganRequest getOrganRequest() {
         return organRequest;
@@ -30,26 +27,14 @@ public class OrganProcurement extends WorkRequest{
     public void setStatus(String status) {
         this.status = status;
     }
-    private Hospital hospital;
-    private String status;
 
-    public OrganProcurement( OrganRequest organRequest ,Hospital hospital) {
+    public OrganProcurement( OrganRequest organRequest) {
         this.organRequest = organRequest;
-        this.hospital = hospital;
-        status = "Waiting";
-    }
-
-   
-    public Hospital getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+        status = "PENDING";
     }
 
 @Override()
     public String toString(){
-       return this.organRequest.getOrganName();
+       return this.organRequest.getPatient().getName();
     }
 }

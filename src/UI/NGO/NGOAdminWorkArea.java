@@ -6,6 +6,7 @@ package UI.NGO;
 
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
+import Model.WorkQueue.OrganProcurement;
 import Model.WorkQueue.OrganRequest;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -45,14 +46,13 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         tblPendingRequests = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnRaiseRequest = new javax.swing.JButton();
-        btnComplete = new javax.swing.JButton();
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Patient", "Organ", "Blood Group"
+                "Patient", "Organ", "Blood Group", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -66,31 +66,20 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnComplete.setText("Complete");
-        btnComplete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompleteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(255, 255, 255)
-                        .addComponent(btnRaiseRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRaiseRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -101,25 +90,29 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRaiseRequest)
-                    .addComponent(btnComplete))
+                .addComponent(btnRaiseRequest)
                 .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRaiseRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaiseRequestActionPerformed
         // TODO add your handling code here:
+        int selectedrow = tblPendingRequests.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            return;
+        }
+        
+        OrganRequest or = (OrganRequest) tblPendingRequests.getValueAt(selectedrow, 0);
+        OrganProcurement organProcurement = new OrganProcurement(or);
+        or.setStatus("Sent to Organ Bank");
+        enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest().add(organProcurement);
         JOptionPane.showMessageDialog(this, "Request raised successfully");
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
 
-    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCompleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnComplete;
     private javax.swing.JButton btnRaiseRequest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -142,10 +135,11 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         // Iterate through the list and add each request to the table
         for (OrganRequest or : wrq) {
             if (or != null) {
-                Object[] row = new Object[3];
-                row[0] = or;
+                Object[] row = new Object[4];
+                row[0] = or.getPatient().getName();
                 row[1] = or.getOrganName();
                 row[2] = or.getBloodType();
+                row[3] = or.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");

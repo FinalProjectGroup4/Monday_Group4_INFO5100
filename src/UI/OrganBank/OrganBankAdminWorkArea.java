@@ -7,9 +7,9 @@ package UI.OrganBank;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.OrganProcurement;
-import Model.WorkQueue.OrganRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,13 +51,13 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Request ID", "Organ", "Hospital", "Blood Group", "Status"
+                "Patient Name", "Organ Name", "Blood Group", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -99,7 +99,15 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
 
     private void btnViewRequestDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRequestDetailsActionPerformed
         // TODO add your handling code here:
-        ViewRequestDetails vrd = new ViewRequestDetails(userProcessContainer);
+        int selectedrow = tblPendingRequests.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            return;
+        }
+        
+        OrganProcurement organProcurement = (OrganProcurement) tblPendingRequests.getValueAt(selectedrow, 0);
+        ViewRequestDetails vrd = new ViewRequestDetails(userProcessContainer,organProcurement,enterprise);
         userProcessContainer.add("ViewRequestDetails",vrd);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -121,21 +129,20 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         // Get the list of OrganRequests
         ArrayList<OrganProcurement> wrq = enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest();
 
-        // Check if the list is null or empty
+        // Check if the list is null op empty
         if (wrq == null || wrq.isEmpty()) {
             System.err.println("No Organ Requests found.");
             return;
         }
 
         // Iterate through the list and add each request to the table
-        for (OrganProcurement or : wrq) {
-            if (or != null) {
+        for (OrganProcurement op : wrq) {
+            if (op != null) {
                 Object[] row = new Object[5];
-                row[0] = or;
-                row[1] = or.getOrganRequest().getOrganName();
-                row[2] = or.getHospital();
-                row[3] = or.getBloodGroup();
-                row[4] = or.getStatus();
+                row[0] = op;
+                row[1] = op.getOrganRequest().getOrganName();
+                row[2] = op.getOrganRequest().getBloodType();
+                row[3] = op.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");

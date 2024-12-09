@@ -22,7 +22,11 @@ public abstract class WorkRequest {
     private String organ;
     private String completedDate;
     private String bloodGroup;
-
+    private static int counter=0;
+    private String city;
+    private String country;
+    private int ID;
+    
     public String getBloodGroup() {
         return bloodGroup;
     }
