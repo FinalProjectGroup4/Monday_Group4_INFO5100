@@ -9,6 +9,7 @@ import Model.Networks.Network;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
 import Model.WorkQueue.OrganProcurement;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -194,16 +195,24 @@ public class ViewRequestDetails extends javax.swing.JPanel {
 
     private void btnApprovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         GovernmentOrganApproveRequest governmentOrganApproveRequest = new GovernmentOrganApproveRequest(organProcurement);
         organProcurement.setStatus("Sent for government approval");
         organProcurement.getOrganRequest().setStatus("Gov approval pending");
         Network network = enterprise.getNetwork();
         network.getWorkqueue().getGovernmentOrganApproveRequests().add(governmentOrganApproveRequest);
+=======
+        JOptionPane.showMessageDialog(this, "approval send successfully");
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnApprovalActionPerformed
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         organProcurement.setStatus("REJECTED");
+=======
+        JOptionPane.showMessageDialog(this, "request rejected");
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnRejectActionPerformed
 
 
