@@ -146,11 +146,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         if (txtName.getText().isEmpty()) {
-<<<<<<< Updated upstream
+
             JOptionPane.showMessageDialog((this), "Please enter all fields");
-=======
+
             JOptionPane.showMessageDialog((this), "Please enter name field");
->>>>>>> Stashed changes
+
             return;
         }
 
