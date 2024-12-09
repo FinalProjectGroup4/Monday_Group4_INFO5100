@@ -8,6 +8,7 @@ import Model.Enterprises.Enterprise;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
 import Model.WorkQueue.OrganProcurement;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,6 +29,9 @@ public class ViewRequestDetails extends javax.swing.JPanel {
         this.userProcessContainer = container;
         this.organProcurement = organProcurement;
         this.enterprise = enterprise;
+        if(!txtStatus.getText().equals("PENDING")){
+            btnReject.setEnabled(false);
+        }
         populateFields();
     }
 
@@ -159,6 +163,10 @@ public class ViewRequestDetails extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        OrganBankAdminWorkArea organBankAdminWorkArea = (OrganBankAdminWorkArea) component;
+        organBankAdminWorkArea.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -166,11 +174,10 @@ public class ViewRequestDetails extends javax.swing.JPanel {
     private void btnApprovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalActionPerformed
         // TODO add your handling code here:
         GovernmentOrganApproveRequest governmentOrganApproveRequest = new GovernmentOrganApproveRequest(organProcurement);
-        organProcurement.setStatus("Sent for government approval");
+        organProcurement.setStatus("Gov approval pending");
         organProcurement.getOrganRequest().setStatus("Gov approval pending");
         enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests().add(governmentOrganApproveRequest);
         JOptionPane.showMessageDialog(this, "Approval send successfully");
-
     }//GEN-LAST:event_btnApprovalActionPerformed
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
@@ -201,7 +208,7 @@ public class ViewRequestDetails extends javax.swing.JPanel {
     private void populateFields() {
         txtPatientName.setText(organProcurement.getOrganRequest().getPatient().getName());
         txtOrgan.setText(organProcurement.getOrganRequest().getOrganName());
-        txtBloodGroup.setText(organProcurement.getOrganRequest().getBloodGroup());
+        txtBloodGroup.setText(organProcurement.getOrganRequest().getBloodType());
         txtStatus.setText(organProcurement.getStatus());
     }
 }

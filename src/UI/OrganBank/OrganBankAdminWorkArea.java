@@ -122,7 +122,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JTable tblPendingRequests;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
         model.setRowCount(0);
 

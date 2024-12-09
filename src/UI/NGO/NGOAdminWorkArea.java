@@ -100,15 +100,16 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         int selectedrow = tblPendingRequests.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            JOptionPane.showMessageDialog((this), "Please select a request to process.");
             return;
         }
-        
+        String txt = (String) tblPendingRequests.getValueAt(selectedrow, 3);
         OrganRequest or = (OrganRequest) tblPendingRequests.getValueAt(selectedrow, 0);
         OrganProcurement organProcurement = new OrganProcurement(or);
         or.setStatus("Sent to Organ Bank");
         enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest().add(organProcurement);
         JOptionPane.showMessageDialog(this, "Request raised successfully");
+        populateTable();
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
 
 

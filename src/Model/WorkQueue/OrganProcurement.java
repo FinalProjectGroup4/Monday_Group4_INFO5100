@@ -30,7 +30,7 @@ public class OrganProcurement extends WorkRequest{
 
     public OrganProcurement( OrganRequest organRequest) {
         this.organRequest = organRequest;
-        status = "PENDING";
+        status = "Waiting for match";
     }
 
 @Override()

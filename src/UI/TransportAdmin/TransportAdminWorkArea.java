@@ -7,9 +7,6 @@ package UI.TransportAdmin;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.ConsignmentRequest;
-import Model.WorkQueue.OrganProcurement;
-import Model.storage.Patient;
-import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -105,6 +102,12 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
             JOptionPane.showMessageDialog((this), "Please select valid row");
             return;
         }
+        String txt = (String) tblRequests.getValueAt(selectedrow, 2);
+        if(txt.equals("SHIPPED")){
+            btnCreate.setEnabled(false);
+            JOptionPane.showMessageDialog((this), "Request is already accepted");
+            return;
+        }
         
         ConsignmentRequest cr = (ConsignmentRequest)tblRequests.getValueAt(selectedrow, 0);
         cr.setStatus("SHIPPED");
@@ -141,7 +144,7 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
                 Object[] row = new Object[6];
                 row[0] = cng;
                 row[1] = cng.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().getOrganName();
-                row[5] = cng.getStatus();
+                row[2] = cng.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null Consignments encountered.");

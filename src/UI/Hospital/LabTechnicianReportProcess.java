@@ -194,7 +194,7 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        PatientServiceWorkAreaJPanel pswajp = (PatientServiceWorkAreaJPanel) component;
+        LabTechnicianPendingReport pswajp = (LabTechnicianPendingReport) component;
         pswajp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

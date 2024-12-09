@@ -39,7 +39,7 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
 
     // Iterate through the list and add each request to the table
     for (GovernmentOrganApproveRequest gov : enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests()) {
-        if (gov != null) {
+        if (gov != null && gov.getOrganProcurement()!=null) {
             Object[] row = new Object[3];
             row[0] = gov;
             row[1] = gov.getOrganProcurement().getOrganRequest().getOrganName();
@@ -129,14 +129,17 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         int selectedrow = tblPendingRequests.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            JOptionPane.showMessageDialog((this), "Please select row to approve request.");
             return;
         }
         
         GovernmentOrganApproveRequest gov = (GovernmentOrganApproveRequest) tblPendingRequests.getValueAt(selectedrow, 0);
-        gov.getOrganProcurement().setStatus("APPROVED!");
-        gov.getOrganProcurement().getOrganRequest().setStatus("APPROVED!");
+        gov.getOrganProcurement().getOrganRequest().setStatus("Approved!");
+        gov.setStatus("Consignment created");
+        gov.getOrganProcurement().setStatus("Consignment created");
+        gov.getOrganProcurement().getOrganRequest().setStatus("Consignment created");
         ConsignmentRequest congiRequest = new ConsignmentRequest(gov);
+        JOptionPane.showMessageDialog((this), "Request Approved.");
         enterprise.getNetwork().getWorkqueue().getConsignmentRequests().add(congiRequest);
         populateTable();
     }//GEN-LAST:event_btnApporveActionPerformed
