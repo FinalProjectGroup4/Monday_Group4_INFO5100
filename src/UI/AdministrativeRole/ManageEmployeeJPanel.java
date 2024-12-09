@@ -62,6 +62,12 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name :");
 
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +146,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         if (txtName.getText().isEmpty()) {
+<<<<<<< Updated upstream
             JOptionPane.showMessageDialog((this), "Please enter all fields");
+=======
+            JOptionPane.showMessageDialog((this), "Please enter name field");
+>>>>>>> Stashed changes
             return;
         }
 
@@ -159,6 +169,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
             populateTable(firstOrganization);
         }
     }//GEN-LAST:event_cmbOrganizationActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

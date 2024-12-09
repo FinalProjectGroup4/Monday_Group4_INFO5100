@@ -36,6 +36,7 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
         this.patient = patient;
         this.userAccount = details;
         this.pathologyTestRequest = ptr;
+        disableAll();
         populateField();
     }
 
@@ -179,7 +180,7 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:  
        String result = txtResult.getText();
        pathologyTestRequest.setResults(Double.parseDouble(result));
        pathologyTestRequest.setStatus("Complete");
@@ -222,5 +223,13 @@ public class LabTechnicianReportProcess extends javax.swing.JPanel {
         txtBG.setEnabled(false);
         txtTT.setEnabled(false);
         txtDoctor.setEnabled(false);
+    }
+
+    private void disableAll() {
+        txtID.setEnabled(false);
+        txtBG.setEditable(false);
+        txtDoctor.setEnabled(false);
+        txtName.setEnabled(false);
+        txtTT.setEnabled(false);
     }
 }
