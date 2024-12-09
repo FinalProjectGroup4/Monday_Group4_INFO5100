@@ -13,18 +13,11 @@ import Model.Enterprises.OrganBank;
  */
 public class ConsignmentRequest extends WorkRequest {
     private GovernmentOrganApproveRequest governmentOrganApproveRequest;
-    private Hospital hospital;
-    private OrganBank organBank;
-    String hosLocation;
-    String ogLocation;
     private String status;
 
-    public ConsignmentRequest( GovernmentOrganApproveRequest governmentOrganApproveRequest ,Hospital hospital) {
+    public ConsignmentRequest( GovernmentOrganApproveRequest governmentOrganApproveRequest) {
         this.governmentOrganApproveRequest = governmentOrganApproveRequest;
-        this.hospital = hospital;
-        hosLocation = hospital.getCity() + " ," +hospital.getCountry();
-        ogLocation = organBank.getCity() + " ," + organBank.getCountry();
-        status = "create consignment";
+        status = "Consignment created";
     }
 
    
@@ -35,40 +28,16 @@ public class ConsignmentRequest extends WorkRequest {
     public void setStatus(String status) {
         this.status = status;
     }
-    
 
-   
-    public Hospital getHospital() {
-        return hospital;
+    public GovernmentOrganApproveRequest getGovernmentOrganApproveRequest() {
+        return governmentOrganApproveRequest;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setGovernmentOrganApproveRequest(GovernmentOrganApproveRequest governmentOrganApproveRequest) {
+        this.governmentOrganApproveRequest = governmentOrganApproveRequest;
     }
     
-    public OrganBank getOrganBank() {
-        return organBank;
-    }
-
-    public void setOrganBank(OrganBank organBank) {
-        this.organBank = organBank;
-    }
-
-    public String getHosLocation() {
-        return hosLocation;
-    }
-
-    public void setHosLocation(String hosLocation) {
-        this.hosLocation = hosLocation;
-    }
-
-    public String getOgLocation() {
-        return ogLocation;
-    }
-
-    public void setOgLocation(String ogLocation) {
-        this.ogLocation = ogLocation;
-    }
+    
 
 @Override()
     public String toString(){
