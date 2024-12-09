@@ -45,9 +45,6 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnRaiseRequest = new javax.swing.JButton();
         btnComplete = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblOrganBanks = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,18 +72,6 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        tblOrganBanks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Location"
-            }
-        ));
-        jScrollPane2.setViewportView(tblOrganBanks);
-
-        jLabel2.setText("Available Organ Banks :");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,22 +81,16 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(255, 255, 255)
                         .addComponent(btnRaiseRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 74, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,11 +103,7 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRaiseRequest)
                     .addComponent(btnComplete))
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -145,10 +120,7 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JButton btnComplete;
     private javax.swing.JButton btnRaiseRequest;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblOrganBanks;
     private javax.swing.JTable tblPendingRequests;
     // End of variables declaration//GEN-END:variables
 
@@ -169,15 +141,9 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
     for (OrganRequest or : wrq) {
         if (or != null) {
             Object[] row = new Object[3];
-            row[0] = or; // Make sure `toString()` is properly overridden in OrganRequest
-            System.err.println("Row 0: " + row[0]);
-            
+            row[0] = or;
             row[1] = or.getOrganName();
-            System.err.println("Row 1: " + row[1]);
-            
             row[2] = or.getBloodType();
-            System.err.println("Row 2: " + row[2]);
-
             model.addRow(row);
         } else {
             System.err.println("Null OrganRequest encountered.");

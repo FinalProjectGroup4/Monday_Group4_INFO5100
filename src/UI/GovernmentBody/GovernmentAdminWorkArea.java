@@ -5,7 +5,11 @@
 package UI.GovernmentBody;
 
 import Model.EcoSystem;
+import Model.Networks.Network;
+import Model.WorkQueue.GovernmentOrganApproveRequest;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,11 +22,42 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
+    
     public GovernmentAdminWorkArea(JPanel container, EcoSystem system) {
         initComponents();
         this.userProcessContainer=container;
         this.ecosystem=ecosystem;
     }
+    
+    private void populateTable() {
+    DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
+    model.setRowCount(0);
+
+    // Get the list of OrganRequests
+    ArrayList<Network> networkList = ecosystem.getNetworkList();
+    
+    ArrayList<GovernmentOrganApproveRequest> allNetworkRequests = new ArrayList();
+
+    for(Network network : networkList){
+        ArrayList<GovernmentOrganApproveRequest> networkRequestList = network.getWorkqueue().getGovernmentOrganApproveRequests();
+        if (networkRequestList != null && !networkRequestList.isEmpty()) {
+        allNetworkRequests.addAll(networkRequestList);
+        }    
+    }
+
+    // Iterate through the list and add each request to the table
+    for (GovernmentOrganApproveRequest or : allNetworkRequests) {
+        if (or != null) {
+            Object[] row = new Object[3];
+            row[0] = or;
+            row[1] = or.getOrganBank();
+            row[2] = or.getHospital();
+            model.addRow(row);
+        } else {
+            System.err.println("Null OrganRequest encountered.");
+        }
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,7 +81,7 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Request ID", "Patient", "Organ", "Blood Group", "Donor Bank"
+                "Organ Bank", "Hospital", "Country"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);

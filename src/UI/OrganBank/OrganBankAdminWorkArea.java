@@ -38,7 +38,6 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPendingRequests = new javax.swing.JTable();
         btnViewRequestDetails = new javax.swing.JButton();
-        btnInventoryManager = new javax.swing.JButton();
 
         jLabel1.setText("Pending Requests :");
 
@@ -62,13 +61,6 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
             }
         });
 
-        btnInventoryManager.setText("Inventory Manager");
-        btnInventoryManager.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInventoryManagerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,9 +72,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnInventoryManager, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnViewRequestDetails, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnViewRequestDetails))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -95,9 +85,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnViewRequestDetails)
-                .addGap(18, 18, 18)
-                .addComponent(btnInventoryManager)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -110,18 +98,8 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewRequestDetailsActionPerformed
 
-    private void btnInventoryManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryManagerActionPerformed
-        // TODO add your handling code here:
-        InventoryManager im = new InventoryManager(userProcessContainer);
-        userProcessContainer.add("InventoryManager",im);
-        
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnInventoryManagerActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnInventoryManager;
     private javax.swing.JButton btnViewRequestDetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

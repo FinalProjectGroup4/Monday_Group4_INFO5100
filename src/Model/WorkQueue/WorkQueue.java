@@ -15,12 +15,14 @@ public class WorkQueue {
     private  ArrayList<WorkRequest> pathologyTestRequests;
     private  ArrayList<WorkRequest> medicalVisitRequests;
     private  ArrayList<OrganRequest> organRequests;
+    private ArrayList<GovernmentOrganApproveRequest> governmentOrganApproveRequests;
 
     public WorkQueue() {
         workRequestList = new ArrayList();
         pathologyTestRequests = new ArrayList();
         medicalVisitRequests = new ArrayList();
         organRequests = new ArrayList();
+        governmentOrganApproveRequests = new ArrayList();
     }
 
     public ArrayList<WorkRequest> getWorkRequestList() {
@@ -54,6 +56,10 @@ public class WorkQueue {
         return filterResult;
     } 
 
+    public ArrayList<GovernmentOrganApproveRequest> getGovernmentOrganApproveRequests(){
+        return governmentOrganApproveRequests;
+    }
+    
     public void setPathologyTestRequests(ArrayList<WorkRequest> pathologyTestRequests) {
         this.pathologyTestRequests = pathologyTestRequests;
     }
@@ -92,6 +98,8 @@ public class WorkQueue {
         }
         return filterResult;
     }
+    
+    
     
     public void removeOrganRequest(WorkRequest workRequest) {
         organRequests.remove(workRequest);
