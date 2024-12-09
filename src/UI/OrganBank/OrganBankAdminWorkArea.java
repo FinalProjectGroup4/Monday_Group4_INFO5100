@@ -5,8 +5,13 @@
 package UI.OrganBank;
 
 import Model.EcoSystem;
+import Model.Enterprises.Enterprise;
+import Model.WorkQueue.OrganProcurement;
+import Model.WorkQueue.OrganRequest;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,10 +24,13 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    public OrganBankAdminWorkArea(JPanel container, EcoSystem system) {
+    Enterprise enterprise;
+    public OrganBankAdminWorkArea(JPanel container, EcoSystem system,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer=container;
         this.ecosystem=ecosystem;
+        this.enterprise = enterprise;
+        populateTable();
     }
 
     /**
@@ -49,7 +57,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Request ID", "Organ", "Doctor", "Patient", "Blood Group"
+                "Request ID", "Organ", "Hospital", "Blood Group", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -105,4 +113,33 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPendingRequests;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
+        model.setRowCount(0);
+
+        // Get the list of OrganRequests
+        ArrayList<OrganProcurement> wrq = enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest();
+
+        // Check if the list is null or empty
+        if (wrq == null || wrq.isEmpty()) {
+            System.err.println("No Organ Requests found.");
+            return;
+        }
+
+        // Iterate through the list and add each request to the table
+        for (OrganProcurement or : wrq) {
+            if (or != null) {
+                Object[] row = new Object[5];
+                row[0] = or;
+                row[1] = or.getOrganRequest().getOrganName();
+                row[2] = or.getHospital();
+                row[3] = or.getBloodGroup();
+                row[4] = or.getStatus();
+                model.addRow(row);
+            } else {
+                System.err.println("Null OrganRequest encountered.");
+            }
+        }
+    }
 }

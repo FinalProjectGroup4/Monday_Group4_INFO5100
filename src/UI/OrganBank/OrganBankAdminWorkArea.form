@@ -65,9 +65,9 @@
               <Table columnCount="5" rowCount="4">
                 <Column editable="true" title="Request ID" type="java.lang.Object"/>
                 <Column editable="true" title="Organ" type="java.lang.Object"/>
-                <Column editable="true" title="Doctor" type="java.lang.Object"/>
-                <Column editable="true" title="Patient" type="java.lang.Object"/>
+                <Column editable="true" title="Hospital" type="java.lang.Object"/>
                 <Column editable="true" title="Blood Group" type="java.lang.Object"/>
+                <Column editable="true" title="Status" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

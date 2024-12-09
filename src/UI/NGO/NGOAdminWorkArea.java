@@ -125,29 +125,29 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
    private void populateTable() {
-    DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
-    model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
+        model.setRowCount(0);
 
-    // Get the list of OrganRequests
-    ArrayList<OrganRequest> wrq = enterprise.getNetwork().getWorkqueue().getOrganRequests();
+        // Get the list of OrganRequests
+        ArrayList<OrganRequest> wrq = enterprise.getNetwork().getWorkqueue().getOrganRequests();
 
-    // Check if the list is null or empty
-    if (wrq == null || wrq.isEmpty()) {
-        System.err.println("No Organ Requests found.");
-        return;
-    }
+        // Check if the list is null or empty
+        if (wrq == null || wrq.isEmpty()) {
+            System.err.println("No Organ Requests found.");
+            return;
+        }
 
-    // Iterate through the list and add each request to the table
-    for (OrganRequest or : wrq) {
-        if (or != null) {
-            Object[] row = new Object[3];
-            row[0] = or;
-            row[1] = or.getOrganName();
-            row[2] = or.getBloodType();
-            model.addRow(row);
-        } else {
-            System.err.println("Null OrganRequest encountered.");
+        // Iterate through the list and add each request to the table
+        for (OrganRequest or : wrq) {
+            if (or != null) {
+                Object[] row = new Object[3];
+                row[0] = or;
+                row[1] = or.getOrganName();
+                row[2] = or.getBloodType();
+                model.addRow(row);
+            } else {
+                System.err.println("Null OrganRequest encountered.");
+            }
         }
     }
-}
 }
