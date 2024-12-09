@@ -196,6 +196,7 @@ public class ViewRequestDetails extends javax.swing.JPanel {
         // TODO add your handling code here:
         GovernmentOrganApproveRequest governmentOrganApproveRequest = new GovernmentOrganApproveRequest(organProcurement);
         organProcurement.setStatus("Sent for government approval");
+        organProcurement.getOrganRequest().setStatus("Gov approval pending");
         Network network = enterprise.getNetwork();
         network.getWorkqueue().getGovernmentOrganApproveRequests().add(governmentOrganApproveRequest);
     }//GEN-LAST:event_btnApprovalActionPerformed

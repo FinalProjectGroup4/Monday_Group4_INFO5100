@@ -20,7 +20,7 @@ public class GovernmentStaffRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, PatientDirectory patientDirectory) {
-        return new GovernmentAdminWorkArea(userProcessContainer, system);
+        return new GovernmentAdminWorkArea(userProcessContainer, system,enterprise);
     }
     
 }
