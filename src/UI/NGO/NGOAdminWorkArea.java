@@ -52,7 +52,7 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient", "Organ", "Blood Group"
+                "Patient", "Organ", "Blood Group", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -134,10 +134,11 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         // Iterate through the list and add each request to the table
         for (OrganRequest or : wrq) {
             if (or != null) {
-                Object[] row = new Object[3];
-                row[0] = or;
+                Object[] row = new Object[4];
+                row[0] = or.getPatient().getName();
                 row[1] = or.getOrganName();
                 row[2] = or.getBloodType();
+                row[3] = or.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");

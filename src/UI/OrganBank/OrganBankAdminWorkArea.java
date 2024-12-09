@@ -51,13 +51,13 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
 
         tblPendingRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Request ID", "Organ", "Hospital", "Blood Group", "Status"
+                "Patient Name", "Organ Name", "Blood Group", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -129,20 +129,20 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         // Get the list of OrganRequests
         ArrayList<OrganProcurement> wrq = enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest();
 
-        // Check if the list is null or empty
+        // Check if the list is null op empty
         if (wrq == null || wrq.isEmpty()) {
             System.err.println("No Organ Requests found.");
             return;
         }
 
         // Iterate through the list and add each request to the table
-        for (OrganProcurement or : wrq) {
-            if (or != null) {
+        for (OrganProcurement op : wrq) {
+            if (op != null) {
                 Object[] row = new Object[5];
-                row[0] = or.getOrganRequest().getPatient().getName();
-                row[1] = or.getOrganRequest().getOrganName();
-                row[2] = or.getBloodGroup();
-                row[3] = or.getStatus();
+                row[0] = op;
+                row[1] = op.getOrganRequest().getOrganName();
+                row[2] = op.getOrganRequest().getBloodType();
+                row[3] = op.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");
