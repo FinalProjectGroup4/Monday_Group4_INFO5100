@@ -277,6 +277,8 @@ public class SystemAdminWorkArea extends javax.swing.JPanel {
         newEnterprise.setCountry(txtCountry.getText());
         newEnterprise.setName(txtName.getText());
         
+        JOptionPane.showMessageDialog((this), "Added Successfully");
+        
         txtName.setText("");
         txtId.setText("");
         txtCity.setText("");
