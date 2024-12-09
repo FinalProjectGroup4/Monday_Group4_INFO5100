@@ -108,6 +108,7 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         OrganProcurement organProcurement = new OrganProcurement(or);
         or.setStatus("Sent to Organ Bank");
         enterprise.getNetwork().getWorkqueue().getOrganProcurementRequest().add(organProcurement);
+        JOptionPane.showMessageDialog(this, "Request raised successfully");
     }//GEN-LAST:event_btnRaiseRequestActionPerformed
 
 
