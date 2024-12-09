@@ -6,9 +6,8 @@ package UI.GovernmentBody;
 
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
-import Model.Networks.Network;
+import Model.WorkQueue.ConsignmentRequest;
 import Model.WorkQueue.GovernmentOrganApproveRequest;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,33 +28,22 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
     public GovernmentAdminWorkArea(JPanel container, EcoSystem system, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer=container;
-        this.ecosystem=ecosystem;
+        this.ecosystem=system;
         this.enterprise = enterprise;
+        populateTable();
     }
     
     private void populateTable() {
     DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
     model.setRowCount(0);
 
-    // Get the list of OrganRequests
-    ArrayList<Network> networkList = ecosystem.getNetworkList();
-    
-    ArrayList<GovernmentOrganApproveRequest> allNetworkRequests = new ArrayList();
-
-    for(Network network : networkList){
-        ArrayList<GovernmentOrganApproveRequest> networkRequestList = network.getWorkqueue().getGovernmentOrganApproveRequests();
-        if (networkRequestList != null && !networkRequestList.isEmpty()) {
-        allNetworkRequests.addAll(networkRequestList);
-        }    
-    }
-
     // Iterate through the list and add each request to the table
-    for (GovernmentOrganApproveRequest or : allNetworkRequests) {
-        if (or != null) {
+    for (GovernmentOrganApproveRequest gov : enterprise.getNetwork().getWorkqueue().getGovernmentOrganApproveRequests()) {
+        if (gov != null && gov.getOrganProcurement()!=null) {
             Object[] row = new Object[3];
-            row[0] = or;
-            row[1] = or.getOrganProcurement().getOrganRequest().getOrganName();
-            row[2] = or.getStatus();
+            row[0] = gov;
+            row[1] = gov.getOrganProcurement().getOrganRequest().getOrganName();
+            row[2] = gov.getStatus();
             model.addRow(row);
         } else {
             System.err.println("Null OrganRequest encountered.");
@@ -141,14 +129,19 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         int selectedrow = tblPendingRequests.getSelectedRow();
         
         if(selectedrow < 0){
-            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            JOptionPane.showMessageDialog((this), "Please select row to approve request.");
             return;
         }
         
         GovernmentOrganApproveRequest gov = (GovernmentOrganApproveRequest) tblPendingRequests.getValueAt(selectedrow, 0);
-        gov.getOrganProcurement().setStatus("APPROVED!");
         gov.getOrganProcurement().getOrganRequest().setStatus("Approved!");
-        
+        gov.setStatus("Consignment created");
+        gov.getOrganProcurement().setStatus("Consignment created");
+        gov.getOrganProcurement().getOrganRequest().setStatus("Consignment created");
+        ConsignmentRequest congiRequest = new ConsignmentRequest(gov);
+        JOptionPane.showMessageDialog((this), "Request Approved.");
+        enterprise.getNetwork().getWorkqueue().getConsignmentRequests().add(congiRequest);
+        populateTable();
     }//GEN-LAST:event_btnApporveActionPerformed
 
 

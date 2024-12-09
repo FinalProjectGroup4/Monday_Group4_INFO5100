@@ -13,8 +13,8 @@ public class GovernmentOrganApproveRequest {
     String status;
 
     public GovernmentOrganApproveRequest(OrganProcurement organProcurement) {
-        organProcurement = organProcurement;
-        status = "WAITING";
+        this.organProcurement = organProcurement;
+        status = "Gov request pending";
         
     }
 
@@ -27,7 +27,7 @@ public class GovernmentOrganApproveRequest {
     }
 
     public OrganProcurement getOrganProcurement() {
-        return organProcurement;
+        return this.organProcurement;
     }
 
     public void setOrganProcurement(OrganProcurement organProcurement) {
@@ -40,6 +40,6 @@ public class GovernmentOrganApproveRequest {
     
     @Override()
     public String toString(){
-        return organProcurement.getOrganRequest().getPatient().getName();
+        return this.organProcurement.getOrganRequest().getPatient().getName();
     }
 }

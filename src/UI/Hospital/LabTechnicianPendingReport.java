@@ -112,7 +112,7 @@ public class LabTechnicianPendingReport extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnProcessActionPerformed
 
-    private void populateTable() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tableReport.getModel();
         model.setRowCount(0);
         for (WorkRequest workRequest : hospitalEnterprise.getWorkQueue().getPathologyTestRequests()) {

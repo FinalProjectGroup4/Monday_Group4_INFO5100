@@ -7,9 +7,6 @@ package UI.TransportAdmin;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.ConsignmentRequest;
-import Model.WorkQueue.OrganProcurement;
-import Model.storage.Patient;
-import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -56,7 +53,7 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Request ID", "Organ Bank", "Hospital", "Organ Bank Location", "Hospital Location", "Status"
+                "Patient Name", "Organ Name", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblRequests);
@@ -105,14 +102,19 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
             JOptionPane.showMessageDialog((this), "Please select a valid row");
             return;
         }
+        String txt = (String) tblRequests.getValueAt(selectedrow, 2);
+        if(txt.equals("SHIPPED")){
+            btnCreate.setEnabled(false);
+            JOptionPane.showMessageDialog((this), "Request is already accepted");
+            return;
+        }
         
         ConsignmentRequest cr = (ConsignmentRequest)tblRequests.getValueAt(selectedrow, 0);
-
-        CreateConsignment vrd = new CreateConsignment(userProcessContainer,enterprise,cr);
-        userProcessContainer.add("CreateConsignment",vrd);
-        
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        cr.setStatus("SHIPPED");
+        cr.getGovernmentOrganApproveRequest().setStatus("SHIPPED");
+        cr.getGovernmentOrganApproveRequest().getOrganProcurement().setStatus("SHIPPED");
+        cr.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().setStatus("SHIPPED");
+        populateTable();
     }//GEN-LAST:event_btnCreateActionPerformed
 
 
@@ -130,22 +132,19 @@ public class TransportAdminWorkArea extends javax.swing.JPanel {
         // Get the list of OrganRequests
         ArrayList<ConsignmentRequest> wrq = enterprise.getNetwork().getWorkqueue().getConsignmentRequests();
 
-        // Check if the list is null or empty
+        // Check if the list is null cng empty
         if (wrq == null || wrq.isEmpty()) {
             System.err.println("No Pending Requests found.");
             return;
         }
 
         // Iterate through the list and add each request to the table
-        for (ConsignmentRequest or : wrq) {
-            if (or != null) {
+        for (ConsignmentRequest cng : wrq) {
+            if (cng != null) {
                 Object[] row = new Object[6];
-                row[0] = or;
-                row[1] = or.getOrganBank();
-                row[2] = or.getHospital();
-                row[3] = or.getOgLocation();
-                row[4] = or.getHosLocation();
-                row[5] = or.getStatus();
+                row[0] = cng;
+                row[1] = cng.getGovernmentOrganApproveRequest().getOrganProcurement().getOrganRequest().getOrganName();
+                row[2] = cng.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null Consignments encountered.");

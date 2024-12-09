@@ -122,7 +122,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
     private javax.swing.JTable tblPendingRequests;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) tblPendingRequests.getModel();
         model.setRowCount(0);
 
@@ -141,7 +141,7 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
                 Object[] row = new Object[5];
                 row[0] = op;
                 row[1] = op.getOrganRequest().getOrganName();
-                row[2] = op.getOrganRequest().getBloodType();
+                row[2] = op.getOrganRequest().getBloodGroup();
                 row[3] = op.getStatus();
                 model.addRow(row);
             } else {
