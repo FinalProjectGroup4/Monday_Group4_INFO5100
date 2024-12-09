@@ -136,7 +136,7 @@ public class NGOAdminWorkArea extends javax.swing.JPanel {
         for (OrganRequest or : wrq) {
             if (or != null) {
                 Object[] row = new Object[4];
-                row[0] = or.getPatient().getName();
+                row[0] = or;
                 row[1] = or.getOrganName();
                 row[2] = or.getBloodType();
                 row[3] = or.getStatus();
