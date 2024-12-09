@@ -4,53 +4,42 @@
  */
 package Model.WorkQueue;
 
-import Model.Enterprises.Hospital;
-import Model.Enterprises.OrganBank;
-import Model.storage.Patient;
-
 /**
  *
  * @author nihardabhi
  */
 public class GovernmentOrganApproveRequest {
-    private Patient patient;
-    private OrganBank organBank;
-    private Hospital hospital;
+    OrganProcurement organProcurement;
+    String status;
 
-    public GovernmentOrganApproveRequest(Patient patient,OrganBank organBank, Hospital hospital) {
-        this.patient = patient;
-        this.organBank = organBank;
-        this.hospital = hospital;
+    public GovernmentOrganApproveRequest(OrganProcurement organProcurement) {
+        organProcurement = organProcurement;
+        status = "WAITING";
+        
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public OrganBank getOrganBank() {
-        return organBank;
+    public OrganProcurement getOrganProcurement() {
+        return organProcurement;
     }
 
-    public void setOrganBank(OrganBank organBank) {
-        this.organBank = organBank;
+    public void setOrganProcurement(OrganProcurement organProcurement) {
+        this.organProcurement = organProcurement;
     }
-
-    public Hospital getHospital() {
-        return hospital;
-    }
-
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
-    }
-
+    
+    
+    
     
     
     @Override()
     public String toString(){
-       return this.getPatient().getName();
+        return organProcurement.getOrganRequest().getPatient().getName();
     }
 }

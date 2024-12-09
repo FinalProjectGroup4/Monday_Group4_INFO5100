@@ -50,8 +50,8 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
         if (or != null) {
             Object[] row = new Object[3];
             row[0] = or;
-            row[1] = or.getOrganBank();
-            row[2] = or.getHospital();
+            row[1] = or.getOrganProcurement().getOrganRequest().getOrganName();
+            row[2] = or.getStatus();
             model.addRow(row);
         } else {
             System.err.println("Null OrganRequest encountered.");
@@ -81,7 +81,7 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Organ Bank", "Hospital", "Country"
+                "Patient Name", "Organ Name", "Status"
             }
         ));
         jScrollPane1.setViewportView(tblPendingRequests);
@@ -134,6 +134,7 @@ public class GovernmentAdminWorkArea extends javax.swing.JPanel {
 
     private void btnApporveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApporveActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnApporveActionPerformed
 
 

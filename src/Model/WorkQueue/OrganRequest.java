@@ -14,11 +14,13 @@ public class OrganRequest extends WorkRequest{
     private Patient patient;
     private String bloodType;
     private String organName;
+    private String status;    
 
     public OrganRequest(Patient patient, String bloodType, String organName) {
         this.patient = patient;
         this.bloodType = bloodType;
         this.organName = organName;
+        status = "Request sent to NGO";
     }
     
     public OrganRequest(Patient patient){
@@ -44,6 +46,16 @@ public class OrganRequest extends WorkRequest{
     public Patient getPatient() {
         return patient;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
     
     @Override()
     public String toString(){

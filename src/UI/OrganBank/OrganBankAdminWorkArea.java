@@ -7,9 +7,9 @@ package UI.OrganBank;
 import Model.EcoSystem;
 import Model.Enterprises.Enterprise;
 import Model.WorkQueue.OrganProcurement;
-import Model.WorkQueue.OrganRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -99,7 +99,15 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
 
     private void btnViewRequestDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRequestDetailsActionPerformed
         // TODO add your handling code here:
-        ViewRequestDetails vrd = new ViewRequestDetails(userProcessContainer);
+        int selectedrow = tblPendingRequests.getSelectedRow();
+        
+        if(selectedrow < 0){
+            JOptionPane.showMessageDialog((this), "Please select a patient to view report history.");
+            return;
+        }
+        
+        OrganProcurement organProcurement = (OrganProcurement) tblPendingRequests.getValueAt(selectedrow, 0);
+        ViewRequestDetails vrd = new ViewRequestDetails(userProcessContainer,organProcurement,enterprise);
         userProcessContainer.add("ViewRequestDetails",vrd);
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -131,11 +139,10 @@ public class OrganBankAdminWorkArea extends javax.swing.JPanel {
         for (OrganProcurement or : wrq) {
             if (or != null) {
                 Object[] row = new Object[5];
-                row[0] = or;
+                row[0] = or.getOrganRequest().getPatient().getName();
                 row[1] = or.getOrganRequest().getOrganName();
-                row[2] = or.getHospital();
-                row[3] = or.getBloodGroup();
-                row[4] = or.getStatus();
+                row[2] = or.getBloodGroup();
+                row[3] = or.getStatus();
                 model.addRow(row);
             } else {
                 System.err.println("Null OrganRequest encountered.");

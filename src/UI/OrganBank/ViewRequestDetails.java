@@ -4,6 +4,10 @@
  */
 package UI.OrganBank;
 
+import Model.Enterprises.Enterprise;
+import Model.Networks.Network;
+import Model.WorkQueue.GovernmentOrganApproveRequest;
+import Model.WorkQueue.OrganProcurement;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -17,9 +21,13 @@ public class ViewRequestDetails extends javax.swing.JPanel {
      * Creates new form ViewRequestDetails
      */
      JPanel userProcessContainer;
-    public ViewRequestDetails(JPanel container) {
+     OrganProcurement organProcurement;
+     Enterprise enterprise;
+    public ViewRequestDetails(JPanel container,OrganProcurement organProcurement,Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = container;
+        this.organProcurement = organProcurement;
+        this.enterprise = enterprise;
     }
 
     /**
@@ -134,6 +142,11 @@ public class ViewRequestDetails extends javax.swing.JPanel {
         });
 
         btnReject.setText("Reject Request");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -181,8 +194,16 @@ public class ViewRequestDetails extends javax.swing.JPanel {
 
     private void btnApprovalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalActionPerformed
         // TODO add your handling code here:
-        
+        GovernmentOrganApproveRequest governmentOrganApproveRequest = new GovernmentOrganApproveRequest(organProcurement);
+        organProcurement.setStatus("Sent for government approval");
+        Network network = enterprise.getNetwork();
+        network.getWorkqueue().getGovernmentOrganApproveRequests().add(governmentOrganApproveRequest);
     }//GEN-LAST:event_btnApprovalActionPerformed
+
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        // TODO add your handling code here:
+        organProcurement.setStatus("REJECTED");
+    }//GEN-LAST:event_btnRejectActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
