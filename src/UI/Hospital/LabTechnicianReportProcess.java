@@ -10,6 +10,7 @@ import Model.Enterprises.Hospital;
 import Model.UserAccount.UserAccount;
 import Model.WorkQueue.PathologyTestRequest;
 import Model.storage.Patient;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
